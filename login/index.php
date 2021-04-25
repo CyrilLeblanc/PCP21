@@ -59,6 +59,7 @@ if (isset($_POST['email']) && isset($_POST['password']))
 
 
 <!--
+#
 # Codée par : Cyril LEBLANC
 # Date : 
 # Description : Page de connexion à la plateforme de covoiturage participatif
@@ -77,10 +78,6 @@ if (isset($_POST['email']) && isset($_POST['password']))
 		<main>
 		
 		</main>
-
-
-
-
 		<?php include_once './footer.html'; ?>
 	</body>
 </html>
