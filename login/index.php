@@ -76,8 +76,7 @@ if (isset($_POST['email']) && isset($_POST['password']))
 	<body>
 		<header></header>
 		<main>
-		
 		</main>
-		<?php include_once './footer.html'; ?>
+		<?php include_once '../footer.html'; ?>
 	</body>
 </html>
