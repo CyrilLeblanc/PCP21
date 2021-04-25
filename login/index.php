@@ -18,7 +18,7 @@ if ($_SESSION['idCovoitureur'] != 0 && $_SESSION['is_Confirme'] == 1)
 // on vérifie les informations de connection du formulaire
 if (isset($_POST['email']) && isset($_POST['password']))
 {
-	require_once './config.php';
+	require_once '../config.php';
 
 	// on récupère les infos de compte à partir du mail
 	$email = $_POST['email'];
@@ -72,10 +72,37 @@ if (isset($_POST['email']) && isset($_POST['password']))
 	<head>
 		<link rel="stylesheet" type="text/css" href="./style.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Se connecter - PCP21</title>
 	</head>
 	<body>
-		<header></header>
+		<header>
+			<h1>Covoiturage Participatif Charles Poncet</h1>
+		</header>
 		<main>
+			<div class="container">
+				<form method="post" action="">
+					<div class="element">
+						<label for="email">E-mail :</label><br/>
+						<input type="email" name="email" id="email" required></input>
+					</div>
+					<div class="element">
+						<label for="password">Mot de passe :</label><br/>
+						<input type="password" name="password" id="password" required></input>
+					</div>
+				
+					<div class="element">
+						<input type="checkbox" name="remember" id="remember">
+						<label for="remember">Se souvenir de moi</label>
+					</div>
+					<div class="element">
+						<button type="submit">Se connecter</button>
+					</div>
+				</form>
+				Si vous n'avez pas de compte vous pouvez <a href="#">vous inscrire</a>.
+			</div>
+
+
+			
 		</main>
 		<?php include_once '../footer.html'; ?>
 	</body>
