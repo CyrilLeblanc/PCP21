@@ -96,6 +96,7 @@ class Covoiturage
 			{
 				if((isset($conducteur) && $etape->voiture->place_restante > 1) || sizeof($etape->Point_A->tab_covoitureur) == 1)		# NOTE : On utilise toute les place que si il ne reste qu'une personne sur le point
 				{
+					#TODO include les covoitureurs que si ils sont dans le même sens que le conducteur
 					echo "#ID : $covoitureur->id  \t$ = $covoitureur->Nbr_Alveole\t\t\t want_retour : $covoitureur->heure_retour\n";
 					$covoitureur->have_voiture = False;							// on retire l'accès à la voiture du covoitureur passager
 					array_push($etape->voiture->tab_passager, $covoitureur);
@@ -155,7 +156,7 @@ class Covoiturage
 	#TODO
 	{
 
-		#####################################################
+		/*#####################################################
 		#	Détermination de l'idCovoiturage dans la BDD	#
 		#####################################################
 
@@ -187,7 +188,7 @@ class Covoiturage
 				echo "$sql\n";
 				//$GLOBALS['mysqli']->query($sql);
 			}
-		} while (!isset($res));
+		} while (!isset($res));*/
 		
 		
 		
