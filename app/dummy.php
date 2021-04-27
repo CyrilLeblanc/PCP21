@@ -1,5 +1,5 @@
 <?php 
-require_once './config.php';
+require_once '../config.php';
 
 $nb_inscription = 20;
 $date = "2021-04-12";
