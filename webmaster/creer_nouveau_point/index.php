@@ -8,10 +8,40 @@
 
     if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['photo']))
     {
+      $maxSize = 5000000;
+      $valideTypes = array('.jpg','.jpeg','.png');
+
+      if($_FILES['photo']['error'] > 0)
+      {
+        echo "Il y a une erreur par rapport à la photo.";
+      }
+
+      $fileSize = $_FILES['photo']['size'];
+      if($fileSize > $maxSize)
+      {
+        echo "La photo est trop lourde, elle ne doit pas dépasser 5 Mo.";
+      }
+
+      $fileName = $_FILES['photo']['name'];
+      $fileTypes = "." . strtolower(substr(strrchr($fileName, '.'), 1));
+      if(!in_array($fileTypes, $valideTypes))
+      {
+        echo "Le type de la photo est invalide, veuillez utiliser .jpg, .jpeg ou .png.";
+      }
+
+      $tempName = $_FILES['photo']['tmp_name'];
+      $uniqueName = md5(uniqid(rand(), true));
+      $fileName = "photos/" . $uniqueName . $fileTypes;
+      $result = move_uploaded_file($tempName, $fileName);
+      if($result)
+      {
+        header('Location: ?error=ok');
+      }
+
       $Ajouter_Point_RDV = new Point();
       $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$_POST['photo']);
-    }?>
-	?>
+    }
+  ?>
   <title>Création Nouveau Point</title>
 </head>
 
@@ -58,7 +88,7 @@
 
       <div class="form-group" align="center">
         <label for="photo" class="mr-sm-2">Photo : </label><br/>
-        <input type="file" class="mb-2 mr-sm-2" name="photo" required>
+        <input type="file" class="mb-2 mr-sm-2" name="photo">
       </div>
 
       <!-- FORM Submit Button -->
@@ -84,17 +114,17 @@
           }
 
           $verif_ajout = new Point();
-      if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['photo']))
-      {
-        if($verif_ajout->verif_point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$_POST['photo']) == True)
-        {
-          header('Location: ?error=ok');
-        }
-        else
-        {
-          header('Location: ?error=erreur');
-        }
-      }
+          if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['photo']))
+          {
+            if($verif_ajout->verif_point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$_POST['photo']) == True)
+            {
+              header('Location: ?error=ok');
+            }
+            else
+            {
+              header('Location: ?error=erreur');
+            }
+          }
 
           
         ?>

@@ -119,7 +119,7 @@
 						</div>
 
 						<div class="form-group" align="left">
-							<label for="imagePoint" class="mr-sm-2">Image : </label><br/>
+							<label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
 							<img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
 							<input type="file" class="mb-2 mr-sm-2" id="imagePoint" name="imagePoint" value="" required>
 
