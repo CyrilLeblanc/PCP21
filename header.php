@@ -25,18 +25,18 @@
           <a class="dropdown-item" href="./webmaster/periode_indisponibilite/index.php" style="">Période Indisponibilité</a>
 
           <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="./webmaster/modifier_point.php">Modifier Point RDV</a>
-            <a class="dropdown-item" href="./gestion_elements/modifier_covoitureur.php">Modifier Covoitureur</a>
-            <a class="dropdown-item" href="./gestion_elements/modifier_ligne.php">Modifier Ligne</a>
+            <a class="dropdown-item" href="./webmaster/modifier_point/index.php">Modifier Point RDV</a>
+            <a class="dropdown-item" href="./webmaster/modifier_covoitureur/index.php">Modifier Covoitureur</a>
+            <a class="dropdown-item" href="./webmaster/modifier_ligne.php">Modifier Ligne</a>
 
           <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="./gestion_elements/demandes_creation_point.php">Demandes Création Point RDV</a>
-            <a class="dropdown-item" href="./gestion_elements/demandes_creation_compte.php">Demandes Création Compte</a>
+            <a class="dropdown-item" href="./webmaster/demandes_creation_point/index.php">Demandes Création Point RDV</a>
+            <a class="dropdown-item" href="./webmaster/demandes_creation_compte/index.php">Demandes Création Compte</a>
 
           <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="./gestion_elements/creer_nouveau_point.php">Créer Nouveau Point RDV</a>
-            <a class="dropdown-item" href="./gestion_elements/creer_nouveau_covoiturage.php">Créer Nouveau Covoiturage</a>
-            <a class="dropdown-item" href="./gestion_elements/creer_nouvelle_ligne.php">Créer Nouvelle Ligne</a>
+            <a class="dropdown-item" href="./webmaster/creer_nouveau_point/index.php">Créer Nouveau Point RDV</a>
+            <a class="dropdown-item" href="./webmaster/creer_nouveau_covoiturage/index.php">Créer Nouveau Covoiturage</a>
+            <a class="dropdown-item" href="./webmaster/creer_nouvelle_ligne/index.php">Créer Nouvelle Ligne</a>
 
         </div>';
       }

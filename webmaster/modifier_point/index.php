@@ -2,14 +2,14 @@
 <html>
 
 <head>
-
 	<?php 
 		include('../bootstrap.html');
-		require_once __DIR__."/request/Point.php"; 
+		require_once "../request/Point.php"; 
 	?>
 	<script src="../popup.js"></script>
 	<title>Modifier Point RDV</title>
 </head>
+
 <body>
 
 	<div class="container p-3 my-3 border shadow rounded" align="center">
@@ -91,20 +91,12 @@
 							<label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
 							<input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
 
-							<?php
-								$Modif_Nom_Point = new Point();
-								$Modif_Nom_Point -> set_Point("Nom",$_POST["nomPoint"],666);
-							?>
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="adressePoint" class="mr-sm-2">Adresse : </label><br/>
 							<input type="text" class="mb-2 mr-sm-2" id="adressePoint" name="adressePoint" value="" required>
 
-							<?php
-								$Modif_Adressse_Point = new Point();
-								$Modif_Adresse_Point -> set_Point("Adresse",$_POST["adressePoint"],666);
-							?>
 						</div>
 
 						
@@ -112,30 +104,18 @@
 							<label for="villePoint" class="mr-sm-2">Ville : </label><br/>
 							<input type="text" class="mb-2 mr-sm-2" id="villePoint" name="villePoint" value="" required>
 
-							<?php
-								$Modif_Ville_Point = new Point();
-								$Modif_Ville_Point -> set_Point("Ville",$_POST["villePoint"],666);
-							?>
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="latitudePoint" class="mr-sm-2">Latitude : </label><br/>
 							<input type="text" class="mb-2 mr-sm-2" id="latitudePoint" name="latitudePoint" value="" required>
 
-							<?php
-								$Modif_Latitude_Point = new Point();
-								$Modif_Latitude_Point -> set_Point("Latitude",$_POST["latitudePoint"],666);
-							?>
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="longitudePoint" class="mr-sm-2">Longitude : </label><br/>
 							<input type="text" class="mb-2 mr-sm-2" id="longitudePoint" name="longitudePoint" value="" required>
 
-							<?php
-								$Modif_Longitude_Point = new Point();
-								$Modif_Longitude_Point -> set_Point("Longitude",$_POST["longitudePoint"],666);
-							?>
 						</div>
 
 						<div class="form-group" align="left">
@@ -143,10 +123,6 @@
 							<img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
 							<input type="file" class="mb-2 mr-sm-2" id="imagePoint" name="imagePoint" value="" required>
 
-							<?php
-								$Modif_Image_Point = new Point();
-								$Modif_Image_Point -> set_Point("Point_Image",$_POST["imagePoint"],666);
-							?>
 						</div>
 					</div>
 
@@ -164,4 +140,5 @@
 
 	</div>
 </body>
+
 </html>
