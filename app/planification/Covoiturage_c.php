@@ -36,56 +36,6 @@ class Covoiturage
 
 			$conducteur = null;
 			$etape->voiture = null;
-			
-			$sansRetour_present = False;
-
-			// on choisi en priorité un conducteur qui n'a pas de retour
-			foreach($etape->Point_A->tab_covoitureur as $covoitureur)
-			{
-				if (!isset($covoitureur->heure_retour))
-				{
-					$sansRetour_present = True;
-				}
-			}
-
-			#echo "AVANT \n";
-			foreach($etape->Point_A->tab_covoitureur as $covoitureur)
-			{
-				#echo "#$covoitureur->id  \t$=$covoitureur->Nbr_Alveole \tretour=$covoitureur->heure_retour\n";
-			}
-			#echo "APRES \n";
-
-
-			if ($sansRetour_present)
-			// si il y a des covoitureurs sans retour sur le point on les met en priorité en conducteur
-			{
-				$temp = array();
-				#echo "on priorise les sans retour pour être conducteur \n\n\n";
-				foreach($etape->Point_A->tab_covoitureur as $covoitureur)
-				{
-					if (!isset($covoitureur->heure_retour))
-					{
-						array_push($temp, $covoitureur);
-					}
-				}
-				foreach($etape->Point_A->tab_covoitureur as $covoitureur)
-				{
-					if (isset($covoitureur->heure_retour))
-					{
-						array_push($temp, $covoitureur);
-					}
-				}
-			}
-
-			$etape->Point_A->tab_covoitureur = $temp;
-
-
-
-
-			foreach($etape->Point_A->tab_covoitureur as $covoitureur)
-			{
-				#echo "#$covoitureur->id  \t$=$covoitureur->Nbr_Alveole \tretour=$covoitureur->heure_retour\n";
-			}
 
 
 
@@ -147,13 +97,7 @@ class Covoiturage
 			foreach($etape->Point_A->tab_covoitureur as $j => $covoitureur)
 			{
 				if((isset($conducteur) && $etape->voiture->place_restante > 1) || sizeof($etape->Point_A->tab_covoitureur) == 1)		# NOTE : On utilise toute les place que si il ne reste qu'une personne sur le point
-				{
-					#TODO include les covoitureurs que si ils veulent un retour
-					if (isset($etape->voiture->tab_passager[0]->heure_retour))
-					{
-						echo "\n\nLe conducteur veux un retour !!!\n";
-					}
-					
+				{					
 					echo "#ID : $covoitureur->id  \t$ = $covoitureur->Nbr_Alveole\t\t\t want_retour : $covoitureur->heure_retour\n";
 					$covoitureur->have_voiture = False;							// on retire l'accès à la voiture du covoitureur passager
 					array_push($etape->voiture->tab_passager, $covoitureur);
