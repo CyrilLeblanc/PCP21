@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   if (empty($_POST["prenom"])) {
-    $prenomErr = "Prénom est nécessaire";
+    $prenomErr = "Prénom est nécessaire";  
   } else {
     $prenom = test_input($_POST["prenom"]);
     // vérifier qu'il comporte que des lettres et des espaces seulement
