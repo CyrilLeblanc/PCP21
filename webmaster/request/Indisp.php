@@ -13,7 +13,7 @@ class Indisp
         $sql = "INSERT INTO Indisponibilite (Debut_Fermeture, Fin_Fermeture, Motif_Fermeture, idCovoitureur) 
         VALUES ('$Debut_Fermeture', '$Fin_Fermeture', '$Motif_Fermeture', $idCovoitureur);";
         return $GLOBALS['mysqli']->query($sql);
-
+		
     }
 
     function get_indisp()
