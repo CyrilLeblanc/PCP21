@@ -76,15 +76,19 @@
         }
 
         $verif_ajout = new Indisp();
+		if (isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['flexRadioDefault']))
+		{
+			if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1) == True)
+			{
+			  header('Location: ?error=ok');
+			}
+			else
+			{
+			  header('Location: ?error=erreur');
+			}
+		}
 
-        if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1) == True)
-        {
-          header('Location: ?error=ok');
-        }
-        else
-        {
-          header('Location: ?error=erreur');
-        }
+        
       ?>
 
     </div>

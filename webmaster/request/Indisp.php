@@ -45,7 +45,8 @@ class Indisp
     function verif_indisp($Debut_Fermeture, $Fin_Fermeture, $Motif_Fermeture, $idCovoitureur)
     {
         $sql = "SELECT * FROM Indisponibilite WHERE Debut_Fermeture = '$Debut_Fermeture' AND Fin_Fermeture = '$Fin_Fermeture' AND Motif_Fermeture = '$Motif_Fermeture' AND idCovoitureur = $idCovoitureur ;";
-        $res = $GLOBALS['mysqli']->query($sql);
+        echo "$sql\n";
+		$res = $GLOBALS['mysqli']->query($sql);
 
         $stack = array();
         while ($row = $res->fetch_assoc())
