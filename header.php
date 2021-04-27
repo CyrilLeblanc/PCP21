@@ -27,7 +27,7 @@
           <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="./webmaster/modifier_point/index.php">Modifier Point RDV</a>
             <a class="dropdown-item" href="./webmaster/modifier_covoitureur/index.php">Modifier Covoitureur</a>
-            <a class="dropdown-item" href="./webmaster/modifier_ligne.php">Modifier Ligne</a>
+            <a class="dropdown-item" href="./webmaster/modifier_ligne/index.php">Modifier Ligne</a>
 
           <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="./webmaster/demandes_creation_point/index.php">Demandes Création Point RDV</a>
