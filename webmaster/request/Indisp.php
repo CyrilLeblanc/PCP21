@@ -36,7 +36,7 @@ class Indisp
         return $GLOBALS['mysqli']->query($sql);
     }
 
-    function set_indisp($idIndisponibilite)
+    function set_indisp($name,$value,$idIndisponibilite)
     {
         $sql = "UPDATE Indisponibilite SET $name = $value WHERE idIndisponibilite = $idIndisponibilite ;";
         return $GLOBALS['mysqli']->query($sql);

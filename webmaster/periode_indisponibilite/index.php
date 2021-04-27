@@ -1,9 +1,9 @@
 <?php 
   include('../bootstrap.html');
 
-  if($_POST['date_debut'] != NULL && $_POST['date_fin'] != NULL)
+  if(isset($_POST['date_debut']) && isset($_POST['date_fin']))
   {
-    require_once __DIR__."/request/Indisp.php"; 
+    require_once "../request/Indisp.php"; 
     
     $Ajouter_Indisponibilite = new Indisp();
     $Ajouter_Indisponibilite->add_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1);
