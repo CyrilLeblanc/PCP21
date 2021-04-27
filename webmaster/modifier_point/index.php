@@ -5,7 +5,7 @@
 
 	<?php 
 		include('../bootstrap.html');
-		require_once __DIR__."/request/Point.php"; 
+		require_once "../request/Point.php"; 
 	?>
 	<script src="../popup.js"></script>
 	<title>Modifier Point RDV</title>
