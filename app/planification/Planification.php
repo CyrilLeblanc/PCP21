@@ -4,7 +4,7 @@ require_once "Covoiturage_c.php";
 
 $tab_date = array("2021-04-12");
 $tab_heure = array("12:00:00");
-$is_depart_lycee = array(0);			// TODO
+$is_depart_lycee = array(0,1);			// TODO
 
 
 foreach($tab_date as $date)
