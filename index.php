@@ -21,7 +21,9 @@
 
 <body>
 
-  <?php include __DIR__."/header.php";?>
+  <div class="container-fluid">
+    <?php include __DIR__."/header.php";?>
+  </div>
 
 </body>
 </html>

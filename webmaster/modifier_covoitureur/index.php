@@ -66,7 +66,7 @@
 
 								<td>' . $value["Email"] . '</td>
 
-								<td> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="100"></img></td>
+								<td> <a href="' . $value["Utilisateur_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="150"></img></a> </td>
 
 								<td>' . $voiture["Marque"] . '</td>
 
@@ -76,9 +76,9 @@
 
 								<td>' . $voiture["Couleur"] . '</td>
 
-								<td> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="100"></img></td>
+								<td> <a href="' . $voiture["Voiture_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="150"></img></a> </td>
 
-								<td>' . '<button class="btn btn-success material-icons" onclick="popupIndisp(`' . $value["Nom"] . $value["Prenom"] . $value["Num_Telephone"] . $value["Email"] . $value["Utilisateur_Image"] . $voiture["Marque"] . $voiture["Modele"] . $voiture["Annee"] . $voiture["Couleur"] . $voiture["Voiture_Image"] .'`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
+								<td>' . '<button class="btn btn-success material-icons btn-sm" style="font-size: 150%" onclick="popupIndisp(`' . $value["Nom"] . $value["Prenom"] . $value["Num_Telephone"] . $value["Email"] . $value["Utilisateur_Image"] . $voiture["Marque"] . $voiture["Modele"] . $voiture["Annee"] . $voiture["Couleur"] . $voiture["Voiture_Image"] .'`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
 							</tr>';	
 					}
 

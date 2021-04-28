@@ -55,9 +55,9 @@
 
 								<td> <a href="https://www.google.com/maps/place/' . $value["Latitude"] . ',' . $value["Longitude"] . '" onclick="window.open(this.href); return false;"" style="font-weight: bold; color: green;">' . $value["Latitude"] . '<br/>' . $value["Longitude"] . '</td>
 
-								<td> <a href="' . $value["Point_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Point_Image"] . '"class="img-fluid rounded" width="100"></img></a> </td>
+								<td> <a href="' . $value["Point_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Point_Image"] . '"class="img-fluid rounded" width="150"></img></a> </td>
 
-								<td>' . '<button class="btn btn-success material-icons" onclick="popupModifPoint(`' . $value["Nom"] . '`,`' . $value["Adresse"] . '`,`' . $value["Ville"] . '`,`' . $value["Latitude"] . '`,`' . $value["Longitude"] . '`,`' . $value["Point_Image"] . '`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
+								<td>' . '<button class="btn btn-success material-icons btn-sm" style="font-size: 150%" onclick="popupModifPoint(`' . $value["Nom"] . '`,`' . $value["Adresse"] . '`,`' . $value["Ville"] . '`,`' . $value["Latitude"] . '`,`' . $value["Longitude"] . '`,`' . $value["Point_Image"] . '`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
 							</tr>';
 					}
 				?>

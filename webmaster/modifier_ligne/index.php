@@ -78,7 +78,7 @@
 
 								<td>' . $value["Voiture_Image"] . '</td>
 
-								<td>' . '<button class="btn btn-success material-icons"onclick="popupModifCovoit(`' . $value["Nom"] . '`,`...`,`' . $value["Latitude"] . ' ' . $value["Longitude"] . '`,`' . $value["Point_Image"] . '`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
+								<td>' . '<button class="btn btn-success material-icons btn-sm" style="font-size: 150%" onclick="popupModifCovoit(`' . $value["Nom"] . '`,`...`,`' . $value["Latitude"] . ' ' . $value["Longitude"] . '`,`' . $value["Point_Image"] . '`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
 							</tr>';
 					}
 				?>
