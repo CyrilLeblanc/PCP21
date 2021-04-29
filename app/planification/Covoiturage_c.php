@@ -14,7 +14,7 @@ class Covoiturage
 {
 	public $ligne;
 
-	private $tab_etape = array();		// tableau qui contient les covoiturages créers pour les enregistrers
+	private $tab_etape_retour = array();		// tableau qui contient les covoiturages créers pour les enregistrers
 
 
 	function __construct(&$ligne, $date, $heure, $is_depart_lycee)
@@ -153,9 +153,56 @@ class Covoiturage
 				}
 				$etape->voiture->kilometrage = $etape->distance;
 			}
+
+
+
+
+				
+			// on ajoute l'étape actuel dans un tableau pour déterminer les retour plus tard
+			array_push($this->tab_etape_retour, clone $etape);
+
 			echo "\n\n\n";
 			$this->save($etape,$ligne->id, $is_depart_lycee, $date, $heure);
-		}	
+		}
+
+
+
+		#################################
+		#	Planification des retour	#
+		#################################
+
+		foreach($this->tab_etape_retour as $j => $etape)
+		{
+			// on retire tout les covoitureurs sans retour de la voiture
+			foreach($etape->voiture->tab_passager as $k => $passager)
+			{
+				if (!isset($passager->heure_retour))
+				{
+					unset($this->tab_etape_retour[$j]->voiture->tab_passager[$k]);
+				}
+			}
+
+			// on inverse pour chaque étape le point_A et le point_B
+			
+			$temp = $etape->Point_A;
+			$etape->Point_A = $etape->Point_B;
+			$etape->Point_B = $temp;
+
+			echo "===================\n";
+			echo "\t ETAPE ".$etape->Point_A->id."~".$etape->Point_B->id."\n\n";
+
+			echo "#Voiture de : ".$etape->voiture->tab_passager[0]->id." \t$= ".$etape->voiture->tab_passager[0]->Nbr_Alveole." \t\twant_retour : ".$etape->voiture->tab_passager[0]->heure_retour."\n";
+			echo "idVoiture : ".$etape->voiture->id." \tnb_place : ".$etape->voiture->place_restante."\n\n";
+			foreach($etape->voiture->tab_passager as $k => $passager)
+			{
+				if ($k == 0)
+				{
+					continue;
+				}
+				echo "#ID : ".$passager->id." \t$ = ".$passager->Nbr_Alveole." \t\t\twant_retour : ".$passager->heure_retour."\n";
+			}
+		}
+		//var_dump($this->tab_etape_retour);
 	}
 
 

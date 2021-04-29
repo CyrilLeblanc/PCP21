@@ -44,7 +44,7 @@ for($i = 1; $i<$nb_inscription ; $i++)
     $sql = "INSERT INTO Inscription (idInscription, idCovoitureur, Date_Depart, is_Depart_Lycee, Heure_Arrivee) VALUES ($i, $i, '$date', $depart_lycee, '$heure');";
     echo "$sql\n";
     $GLOBALS['mysqli']->query($sql);
-	if (rand(0,4) == 1)
+	if (rand(0,1) == 1)
 	{
 		$heure_retour = rand(12,18).":00:00";
 		$sql = "INSERT INTO Inscription (idInscription, idCovoitureur, Date_Depart, is_Depart_Lycee, Heure_Arrivee) VALUES ($i+$nb_inscription, $i, '$date', 1, '$heure_retour');";
