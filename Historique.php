@@ -58,6 +58,9 @@ $table1 = $PointA -> get_point_info(1);
 $PointB = new Point();
 $table2 = $PointB -> get_point_info(2);
 
+//$PointAB = new Covoitureur();
+//$table = $PointAB -> get_etape(1);
+
 $Kilom = new Covoitureur();
 $table_info_kilom = $Kilom -> get_participation(11);
 

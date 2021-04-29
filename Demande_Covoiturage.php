@@ -2,6 +2,7 @@
 <?php
 require_once 'request/Point.php';
 require_once 'request/Covoitureur.php';
+include 'check_demande_cov.php';
 
 ?>
 <!-- Modal -->
@@ -13,7 +14,7 @@ require_once 'request/Covoitureur.php';
 
         <div class="container">
 
-    <form action="./demande_Covoiturage.php" id="titre_covoi" method="post">
+    <form action="/check_demande_cov.php" id="titre_covoi" method="post">
     <h5 class="modal-title" id="titre_covoiturage">Demande de Covoiturage</h5>
     <br>
 

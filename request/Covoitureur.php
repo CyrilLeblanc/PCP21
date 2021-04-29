@@ -200,6 +200,21 @@ function get_participation($idParticipation)
     }
 
 
+function get_etape($idEtape)
+{
+        $sql = "SELECT * FROM Etape WHERE idEtape = $idEtape;";
+
+        $res = $GLOBALS['mysqli'] ->query($sql);
+        $stack = array();
+        while ($row = $res->fetch_assoc())
+        {
+            array_push($stack,$row);
+        }
+        return $stack;
+
+}
+
+
 }
 
 ?>
