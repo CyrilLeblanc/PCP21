@@ -2,9 +2,9 @@
 <html>
 
 <head>
-  <?php 
-		include('../bootstrap.html');
-  ?>
+<?php 
+		include('../../bootstrap.html');
+	?>
   <title>Création Nouveau Point</title>
 </head>
 

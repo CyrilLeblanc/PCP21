@@ -3,7 +3,7 @@
 
 <head>
 	<?php 
-		include('../bootstrap.html');
+		include('../../bootstrap.html');
 		require_once "../request/Point.php"; 
 	?>
 	<script src="../popup.js"></script>
@@ -76,7 +76,7 @@
 
 			<!-- POPUP Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">Modification Point de RDV - Work In Progress ...</h4>
+				<h4 class="modal-title">Modification Point de RDV</h4>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 
@@ -89,39 +89,39 @@
 					<div class="container border rounded shadow">
 						<div class="form-group" align="left">
 							<label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
+							<input type="text" class="mb-2 mr-sm-2" placeholder="Lycée" id="nomPoint" name="nomPoint" value="" required>
 
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="adressePoint" class="mr-sm-2">Adresse : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="adressePoint" name="adressePoint" value="" required>
+							<input type="text" class="mb-2 mr-sm-2" placeholder="1 avenue de Charles Poncet" id="adressePoint" name="adressePoint" value="" required>
 
 						</div>
 
 						
 						<div class="form-group" align="left">
 							<label for="villePoint" class="mr-sm-2">Ville : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="villePoint" name="villePoint" value="" required>
+							<input type="text" class="mb-2 mr-sm-2" placeholder="74300 Cluses" id="villePoint" name="villePoint" value="" required>
 
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="latitudePoint" class="mr-sm-2">Latitude : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="latitudePoint" name="latitudePoint" value="" required>
+							<input type="text" class="mb-2 mr-sm-2" placeholder="46.0618" id="latitudePoint" name="latitudePoint" value="" required>
 
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="longitudePoint" class="mr-sm-2">Longitude : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="longitudePoint" name="longitudePoint" value="" required>
+							<input type="text" class="mb-2 mr-sm-2" placeholder="6.57994" id="longitudePoint" name="longitudePoint" value="" required>
 
 						</div>
 
 						<div class="form-group" align="left">
 							<label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
 							<img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
-							<input type="file" class="mb-2 mr-sm-2" id="imagePoint" name="imagePoint" value="" required>
+							<input type="file" class="mb-2 mr-sm-2" placeholder="../images/" id="imagePoint" name="imagePoint" value="" required>
 
 						</div>
 					</div>

@@ -2,9 +2,9 @@
 <html>
 
 <head>
-	<?php 
-		include('../bootstrap.html');
-		require_once "../request/Covoitureur.php";
+<?php 
+		include('../../bootstrap.html');
+		require_once "../request/Covoiturage.php"; 
 	?>
 	<title>Modifier Covoitureur</title>
 </head>

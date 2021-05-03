@@ -7,7 +7,7 @@
 $GLOBALS['bdd_address'] = '127.0.0.1';      // addresse de la BDD
 $GLOBALS['bdd_user'] = 'root';             // nom d'utilisateur
 $GLOBALS['bdd_password'] = '';          // mot de passe utilisateur
-$GLOBALS['bdd'] = 'mydb';            // nom de la base de donnée
+$GLOBALS['bdd'] = 'PCP21';            // nom de la base de donnée
 
 
 

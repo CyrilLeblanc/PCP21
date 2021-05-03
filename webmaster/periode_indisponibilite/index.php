@@ -3,8 +3,8 @@
 
 <head>
   <?php 
-    include('../bootstrap.html');
-    require_once "../request/Indisp.php"; 
+		include('../../bootstrap.html');
+		require_once "../request/Indisp.php"; 
 
     if(isset($_POST['date_debut']) && isset($_POST['date_fin']))
     {
