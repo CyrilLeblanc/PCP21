@@ -19,7 +19,7 @@ include 'check_demande_cov.php';
     <br>
 
       <?php
-
+/*
 $PointD = new Point();
 $table_depart = $PointD -> get_Point(True);
 
@@ -36,7 +36,19 @@ $table_depart = $PointD -> get_Point(True);
 
   echo '</select>';
   echo '</div>';
+
+  */
 ?>
+
+	<h6>Date de départ<h6>
+      
+  <div>
+    <input type="date" id="date_depart" name="date_depart" required>
+    <span class="validity"></span>
+  </div>
+      
+      <br>
+
 
       <h6>Heure d'arrivée<h6>
       
@@ -45,18 +57,11 @@ $table_depart = $PointD -> get_Point(True);
   <span class="validity"></span>
 
       
-      <br>
+      <br><br>
 
-      <h6>Date de départ<h6>
       
-  <div>
-    <input type="date" id="date_depart" name="date_depart" required>
-    <span class="validity"></span>
-  </div>
-      
-      <br>
 <?php
-
+/*
 $PointA = new Point();
 $table_arrive = $PointA -> get_Point(True);
 
@@ -73,15 +78,43 @@ $table_arrive = $PointA -> get_Point(True);
 
   echo '</select>';
   echo '</div>';
+ */
 ?>
 
-      
-  <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="aller_retour" name="aller_retour">
+  
+ <div class="row">
+
+  <div class="col-sm-4">
+  	<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="aller_retour" name="destination">
   <label class="form-check-label" for="defaultCheck1">  
     Aller-Retour
   </label>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+  	<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="aller_retour" name="destination">
+  <label class="form-check-label" for="defaultCheck1">  
+    Aller
+  </label>
+    </div>
+  </div>
+
+  <div class="col-sm-4">
+  	<div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="aller_retour" name="destination">
+  <label class="form-check-label" for="defaultCheck1">  
+    Retour
+  </label>
+    </div>
+  </div>
+
 </div>
+
+
+  
 
       
       <br>
@@ -94,7 +127,7 @@ $table_arrive = $PointA -> get_Point(True);
 
   <div class="form-group">
     <label for="scroll_jour">Jour de semaine</label>
-    <select class="custom-select my-1 mr-sm-2" id="jour" name="jour">
+    <select class="custom-select my-1 mr-sm-2" id="jour" name="jour_semaine">
     <option selected>Choisir...</option>
 
     <option value="Lundi">Lundi</option>
@@ -111,7 +144,7 @@ $table_arrive = $PointA -> get_Point(True);
 
   <div class="form-group">
     <label for="scroll_regime">Régime de semaine</label>
-    <select class="custom-select my-1 mr-sm-2" id="regime" name="regime">
+    <select class="custom-select my-1 mr-sm-2" id="regime" name="semaine">
     <option selected>Choisir...</option>
 
     <option value="A">A</option>
