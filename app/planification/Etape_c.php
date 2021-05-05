@@ -16,14 +16,14 @@ class Etape
 {
 
 	// les deux étapes du Point
-	public $Point_A;
-	public $Point_B;
+	private $Point_A;
+	private $Point_B;
 
-	public $is_Depart_Lycee;
+	private $is_Depart_Lycee;
 
-	public $distance;		// la distance séparant les deux points [FORMAT : ISODISTANCE]
+	private $distance;		// la distance séparant les deux points [FORMAT : ISODISTANCE]
 
-	public $voiture;		// la voiture utilisé pour l'étape
+	private $voiture;		// la voiture utilisé pour l'étape
 
 	function __construct($idPoint_A, $idPoint_B)
 	{
@@ -31,21 +31,12 @@ class Etape
 		$this->Point_B = new Point($idPoint_B);
 	}
 
-
-	function set_distance()
-	// permet de calculer la distance entre deux points en isodistance
-	#TODO
-	{
-
-	}
-
-
 	function set_covoitureur($date, $heure, $is_depart_lycee)
 	// permet de set les covoitureurs en fonction de la date, de l'heure et du sens
 	{
 		$tab_temp = array();		// contient temporairement les idCovoitureur
 
-		$idPoint = $this->Point_A->id;
+		$idPoint = $this->Point_A->get_id();
 		// cette requête récupère les idCovoitureur des inscriptions en prenant seulement ceux
 		// qui nous intéresse et en triant les entré en fonction des nbrAlveole
 		$sql = "SELECT Covoitureur.idCovoitureur
@@ -72,12 +63,69 @@ class Etape
 
 
 		$res = $GLOBALS['mysqli']->query($sql);
-		$test = array();
 		while ($row = $res->fetch_assoc())
 		{
-			array_push($this->Point_A->tab_covoitureur, new Covoitureur($row['idCovoitureur']));
-			array_push($test , new Covoitureur($row['idCovoitureur']));
+			$this->Point_A->add_covoitureur(new Covoitureur($row['idCovoitureur']));
 		}
+	}
+
+	function rm_covoitureur($id)
+	{
+		$this->Point_A->rm_covoitureur($id);
+	}
+
+	function add_covoitureur($covoitureur)
+	{
+		$this->Point_A->add_covoitureur($covoitureur);
+	}
+
+
+## SETER & GETER
+
+	function &get_ref_tab_covoitureur()
+	{
+		return $this->Point_A->get_ref_tab_covoitureur();
+	}
+
+	function &get_ref_voiture()
+	{
+		return $this->voiture;
+	}
+
+
+	function set_distance()
+	// permet de calculer la distance entre deux points en isodistance
+	#TODO
+	{
+
+	}
+
+
+	function set_id_Point_A($id)
+	{
+		$this->Point_A->set_id($id);
+	}
+
+	function set_id_Point_B($id)
+	{
+		$this->Point_B->set_id($id);
+	}
+
+	
+	function get_id_Point_A()
+	{
+		return $this->Point_A->get_id();
+	}
+
+	function get_id_Point_B()
+	{
+		return $this->Point_B->get_id();
+	}
+
+	
+	function get_distance()
+	{
+		return $this->distance;
 	}
 }
 ?>

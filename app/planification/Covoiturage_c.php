@@ -12,22 +12,21 @@ require_once "Voiture_c.php";
 
 class Covoiturage
 {
-	public $ligne;
-
 	private $tab_etape_retour = array();		// tableau qui contient les covoiturages créers pour les enregistrers
 
 
 	function __construct(&$ligne, $date, $heure, $is_depart_lycee)
 	{
-		foreach($ligne->tab_etape as $k => $etape)
+		$tab_etape = &$ligne->get_ref_tab_etape();
+		foreach($tab_etape as $k => $etape)
 		{
 			// on regarde si il y a des gens sur cette étape
-			if (sizeof($etape->Point_A->tab_covoitureur) < 1)
+			if (sizeof($etape->get_ref_tab_covoitureur()) < 1)
 			{
 				continue;
 			}
 			echo "####################\n";
-			echo "\t ETAPE ".$etape->Point_A->id." ~ ".$etape->Point_B->id."\n\n";
+			echo "\t ETAPE ".$etape->get_id_Point_A()." ~ ".$etape->get_id_Point_B()."\n\n";
 	
 			#####################################
 			#	Détermination du Conducteur		#
@@ -36,42 +35,45 @@ class Covoiturage
 			// le conducteur sera en priorité un covoitureur voulant un aller retour 
 
 			$conducteur = null;
-			$etape->voiture = null;
+			$voiture = &$etape->get_ref_voiture();
+			$voiture = null;
 
 			// on détermine si il reste des covoitureurs voulant un simple aller
 			$aller_retour_remain = False;
-			foreach($etape->Point_A->tab_covoitureur as $covoitureur)
+
+			$tab_covoitureur = &$etape->get_ref_tab_covoitureur();
+			foreach($tab_covoitureur as $covoitureur)
 			{
-				if (isset($covoitureur->heure_retour))
+				if (null !== $covoitureur->get_heure_retour())
 				{
 					$aller_retour_remain = True;
 				}
 			}
 
 
-			foreach($etape->Point_A->tab_covoitureur as $j => $covoitureur)
+			foreach($tab_covoitureur as $j => $covoitureur)
 			{
-				if (isset($covoitureur) && $covoitureur->have_voiture)
+				if (isset($covoitureur) && $covoitureur->get_have_voiture())
 				// on cherche un covoitureur avec une voiture en partant des plus pauvres
 				{
-					if ($aller_retour_remain && !isset($covoitureur->heure_retour))
+					if ($aller_retour_remain && null == $covoitureur->get_heure_retour())
 					// si il reste de utilisateur voulant un aller retour et que le covoitutreur séléctionner n'a pas de retour (donc il veux un aller simple)
 					// alors on passe séléctionne le covoitureur suivant
 					{
 						continue;
 					}
 					$conducteur = $covoitureur;
-					$etape->voiture = new Voiture($conducteur);
-					unset($etape->Point_A->tab_covoitureur[$j]);
+					$voiture = new Voiture($conducteur);
+					$etape->rm_covoitureur($covoitureur->get_id());
 
 					// on ajoute le conducteur à sa voiture
-					array_push($etape->voiture->tab_passager, $conducteur);
-					$etape->voiture->place_restante--;
-					echo "#Voiture de : $conducteur->id \t$= $covoitureur->Nbr_Alveole\t\t want_retour : $covoitureur->heure_retour\n".
-					"idVoiture : ".$etape->voiture->id."\t nb_place : ".$etape->voiture->place_restante."\n\n";
+					$voiture->add_passager($conducteur);
+					echo "#Voiture de : ".$conducteur->get_id()." \t$= ".$covoitureur->get_Nbr_Alveole()."\t\t want_retour : ".$covoitureur->get_heure_retour()."\n".
+					"idVoiture : ".$voiture->get_id()."\t nb_place : ".$voiture->get_place_restante()."\n\n";
 					break;
 				}
 			}
+
 
 
 			#################################
@@ -81,49 +83,47 @@ class Covoiturage
 			// on trie les covoitureurs sur l'étape pour avoir en priorité les plus riches en alvéoles
 			
 			// par bubble sort
-			$tab = $etape->Point_A->tab_covoitureur;
-			$this->combler_tab($tab);
+			$tab_passager = &$voiture->get_ref_tab_passager();
+			$tab_covoitureur = &$etape->get_ref_tab_covoitureur();
+			$this->combler_tab($tab_covoitureur);
 
-			
-			for($i=0; $i<sizeof($etape->Point_A->tab_covoitureur)-1; $i++) {
-				for($j=0; $j<(sizeof($etape->Point_A->tab_covoitureur)-1-$i); $j++) {
-					if ($tab[$j]->Nbr_Alveole > $tab[$j+1]->Nbr_Alveole ) {
-						$temp = $tab[$j+1];
-						$tab[$j+1] = $tab[$j];
-						$tab[$j] = $temp;
+			for($i=0; $i<sizeof($tab_covoitureur)-1; $i++) {
+				for($j=0; $j<(sizeof($tab_covoitureur)-1-$i); $j++) {
+					if ($tab_covoitureur[$j]->get_Nbr_Alveole() > $tab_covoitureur[$j+1]->get_Nbr_Alveole() ) {
+						$temp = $tab_covoitureur[$j+1];
+						$tab_covoitureur[$j+1] = $tab_covoitureur[$j];
+						$tab_covoitureur[$j] = $temp;
 					}
 				}
 			}
 
-			$etape->Point_A->tab_covoitureur = $tab;
-
 			// on trie le tableau des covoitureurs sur l'étape pour avoir en priorité les covoitureurs sans voitures et ensuite les plus riches
 			
-				foreach($etape->Point_A->tab_covoitureur as $j => $covoitureur)
+				foreach($tab_covoitureur as $j => $covoitureur)
 				{
-					if ($covoitureur->have_voiture)
+					if ($covoitureur->get_have_voiture())
 					{
-						array_push($etape->Point_A->tab_covoitureur, $covoitureur);
-						unset($etape->Point_A->tab_covoitureur[$j]);
+						// on déplace le covoitureur à la fin du tab_covoiturage
+						$etape->rm_covoitureur($covoitureur->get_id());
+						$etape->add_covoitureur($covoitureur);
 					}
 				}
 
 
 
-			foreach($etape->Point_A->tab_covoitureur as $j => $covoitureur)
+			foreach($tab_covoitureur as $j => $covoitureur)
 			{
-				if((isset($conducteur) && $etape->voiture->place_restante > 1) || sizeof($etape->Point_A->tab_covoitureur) == 1)# NOTE : On utilise toute les place que si il ne reste qu'une personne sur le point	
+				if((isset($conducteur) && $voiture->get_place_restante() > 1) || sizeof($tab_covoitureur) == 1)# NOTE : On utilise toute les place que si il ne reste qu'une personne sur le point	
 				{
-					if (!isset($etape->voiture->tab_passager[0]->heure_retour) && isset($covoitureur->heure_retour))
+					if ($tab_passager[0]->get_heure_retour() == null && $covoitureur->get_heure_retour() !== null)
 					// si le conducteur veux un aller simple il ne prendra que des passagers voulant la même chose
 					{
 						continue;
 					}
-					echo "#ID : $covoitureur->id  \t$ = $covoitureur->Nbr_Alveole\t\t\t want_retour : $covoitureur->heure_retour\n";
-					$covoitureur->have_voiture = False;							// on retire l'accès à la voiture du covoitureur passager
-					array_push($etape->voiture->tab_passager, $covoitureur);
-					$etape->voiture->place_restante--;
-					unset($etape->Point_A->tab_covoitureur[$j]);
+					echo "#ID : ".$covoitureur->get_id()."  \t$ = ".$covoitureur->get_Nbr_Alveole()."\t\t\t want_retour : ".$covoitureur->get_heure_retour()."\n";
+					$covoitureur->set_have_voiture(False);							// on retire l'accès à la voiture du covoitureur passager
+					$voiture->add_passager($covoitureur);
+					$etape->rm_covoitureur($covoitureur->get_id());
 				}
 			}
 
@@ -131,13 +131,14 @@ class Covoiturage
 			#	Déplacement des passager à la prochaine étape	#
 			#####################################################
 
-			if (isset($ligne->tab_etape[$k+1]) && isset($etape->voiture))
+			if (isset($tab_etape[$k+1]) && isset($voiture))
 			{
-				foreach($etape->voiture->tab_passager as $passager)
+				foreach($tab_passager as $passager)
 				{
 					// on ajoute les covoitureur seulement si il n'y sont pas déjà
 					$is_already_here = False;
-					foreach($ligne->tab_etape[$k+1]->Point_A->tab_covoitureur as $covoitureur)
+					$sup_tab_covoitureur = &$tab_etape[$k+1]->get_ref_tab_covoitureur();
+					foreach($sup_tab_covoitureur as $covoitureur)
 					{
 						if ($covoitureur == $passager)
 						{
@@ -147,22 +148,20 @@ class Covoiturage
 
 					if (!$is_already_here)
 					{
-						array_push($ligne->tab_etape[$k+1]->Point_A->tab_covoitureur, $passager);
+						//array_push($ligne->tab_etape[$k+1]->Point_A->tab_covoitureur, $passager);
+						$tab_etape[$k+1]->add_covoitureur($passager);
 					}
 					
 				}
-				$etape->voiture->kilometrage = $etape->distance;
+				$voiture->set_kilometrage($etape->get_distance());
 			}
-
-
-
 
 				
 			// on ajoute l'étape actuel dans un tableau pour déterminer les retour plus tard
 			array_push($this->tab_etape_retour, clone $etape);
 
 			echo "\n\n\n";
-			$this->save($etape,$ligne->id, $is_depart_lycee, $date, $heure);
+			$this->save($etape,$ligne->get_id(), $is_depart_lycee, $date, $heure);
 		}
 
 
@@ -170,7 +169,7 @@ class Covoiturage
 		#################################
 		#	Planification des retour	#
 		#################################
-
+		/*
 		foreach($this->tab_etape_retour as $j => $etape)
 		{
 			// on retire tout les covoitureurs sans retour de la voiture
@@ -202,11 +201,10 @@ class Covoiturage
 				echo "#ID : ".$passager->id." \t$ = ".$passager->Nbr_Alveole." \t\t\twant_retour : ".$passager->heure_retour."\n";
 			}
 		}
-		//var_dump($this->tab_etape_retour);
+		*/
 	}
 
-
-	function combler_tab(&$tab)							// non utilisé
+	function combler_tab(&$tab)
 	// permet de retirer les index vide d'un tableau
 	{
 		$temp = array();

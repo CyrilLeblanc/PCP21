@@ -19,20 +19,22 @@ foreach($tab_date as $date)
 			// on vérifie que les covoitureurs veulent un retour ou non
 			if ($sens == 0)		// si c'est un aller
 			{
-				foreach($ligne->tab_etape as $etape)
+				$tab_etape = &$ligne->get_ref_tab_etape();
+				foreach($tab_etape as $etape)
 				{
-					foreach($etape->Point_A->tab_covoitureur as $covoitureur)
+					$tab_covoitureur = &$etape->get_ref_tab_covoitureur();
+					foreach($tab_covoitureur as $covoitureur)
 					{
-						$sql = "SELECT Heure_Arrivee FROM Inscription WHERE idCovoitureur = $covoitureur->id AND Date_Depart = '$date' AND is_Depart_Lycee = 1";
+						$sql = "SELECT Heure_Arrivee FROM Inscription WHERE idCovoitureur = ".$covoitureur->get_id()." AND Date_Depart = '$date' AND is_Depart_Lycee = 1";
 						$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
 						if (isset($res))
 						{
-							$covoitureur->heure_retour = $res['Heure_Arrivee'];
+							$covoitureur->set_heure_retour($res['Heure_Arrivee']);
 						}
 					}
 				}
 			}
-		
+
 			while (sizeof($ligne->get_population()) > 0)
 			{
 				$covoiturage = new Covoiturage($ligne, $date, $heure, $sens);

@@ -11,10 +11,10 @@ require_once "config.php";
 
 class Covoitureur
 {
-	public $id;
-	public $Nbr_Alveole;
-	public $have_voiture = True;
-	public $heure_retour = null;
+	private $id;
+	private $Nbr_Alveole;
+	private $have_voiture = True;
+	private $heure_retour = null;
 
 	function __construct($id)
 	{
@@ -23,4 +23,36 @@ class Covoitureur
 		$this->Nbr_Alveole = (int)$GLOBALS['mysqli']->query($sql)->fetch_assoc()['Nbr_Alveoles'];
 	}
 
+
+## SETER & GETER
+
+	function get_id()
+	{
+		return $this->id;
+	}
+
+	function get_Nbr_Alveole()
+	{
+		return $this->Nbr_Alveole;
+	}
+
+	function get_have_voiture()
+	{
+		return $this->have_voiture;
+	}
+
+	function set_have_voiture($value)
+	{
+		$this->have_voiture = $value;
+	}
+
+	function set_heure_retour($value)
+	{
+		$this->heure_retour = $value;
+	}
+
+	function get_heure_retour()
+	{
+		return $this->heure_retour;
+	}
 }

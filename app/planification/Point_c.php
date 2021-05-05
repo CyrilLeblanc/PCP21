@@ -14,12 +14,12 @@ class Point
 {
 
 	// coordonée GSP [FORMAT : DECIMAL]
-	public $latitude;
-	public $longitude;
+	private $latitude;
+	private $longitude;
 
-	public $id; 			// "idPoint_RDV" dans la base de donnée
+	private $id; 			// "idPoint_RDV" dans la base de donnée
 
-	public $tab_covoitureur = array();	// contient tout les covoitureurs à un horaire demandé
+	private $tab_covoitureur = array();	// contient tout les covoitureurs à un horaire demandé
 
 
 
@@ -34,11 +34,38 @@ class Point
 		$this->longitude = (float)$res['Longitude'];
 	}
 
+	function add_covoitureur(Covoitureur $covoitureur)
+	{
+		array_push($this->tab_covoitureur, $covoitureur);
+	}
 
+	function rm_covoitureur($id)
+	{
+		foreach($this->tab_covoitureur as $j => $covoitureur)
+		{
+			if ($covoitureur->get_id() == $id)
+			{
+				unset($this->tab_covoitureur[$j]);
+			}
+		}
+	}
+
+
+## SETER & GETER
 	function get_id()
 	{
 		return $this->id;
 	}
+
+	function set_id($id)
+	{
+		$this->id = $id;
+	}
+
+	function &get_ref_tab_covoitureur()
+	{
+		return $this->tab_covoitureur;
+	}	
 
 }
 ?>

@@ -14,8 +14,8 @@ require_once "Etape_c.php";
 class Ligne
 {
 
-	public $id;
-	public $tab_etape = array();			// contient les étapes demandés
+	private $id;
+	private $tab_etape = array();			// contient les étapes demandés
 
 	function __construct($id, $is_depart_lycee)
 	// créer les étapes pour la ligne automatiquement en fonction de l'idLigne et du sens
@@ -34,7 +34,7 @@ class Ligne
 	}
 
 
-	public function get_composition($id, $is_depart_lycee)
+	private function get_composition($id, $is_depart_lycee)
 	// utilisé par le constructeur
 	// permet de récupéré la composition d'une ligne en fonction de son sens et de son id
 	{
@@ -97,7 +97,7 @@ class Ligne
 
 		foreach($this->tab_etape as $k => $etape)
 		{
-			if (sizeof($etape->Point_A->tab_covoitureur) < 1)
+			if (sizeof($etape->get_ref_tab_covoitureur()) < 1)
 			// si il n'y a personne sur le point on le retire
 			{
 				unset($this->tab_etape[$k]);
@@ -118,7 +118,8 @@ class Ligne
 		{
 			if (isset($this->tab_etape[$k+1]))
 			{
-				$this->tab_etape[$k]->Point_B->id = $this->tab_etape[$k+1]->Point_A->id;
+				//$this->tab_etape[$k]->Point_B->id = $this->tab_etape[$k+1]->Point_A->id;
+				$etape->set_id_Point_B($this->tab_etape[$k+1]->get_id_Point_A());
 			}
 		}
 	}
@@ -128,7 +129,8 @@ class Ligne
 		$population = array();
 		foreach($this->tab_etape as $etape)
 		{
-			foreach($etape->Point_A->tab_covoitureur as $covoitureur)
+			$tab_covoitureur = &$etape->get_ref_tab_covoitureur();
+			foreach($tab_covoitureur as $covoitureur)
 			{
 				array_push($population, $covoitureur);
 			}
@@ -136,6 +138,16 @@ class Ligne
 		return $population;
 	}
 
+	function &get_ref_tab_etape()
+	{
+		return $this->tab_etape;
+	}
 
+## SETER & GETER
+
+	function get_id()
+	{
+		return $this->id;
+	}
 }
 ?>
