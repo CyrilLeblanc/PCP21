@@ -24,10 +24,10 @@ class Point
     }
 
  
-    function add_Point($Nom, $Adresse, $Ville, $Latitude, $Longitude, $Point_Image)
+    function add_Point($Nom, $Adresse, $Ville, $Latitude, $Longitude)
     {
-        $sql = "INSERT INTO Point_RDV (Nom, Adresse, Ville, Latitude, Longitude, Point_Image) 
-                VALUES ('$Nom', $Adresse, $Ville, $Latitude, $Longitude, '$Point_Image');";
+        $sql = "INSERT INTO Point_RDV (Nom, Adresse, Ville, Latitude, Longitude) 
+                VALUES ('$Nom', $Adresse, $Ville, $Latitude, $Longitude);";
 
         return $GLOBALS['mysqli'] ->query($sql);
     }

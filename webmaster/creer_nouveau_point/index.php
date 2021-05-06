@@ -3,8 +3,15 @@
 
 <head>
 <?php 
-		include('../../bootstrap.html');
-	?>
+		include_once '../../bootstrap.html';
+    require_once '../request/Point.php';
+
+    if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
+    {
+      $Ajouter_Point_RDV = new Point();
+      $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']);
+    }
+  ?>
   <title>Création Nouveau Point</title>
 </head>
 
@@ -72,14 +79,14 @@
           {
             echo "</br></br>
               <div class='alert alert-danger text-center'>
-              <h2><strong>Erreur</strong></h2>
+              <h2><strong>Erreur d'ajout de point de RDV.</strong></h2>
               </div>";
           }
 
           $verif_ajout = new Point();
-          if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']) && isset($_POST['photo']))
+          if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
           {
-            if($verif_ajout->verif_point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$_POST['photo']) == True)
+            if($verif_ajout->verif_point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']) == True)
             {
               header('Location: ?error=ok');
             }
