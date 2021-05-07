@@ -12,7 +12,7 @@ require_once "Voiture_c.php";
 
 class Covoiturage
 {
-	private $tab_etape_retour = array();		// tableau qui contient les covoiturages créers pour les enregistrers
+	private $tab_covoitureur_retour = array();		// tableau qui contient les covoiturages créers pour les enregistrers
 
 
 	function __construct(&$ligne, $date, $heure, $is_depart_lycee)
@@ -68,7 +68,7 @@ class Covoiturage
 
 					// on ajoute le conducteur à sa voiture
 					$voiture->add_passager($conducteur);
-					echo "#Voiture de : ".$conducteur->get_id()." \t$= ".$covoitureur->get_Nbr_Alveole()."\t\t want_retour : ".$covoitureur->get_heure_retour()."\n".
+					echo "#Voiture de : ".$conducteur->get_id()." \t$= ".$covoitureur->get_Nbr_Alveole()."\t\t home: ".$covoitureur->get_idPoint_home()."\twant_retour : ".$covoitureur->get_heure_retour()."\n".
 					"idVoiture : ".$voiture->get_id()."\t nb_place : ".$voiture->get_place_restante()."\n\n";
 					break;
 				}
@@ -120,7 +120,12 @@ class Covoiturage
 					{
 						continue;
 					}
-					echo "#ID : ".$covoitureur->get_id()."  \t$ = ".$covoitureur->get_Nbr_Alveole()."\t\t\t want_retour : ".$covoitureur->get_heure_retour()."\n";
+					if ($covoitureur->get_have_voiture())
+					// si le futur passager à encore sa voiture on défini le $covoitureur->voiture_at_point comme étant le point actuel
+					{
+						$covoitureur->set_voiture_at_point($etape->get_id_Point_A());
+					}
+					echo "#ID : ".$covoitureur->get_id()."  \t$ = ".$covoitureur->get_Nbr_Alveole()."\t\t\t home: ".$covoitureur->get_idPoint_home()."\tvoiture_at : ".$covoitureur->get_voiture_at_point()."\t want_retour : ".$covoitureur->get_heure_retour()."\n";
 					$covoitureur->set_have_voiture(False);							// on retire l'accès à la voiture du covoitureur passager
 					$voiture->add_passager($covoitureur);
 					$etape->rm_covoitureur($covoitureur->get_id());
@@ -133,7 +138,7 @@ class Covoiturage
 
 			if (isset($tab_etape[$k+1]) && isset($voiture))
 			{
-				foreach($tab_passager as $passager)
+				foreach($tab_passager as $j => $passager)
 				{
 					// on ajoute les covoitureur seulement si il n'y sont pas déjà
 					$is_already_here = False;
@@ -157,19 +162,35 @@ class Covoiturage
 			}
 
 				
-			// on ajoute l'étape actuel dans un tableau pour déterminer les retour plus tard
-			array_push($this->tab_etape_retour, clone $etape);
+			// on ajoute tout les passagers arriver au bout de leurs voyages dans $tab_covoitureur_retour
 
 			echo "\n\n\n";
+
+			if($ligne->get_id_final() == $etape->get_id_Point_B())				// si c'est la dernière étape
+			{
+				foreach($tab_passager as $j => $passager)
+				{
+					if ($j == 0)												// pour le conducteur
+					{
+						$passager->set_voiture_at_point($ligne->get_id_final());// on dit que sa voiture est au point final
+					}
+					if(null != $passager->get_heure_retour())
+					{
+						array_push($this->tab_covoitureur_retour, clone $passager);	// on ajoute tout les passagers 
+					}
+				}
+			}
+
+
 			$this->save($etape,$ligne->get_id(), $is_depart_lycee, $date, $heure);
 		}
 
 
-
+		/*
 		#################################
 		#	Planification des retour	#
 		#################################
-		/*
+		
 		foreach($this->tab_etape_retour as $j => $etape)
 		{
 			// on retire tout les covoitureurs sans retour de la voiture
@@ -202,6 +223,7 @@ class Covoiturage
 			}
 		}
 		*/
+		
 	}
 
 	function combler_tab(&$tab)
@@ -223,7 +245,7 @@ class Covoiturage
 	#TODO
 	{
 
-		/*#####################################################
+		/*###################################################
 		#	Détermination de l'idCovoiturage dans la BDD	#
 		#####################################################
 
@@ -256,22 +278,13 @@ class Covoiturage
 				//$GLOBALS['mysqli']->query($sql);
 			}
 		} while (!isset($res));*/
-		
-		
-		
-
-		
-		
-		
-		
-		
-		
-
-
-
-
-
 		//var_dump($etape);
+	}
+
+
+	function get_tab_covoitureur_retour()
+	{
+		return $this->tab_covoitureur_retour;
 	}
 }
 

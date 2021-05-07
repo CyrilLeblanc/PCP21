@@ -13,18 +13,28 @@ class Covoitureur
 {
 	private $id;
 	private $Nbr_Alveole;
+	private $idPoint_home;
+
 	private $have_voiture = True;
 	private $heure_retour = null;
+	private $voiture_at_point = null;			// contient l'id point où la voiture du covoitureur à été laisser
 
 	function __construct($id)
 	{
 		$this->id = $id;
-		$sql = "SELECT Nbr_Alveoles FROM Covoitureur WHERE idCovoitureur = $id";
-		$this->Nbr_Alveole = (int)$GLOBALS['mysqli']->query($sql)->fetch_assoc()['Nbr_Alveoles'];
+		$sql = "SELECT Nbr_Alveoles, idPoint_RDV FROM Covoitureur WHERE idCovoitureur = $id";
+		$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
+		$this->Nbr_Alveole = (int)$res['Nbr_Alveoles'];
+		$this->idPoint_home = (int)$res['idPoint_RDV'];
 	}
 
 
 ## SETER & GETER
+
+	function get_idPoint_home()
+	{
+		return $this->idPoint_home;
+	}
 
 	function get_id()
 	{
@@ -54,5 +64,15 @@ class Covoitureur
 	function get_heure_retour()
 	{
 		return $this->heure_retour;
+	}
+
+	function get_voiture_at_point()
+	{
+		return $this->voiture_at_point;
+	}
+
+	function set_voiture_at_point($idPoint)
+	{
+		$this->voiture_at_point = $idPoint;
 	}
 }

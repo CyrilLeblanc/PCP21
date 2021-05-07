@@ -89,6 +89,11 @@ class Ligne
 		$this->del_empty();
 	}
 
+	function inject_covoitureur($tab_covoitureur)
+	{
+		
+	}
+
 
 	function del_empty()
 	{
@@ -148,6 +153,11 @@ class Ligne
 	function get_id()
 	{
 		return $this->id;
+	}
+
+	function get_id_final()
+	{
+		return $this->tab_etape[sizeof($this->tab_etape)-1]->get_id_Point_B();
 	}
 }
 ?>
