@@ -121,6 +121,11 @@ foreach($tab_date as $date)
 
 	$tab_heure_retour = $tab;
 
+
+
+
+
+
 	#############################
 	#	Trie des covoitureur	#
 	#############################
@@ -137,18 +142,85 @@ foreach($tab_date as $date)
 			}
 		}
 	}
+
+
+
+	// si les covoitureurs d'une heure n'ont pas de voiture on les déplaces sur le prochain créneau
+	foreach($tab_heure_retour as $j => $heure)
+	{
+		$voiture_available = false;
+		foreach($heure["covoitureur"] as $covoitureur)			// on vérifie si il y a une voiture pour ce créneau
+		{
+			if ($covoitureur->get_voiture_at_point() == 1)
+			{
+				$voiture_available = true;
+			}
+		}
+
+		if (!$voiture_available)								// si il n'y pas de voiture on déplace tout les covoitureurs au créneaux suivant
+		{
+			foreach($heure["covoitureur"] as $k => $covoitureur)
+			{
+				if (isset($tab_heure_retour[$j+1]))
+				{
+					array_push($tab_heure_retour[$j+1]["covoitureur"],$covoitureur);
+				}
+				else {		// si il n'y a pas de prochain créneaux alors les covoitureurs n'ont pas de retour
+					echo "pas de retour pour #" . $covoitureur->get_id() . "\n";
+				}
+				unset($tab_heure_retour[$j]["covoitureur"][$k]);
+			}
+		}
+	}
+
+	// si le conducteur ne va pas jusqu'au rang des passager le plus loin alors on déplace les covoitureurs au prochain créneaux
+	foreach($tab_heure_retour as $j => $heure)
+	{
+		// on cherche le conducteur
+		$conducteur = null;
+		foreach($heure["covoitureur"] as $covoitureur)
+		{
+			if($covoitureur->get_voiture_at_point() == 1)
+			{
+				$conducteur = $covoitureur;
+				break;
+			}
+		}
+
+		// on cherche le rang max du point des passagers (on cherche le point max des voitures laissé à un point)
+		$max_rang = 0;
+		foreach($heure["covoitureur"] as $covoitureur)
+		{
+			if($covoitureur->get_voiture_at_point() > $max_rang)
+			{
+				$max_rang = $covoitureur->get_voiture_at_point();
+			}
+		}
+		echo "max rang = $max_rang\n";
+	}
+
 	// ensuite on les tries en fonction de accès à leurs voiture ou non
 
 
-	foreach($tab_heure_retour as $heure)
+	foreach($tab_heure_retour as $heure)		#DEBUG
 	{
 		echo "\n". $heure["heure"] . "\n";
 		foreach($heure["covoitureur"] as $covoitureur)
 		{
-			echo "#".$covoitureur->get_id() . "\t home : " . $covoitureur->get_idPoint_home() ."\t voiture_at : ". $covoitureur->get_voiture_at_point() ."\n";
+			foreach($ligne->get_ref_tab_etape() as $etape)
+			{
+				$rang = 0;
+				if ($etape->get_id_Point_A() == $covoitureur->get_voiture_at_point())
+				{
+					$rang = $etape->get_rang_Point_A();
+					break;
+				}
+			}
+			echo "#".$covoitureur->get_id() . "\t home : " . $covoitureur->get_idPoint_home() ."\t voiture_at : ". $covoitureur->get_voiture_at_point() . "[$rang] \tretour_voulu : " . $covoitureur->get_heure_retour() ."\n";
 		}
 		echo "\n";
 	}
+
 
 
 	#############################

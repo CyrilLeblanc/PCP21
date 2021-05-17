@@ -25,10 +25,11 @@ class Etape
 
 	private $voiture;		// la voiture utilisé pour l'étape
 
-	function __construct($idPoint_A, $idPoint_B)
+	function __construct($idPoint_A, $idPoint_B, $idLigne)
+	#TODO consctruct avec la base de donnée
 	{
-		$this->Point_A = new Point($idPoint_A);
-		$this->Point_B = new Point($idPoint_B);
+		$this->Point_A = new Point($idPoint_A, $idLigne);
+		$this->Point_B = new Point($idPoint_B, $idLigne);
 	}
 
 	function set_covoitureur($date, $heure, $is_depart_lycee)
@@ -120,6 +121,11 @@ class Etape
 	function get_id_Point_B()
 	{
 		return $this->Point_B->get_id();
+	}
+
+	function get_rang_Point_A()
+	{
+		return $this->Point_A->get_rang();
 	}
 
 	

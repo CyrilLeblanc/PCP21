@@ -18,6 +18,7 @@ class Point
 	private $longitude;
 
 	private $id; 			// "idPoint_RDV" dans la base de donnée
+	private $rang;
 
 	private $idPoint_A;
 	private $idPoint_B;
@@ -26,15 +27,24 @@ class Point
 
 
 
-	function __construct($id)
+	function __construct($idPoint, $idLigne)
 	{
-		$this->id = $id;
+		$this->id = $idPoint;
 
 		// on récupère les coordonnées du point depuis la base de donnée
-		$sql = "SELECT Latitude, Longitude FROM Point_RDV WHERE idPoint_RDV = $id;";
+		$sql = "SELECT Latitude, Longitude FROM Point_RDV WHERE idPoint_RDV = $idPoint;";
 		$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
 		$this->latitude = (float)$res['Latitude'];
 		$this->longitude = (float)$res['Longitude'];
+
+		// on récupère le rang du point sur la ligne
+		$sql = "SELECT rang FROM Composition WHERE idPoint_RDV = $idPoint AND idLigne = $idLigne;";
+		$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
+		if ($this->id != 1)
+		{
+			$this->rang = (int)$res['rang'];
+		}
+
 	}
 
 	function add_covoitureur(Covoitureur $covoitureur)
@@ -65,10 +75,21 @@ class Point
 		$this->id = $id;
 	}
 
+	function get_rang()
+	{
+		return $this->rang;
+	}
+
+	function set_rang($value)
+	{
+		$this->rang = $value;
+	}
+
 	function &get_ref_tab_covoitureur()
 	{
 		return $this->tab_covoitureur;
 	}	
+
 
 }
 ?>

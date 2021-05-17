@@ -16,6 +16,7 @@ class Ligne
 
 	private $id;
 	private $tab_etape = array();			// contient les étapes demandés
+	private $tab_point_rang = array();
 
 	function __construct($id, $is_depart_lycee)
 	// créer les étapes pour la ligne automatiquement en fonction de l'idLigne et du sens
@@ -28,8 +29,18 @@ class Ligne
 		{
 			if (isset($composition[$k+1]) && $composition[$k])
 			{
-				array_push($this->tab_etape, new Etape($composition[$k], $composition[$k+1]));
+				array_push($this->tab_etape, new Etape($composition[$k], $composition[$k+1], $id));
 			}
+		}
+
+		// on créer le tableau associatif des rang / point
+		foreach($this->tab_etape as $etape)
+		{
+			$temp = array("idPoint" => 0 , "rang" => 0);
+			$temp["idPoint"] = $etape->get_id_Point_A();
+			$temp["rang"] = $etape->get_rang_Point_A();
+
+			array_push($this->tab_point_rang, $temp);
 		}
 	}
 
@@ -158,6 +169,11 @@ class Ligne
 	function get_id_final()
 	{
 		return $this->tab_etape[sizeof($this->tab_etape)-1]->get_id_Point_B();
+	}
+
+	function get_tab_point_rang()
+	{
+		return $this->tab_point_rang;
 	}
 }
 ?>
