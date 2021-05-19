@@ -24,7 +24,7 @@
 
 
 
-    <img src="Photo.jpg" style="width:80px;">
+    <img src="../Image/Photo.jpg" style="width:80px;">
 
   
     Jean EUDE
