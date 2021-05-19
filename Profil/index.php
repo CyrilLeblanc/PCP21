@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<?php include 'bootstrap.html'; ?>
+	<?php include '../bootstrap.html'; ?>
 	<title></title>
 </head>
 <body>
@@ -12,7 +12,7 @@
 <div class="col-sm-4">
 
 
-      <button class="btn material-icons float-left" onclick="window.location.href = 'Page_acceuil.php';" style="color: white; font-size: 200%;">&#xe5c4</button>
+      <button class="btn material-icons float-left" onclick="window.location.href = '../Page_Accueil/index.php';" style="color: white; font-size: 200%;">&#xe5c4</button>
   
 
 </div>
@@ -22,7 +22,7 @@
   <div class="col-sm-4 text-right">
     
         69
-        <img src="honey.png" width="60">
+        <img src="../image/honey.png" width="60">
       </div>
 </div>
   
@@ -48,7 +48,7 @@
 		<div class="container col-sm-6 border ">
 
 			<p class="text-center font-weight-bold">Identité</p>
-			<img src="Photo.png" style="width:100px;" class="rounded float-left">
+			<img src="../image/Photo.png" style="width:100px;" class="rounded float-left">
 
 		<div class="row">
 
@@ -83,7 +83,7 @@
 
 		<div class="row">
 
-			<img src="voiture.jpg" style="width:100px;" class="rounded col-sm-2">
+			<img src="../image/voiture.jpg" style="width:100px;" class="rounded col-sm-2">
 
 			<div class="col-sm-6"></div>
 

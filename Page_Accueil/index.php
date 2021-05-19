@@ -2,15 +2,15 @@
 <html>
 <head>
   <?php
-  include 'bootstrap.html';
+  include '../bootstrap.html';
     ?>
 </head>
 <body>
 
     <?php
-  include 'Demande_Covoiturage.php';
-  include 'Classement.php';
-  include 'Historique.php';
+  include 'DemandeCovoiturage/Demande_Covoiturage.php';
+  include 'Classement/Classement.php';
+  include 'Historique/Historique.php';
     ?>
 
 <!-- HEADER -->
@@ -20,7 +20,7 @@
 <div class="col-sm-4">
 
 
-      <button class="btn material-icons float-left" onclick="window.location.href = 'Profil.php';" style="color: white; font-size: 300%;">&#xf02e;</button>
+      <button class="btn material-icons float-left" onclick="window.location.href = '../Profil/index.php';" style="color: white; font-size: 300%;">&#xf02e;</button>
 
 
 
@@ -37,7 +37,7 @@
   <div class="col-sm-4 text-right">
     
         69
-        <img src="honey.png" width="60">
+        <img src="../image/honey.png" width="60">
       </div>
 </div>
   
@@ -71,7 +71,7 @@
 
 </div>
 
-<?php include 'Prochain_covoiturage.php' ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
+<?php include 'Prochain_Covoiturage/Prochain_covoiturage.php' ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
 
 </div>
 
