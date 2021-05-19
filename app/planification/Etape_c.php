@@ -8,7 +8,7 @@
 #
 #
 
-require_once "config.php";
+require_once "../../config.php";
 require_once "Point_c.php";
 require_once "Covoitureur_c.php";
 

@@ -7,7 +7,7 @@
 #
 #
 
-require_once "config.php";
+require_once "../../config.php";
 require_once "Voiture_c.php";
 
 class Covoiturage
