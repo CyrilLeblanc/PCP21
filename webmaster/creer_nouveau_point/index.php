@@ -13,6 +13,8 @@
       {
         $filename = $_FILES['photo']['name'];
         $tempname = $_FILES['photo']['tmp_name'];
+        $filesize = $_FILES['photo']['size';]
+        $error = 1;
         $folder = "../images/".$filename;
 
         $extension = new SplFileInfo($filename);
@@ -21,9 +23,15 @@
         $newname = "/PCP21/webmaster/images/" . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
         $newfolder = "../images/" . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
 
+        $newname = addslashes($newname);
+
         if(move_uploaded_file($tempname,$folder)) 
         {
           $_POST['photo'] = $newname;
+        }
+        elseif($filename == null)
+        {
+          $_POST['photo'] = "";
         }
         else 
         { 
@@ -34,8 +42,9 @@
             <h2><strong>La photo ne s'est pas envoyée.</strong></h2>
             </div>"; 
         }
-      }
 
+      }
+      
       //Ajout du Point de RDV
       $Ajouter_Point_RDV = new Point();
       $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$_POST['photo'],1);
@@ -106,7 +115,7 @@
           $verif_ajout = new Point();
           if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
           {
-            if($verif_ajout->verif_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']) == True)
+            if($verif_ajout->verif_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']))
             {
               echo "</br></br>
                 <div class='alert alert-success text-center'>
