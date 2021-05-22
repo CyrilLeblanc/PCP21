@@ -1,6 +1,6 @@
 <?php
   //Envoi de l'image
-  /*
+
   $target_dir = "../images/";
   $target_file = $target_dir . basename($_FILES["photo"]["name"]);
   $uploadOk = 1;
@@ -61,5 +61,5 @@
     }
   }
   
-  //Pour pouvoir envoyer le chemin d'accès de l'image dans le BDD.*/
+  //Pour pouvoir envoyer le chemin d'accès de l'image dans le BDD.
 ?>
