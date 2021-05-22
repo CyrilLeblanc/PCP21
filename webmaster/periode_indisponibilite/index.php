@@ -6,6 +6,7 @@
 	  include_once '../../bootstrap.html';
 	  require_once '../request/Indisp.php'; 
 
+    //Ajout de la période d'Indisponibilité
     if(isset($_POST['date_debut']) && isset($_POST['date_fin']))
     {
       $Ajouter_Indisponibilite = new Indisp();
@@ -64,37 +65,27 @@
         <br/><button type="submit" class="btn btn-success" name="submit">Valider</button>
 
         <?php
-
-          if(isset($_GET['error']) && $_GET['error'] == 'ok')
+        
+          //Vérifie si la période a bien été ajoutée
+          $verif_ajout = new Indisp();
+          if(isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['flexRadioDefault']))
           {
-            echo "</br></br>
-              <div class='alert alert-success text-center'>
-              <h5><strong>La période d'indisponibilité a bien été ajoutée.</strong></h5>
-              </div>";
+            if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1) == True)
+            {
+              echo "</br></br>
+                  <div class='alert alert-success text-center'>
+                  <h5><strong>La période d'indisponibilité a bien été ajoutée.</strong></h5>
+                  </div>";
+            }
+            else
+            {
+              echo "</br></br>
+                  <div class='alert alert-danger text-center'>
+                  <h2><strong>Erreur d'ajout de période d'indisponibilité.</strong></h2>
+                  </div>";
+            }
           }
 
-          if(isset($_GET['error']) && $_GET['error'] == 'erreur')
-          {
-            echo "</br></br>
-              <div class='alert alert-danger text-center'>
-              <h2><strong>Erreur d'ajout de période d'indisponibilité.</strong></h2>
-              </div>";
-          }
-
-      $verif_ajout = new Indisp();
-      if(isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['flexRadioDefault']))
-      {
-        if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1) == True)
-        {
-          header('Location: ?error=ok');
-        }
-        else
-        {
-          header('Location: ?error=erreur');
-        }
-      }
-
-          
         ?>
 
       </div>

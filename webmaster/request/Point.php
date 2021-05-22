@@ -27,15 +27,13 @@ class Point
     function add_Point($Nom, $Adresse, $Ville, $Latitude, $Longitude)
     {
         $sql = "INSERT INTO Point_RDV (Nom, Adresse, Ville, Latitude, Longitude) 
-                VALUES ('$Nom', $Adresse, $Ville, $Latitude, $Longitude);";
-
-        return $GLOBALS['mysqli'] ->query($sql);
+        VALUES ('$Nom', '$Adresse', '$Ville', $Latitude, $Longitude);";
+        return $GLOBALS['mysqli']->query($sql);
     }
 
-    function verif_point($Nom, $Adresse, $Ville, $Latitude, $Longitude)
+    function verif_Point($Nom, $Adresse, $Ville, $Latitude, $Longitude)
     {
-        echo "\n test";
-        $sql = "SELECT * FROM Point_RDV WHERE Nom = '$Nom' AND Adresse = '$Adresse' AND Ville = '$Ville' AND Latitude = '$Latitude' AND Longitude = '$Longitude' AND Point_Image = '$Point_Image';";
+        $sql = "SELECT * FROM Point_RDV WHERE Nom = '$Nom' AND Adresse = '$Adresse' AND Ville = '$Ville' AND Latitude = $Latitude AND Longitude = $Longitude ;";
         $res = $GLOBALS['mysqli']->query($sql);
 
         $stack = array();

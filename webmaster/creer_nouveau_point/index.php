@@ -2,9 +2,16 @@
 <html>
 
 <head>
-<?php 
+  <?php 
 		include_once '../../bootstrap.html';
     require_once '../request/Point.php';
+
+    //Ajout du Point de RDV
+    if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
+    {
+      $Ajouter_Point_RDV = new Point();
+      $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']);
+    }
   ?>
   <title>Création Nouveau Point RDV</title>
 </head>
@@ -22,7 +29,7 @@
 
 
     <!-- FORM -->
-    <form class="needs-validation" method="post" action="upload.php" enctype="multipart/form-data">
+    <form class="needs-validation" method="post" action="">
 
       <!-- FORM Input Fields -->
       <div class="form-group" align="center">
@@ -50,19 +57,40 @@
         <input type="text" class="mb-2 mr-sm-2" placeholder="6.5787" name="longitude" required>
       </div>
 
-      <div class="form-group" align="center">
+      <!--<div class="form-group" align="center">
         <label for="photo" class="mr-sm-2">Photo : </label><br/>
         <input type="file" class="mb-2 mr-sm-2" name="photo" id="photo">
-      </div>
+      </div>-->
 
       <!-- FORM Submit Button -->
       <div align="center">
         <br/><button type="submit" class="btn btn-success" name="submit">Valider</button>
 
+        <?php
+
+          //Vérifie si le point a bien été ajouté
+          $verif_ajout = new Point();
+          if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
+          {
+            if($verif_ajout->verif_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']) == True)
+            {
+              echo "</br></br>
+                <div class='alert alert-success text-center'>
+                <h5><strong>Le Point de RDV a bien été ajouté.</strong></h5>
+                </div>";
+            }
+            else
+            {
+              echo "</br></br>
+                <div class='alert alert-danger text-center'>
+                <h2><strong>Erreur d'ajout de point de RDV.</strong></h2>
+                </div>";
+            }
+          }
+
+        ?>
 
       </div>
-
-    </form>
 
     </form>
 
