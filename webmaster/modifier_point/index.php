@@ -6,7 +6,7 @@
 		include('../../bootstrap.html');
 		require_once "../request/Point.php"; 
 	?>
-	<script src="../popup.js"></script>
+	<script src="./popup.js"></script>
 	<title>Modifier Point RDV</title>
 </head>
 
@@ -89,7 +89,7 @@
 					<div class="container border rounded shadow">
 						<div class="form-group" align="left">
 							<label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" placeholder="Lycée" id="nomPoint" name="nomPoint" value="" required>
+							<input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
 
 						</div>
 
@@ -121,7 +121,7 @@
 						<div class="form-group" align="left">
 							<label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
 							<img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
-							<input type="file" class="mb-2 mr-sm-2" placeholder="../images/" id="imagePoint" name="imagePoint" value="" required>
+							<input type="file" class="mb-2 mr-sm-2" placeholder="../images/" id="imagePoint" name="imagePoint" value="">
 
 						</div>
 					</div>

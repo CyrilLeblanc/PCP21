@@ -32,8 +32,9 @@ class Point
         return $GLOBALS['mysqli'] ->query($sql);
     }
 
-    function verif_point($Nom, $Adresse, $Ville, $Latitude, $Longitude, $Point_Image)
+    function verif_point($Nom, $Adresse, $Ville, $Latitude, $Longitude)
     {
+        echo "\n test";
         $sql = "SELECT * FROM Point_RDV WHERE Nom = '$Nom' AND Adresse = '$Adresse' AND Ville = '$Ville' AND Latitude = '$Latitude' AND Longitude = '$Longitude' AND Point_Image = '$Point_Image';";
         $res = $GLOBALS['mysqli']->query($sql);
 

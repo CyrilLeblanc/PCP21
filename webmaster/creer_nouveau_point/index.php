@@ -5,14 +5,8 @@
 <?php 
 		include_once '../../bootstrap.html';
     require_once '../request/Point.php';
-
-    if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
-    {
-      $Ajouter_Point_RDV = new Point();
-      $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']);
-    }
   ?>
-  <title>Création Nouveau Point</title>
+  <title>Création Nouveau Point RDV</title>
 </head>
 
 <body>
@@ -23,12 +17,12 @@
       <a href="/index.php">
         <button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
       </a>
-      <h2 class="text-center" style="color: white;">Créer Nouveau Point</h2>
+      <h2 class="text-center" style="color: white;">Créer Nouveau Point RDV</h2>
     </div>
+
 
     <!-- FORM -->
     <form class="needs-validation" method="post" action="upload.php" enctype="multipart/form-data">
-
 
       <!-- FORM Input Fields -->
       <div class="form-group" align="center">
@@ -65,39 +59,6 @@
       <div align="center">
         <br/><button type="submit" class="btn btn-success" name="submit">Valider</button>
 
-        <?php
-
-          if(isset($_GET['error']) && $_GET['error'] == 'ok')
-          {
-            echo "</br></br>
-              <div class='alert alert-success text-center'>
-              <h5><strong>Le Point de RDV a bien été ajouté.</strong></h5>
-              </div>";
-          }
-
-          if(isset($_GET['error']) && $_GET['error'] == 'erreur')
-          {
-            echo "</br></br>
-              <div class='alert alert-danger text-center'>
-              <h2><strong>Erreur d'ajout de point de RDV.</strong></h2>
-              </div>";
-          }
-
-          $verif_ajout = new Point();
-          if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
-          {
-            if($verif_ajout->verif_point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']) == True)
-            {
-              header('Location: ?error=ok');
-            }
-            else
-            {
-              header('Location: ?error=erreur');
-            }
-          }
-
-          
-        ?>
 
       </div>
 
