@@ -40,7 +40,11 @@
       $Ajouter_Point_RDV = new Point();
       $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$_POST['photo'],1);
 
-      rename($folder, $newfolder);
+      if($filename == null){}
+      else 
+      {
+        rename($folder, $newfolder);
+      }
     }
   ?>
   <title>Création Nouveau Point RDV</title>
