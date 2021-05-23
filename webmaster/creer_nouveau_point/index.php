@@ -8,7 +8,7 @@
 
     if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
     {
-      if(isset($_POST['submit']) && !$_FILES['photo'] == null)
+      if(isset($_POST['submit']) && !empty($_FILES['photo']['name']))
       {
         $filename = $_FILES['photo']['name'];
         $tempname = $_FILES['photo']['tmp_name'];
@@ -30,11 +30,11 @@
         }
         else 
         { 
-          $_FILES['photo'] = "";
+          $_FILES['photo'] = null;
 
           echo "</br></br>
             <div class='alert alert-danger text-center'>
-            <h2><strong>La photo ne s'est pas envoyée.</strong></h2>
+            <h2><strong>Il y a un problème avec l'envoi de votre image.</strong></h2>
             </div>"; 
         }
 
@@ -58,27 +58,31 @@
 
         if ($error == 0) 
         {
-          if(!isset($_FILES['photo']))
-          {
-            unlink($folder);
-          } 
+          unlink($folder);
           $newname = null;
           
           echo "</br></br>
             <div class='alert alert-danger text-center'>
-            <h2><strong>Votre image n'a pas été ajoutée.</strong></h2>
+            <h2><strong>Votre image n'a pas été ajoutée</strong></h2>
             </div>";
         }
+
+        //Ajout du Point de RDV avec image
+        $Ajouter_Point_RDV = new Point();
+        $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$newname,1);
+
+        if($error == 1)
+        {
+          rename($folder, $newfolder);
+        }
       }
-
-      //Ajout du Point de RDV
-      $Ajouter_Point_RDV = new Point();
-      $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$newname,1);
-
-      if(!$_FILES['photo'] == null && $error == 1)
+      elseif(isset($_POST['submit']) && empty($_FILES['photo']['name']))
       {
-        rename($folder, $newfolder);
+        //Ajout du Point de RDV sans image
+        $Ajouter_Point_RDV = new Point();
+        $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],null,1);
       }
+
     }
   ?>
   <title>Création Nouveau Point RDV</title>
