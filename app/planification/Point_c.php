@@ -20,9 +20,6 @@ class Point
 	private $id; 			// "idPoint_RDV" dans la base de donnée
 	private $rang;
 
-	private $idPoint_A;
-	private $idPoint_B;
-
 	private $tab_covoitureur = array();	// contient tout les covoitureurs à un horaire demandé
 
 
