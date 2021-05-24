@@ -2,7 +2,7 @@
 
   <div class="col-sm-4 w-25 text-left">
     <button class="btn material-icons float-left" style="color: white; font-size: 300%;">&#xf02e;</button>
-    <img src="./webmaster/images/Abeille.png" width="80">
+    <img src="./webmaster/images/Abeille.png" width="100">
     Nom
     Prénom
   </div>
@@ -41,7 +41,7 @@
       }
     ?>
    
-    <img src="./webmaster/images/Alvéoles.png" width="60">
+    <img src="./webmaster/images/Alvéoles.png" width="100">
     69
     
 
