@@ -2,9 +2,9 @@
 <html>
 
 <head>
-<?php 
+	<?php 
 		include('../../bootstrap.html');
-		require_once "../request/Covoiturage.php"; 
+		require_once "../request/Covoitureur.php"; 
 	?>
 	<title>Modifier Covoitureur</title>
 </head>
@@ -51,7 +51,7 @@
 				<?php
 					$Covoitureur = new Covoitureur();
 					$table = $Covoitureur -> get_covoitureur(True);
-
+					
 					foreach($table as $value)
 					{
 						$voiture = $Covoitureur -> get_voiture($value["idCovoitureur"]);
@@ -66,7 +66,8 @@
 
 								<td>' . $value["Email"] . '</td>
 
-								<td> <a href="' . $value["Utilisateur_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="150"></img></a> </td>
+								<td> <a href="' . $value["Utilisateur_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' 
+									. $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="50"></img></a> </td>
 
 								<td>' . $voiture["Marque"] . '</td>
 
@@ -76,9 +77,13 @@
 
 								<td>' . $voiture["Couleur"] . '</td>
 
-								<td> <a href="' . $voiture["Voiture_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="150"></img></a> </td>
+								<td> <a href="' . $voiture["Voiture_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' 
+									. $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="50"></img></a> </td>
 
-								<td>' . '<button class="btn btn-success material-icons btn-sm" style="font-size: 150%" onclick="popupIndisp(`' . $value["Nom"] . $value["Prenom"] . $value["Num_Telephone"] . $value["Email"] . $value["Utilisateur_Image"] . $voiture["Marque"] . $voiture["Modele"] . $voiture["Annee"] . $voiture["Couleur"] . $voiture["Voiture_Image"] .'`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
+								<td>' . '<button class="btn btn-success material-icons btn-sm" style="font-size: 150%" onclick="popupIndisp(`' 
+									. $value["Nom"] . $value["Prenom"] . $value["Num_Telephone"] . $value["Email"] . $value["Utilisateur_Image"] 
+									. $voiture["Marque"] . $voiture["Modele"] . $voiture["Annee"] . $voiture["Couleur"] . $voiture["Voiture_Image"] 	
+									.'`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
 							</tr>';	
 					}
 
