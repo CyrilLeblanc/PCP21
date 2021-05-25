@@ -3,8 +3,8 @@
 
 <head>
 	<?php 
-		include('../bootstrap.html'); 
-		require_once "../request/Covoitureur.php";
+		include('../../bootstrap.html');
+		require_once "../request/Covoitureur.php"; 
 	?>
 	<title>Demandes Création Compte</title>
 </head>
