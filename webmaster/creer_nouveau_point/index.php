@@ -98,6 +98,7 @@
       <h2 class="text-center" style="color: white;">Créer Nouveau Point RDV</h2>
     </div>
 
+      <h1>Ajouter un point d'interrogation pour expliquer comment récupérer les coordonnées facilement.</h1>
 
     <!-- FORM -->
     <form class="needs-validation" method="post" action="" enctype="multipart/form-data">

@@ -3,10 +3,10 @@
 
 <head>
 	<?php 
-		include('../bootstrap.html');
+		include('../../bootstrap.html');
 		require_once "../request/Point.php"; 
 	?>
-	<title>Desmandes Création Point RDV</title>
+	<title>Demandes Création Point RDV</title>
 </head>
 
 <body>
@@ -31,10 +31,8 @@
 
 			else
 			{
-				foreach($table as $value)
-				{
-					echo 
-					'<!-- TABLE -->
+				echo
+				'<!-- TABLE -->
 					<div class="container overflow-auto" style="font-size: 10px; height: 400px;">
 					<table class="table">
 
@@ -42,21 +40,23 @@
 					<!-- TABLE Header -->
 					<thead align="center">
 					<tr>
-						<th>Nom du Point</th>
+						<th>Nom</th>
 						<th>Adresse</th>
 						<th>Coordonnées</th>
 						<th>Photo</th>
 						<th>Validation</th>
 					</tr>
-					</thead>
+					</thead>';
 
-
-					<!-- TABLE Body -->
+				foreach($table as $value)
+				{
+					echo 
+					'<!-- TABLE Body -->
 					<tbody align="center" style="height: 100px; overflow: auto;">
 						<tr> 
 							<td>' . $value["Nom"] . '</td>
 
-							<td>' . '...' . '</td>
+							<td>' . $value["Adresse"] . '</td>
 
 							<td> <a href="https://www.google.com/maps/place/' . $value["Latitude"] . ',' . $value["Longitude"] . '" onclick="window.open(this.href); return false;"" style="font-weight: bold; color: green;">' . $value["Latitude"] . '<br/>' . $value["Longitude"] . '</td>
 

@@ -31,35 +31,35 @@
 
 			else
 			{
+				echo
+				'<!-- TABLE -->
+				<div class="container overflow-auto" style="font-size: 10px; height: 400px;">
+				<table class="table">
+
+
+				<!-- TABLE Header -->
+				<thead align="center">
+				<tr>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>N° Téléphone</th>
+					<th>E-mail</th>
+					<th>Photo</th>
+					<th>Marque</th>
+					<th>Modèle</th>
+					<th>Année</th>
+					<th>Couleur</th>
+					<th>Photo</th>
+					<th>Modifier</th>
+				</tr>
+				</thead>';
+				
 				foreach($table as $value)
 				{
 					$voiture = $Covoitureur -> get_voiture($value["idCovoitureur"]);
 
 					echo 
-					'<!-- TABLE -->
-					<div class="container overflow-auto" style="font-size: 10px; height: 400px;">
-					<table class="table">
-
-
-					<!-- TABLE Header -->
-					<thead align="center">
-					<tr>
-						<th>Nom</th>
-						<th>Prénom</th>
-						<th>N° Téléphone</th>
-						<th>E-mail</th>
-						<th>Photo</th>
-						<th>Marque</th>
-						<th>Modèle</th>
-						<th>Année</th>
-						<th>Couleur</th>
-						<th>Photo</th>
-						<th>Modifier</th>
-					</tr>
-					</thead>
-
-
-					<!-- TABLE Body -->
+					'<!-- TABLE Body -->
 					<tbody align="center" style="height: 100px; overflow: auto;">
 						<tr> 
 							<td>' . $value["Nom"] . '</td>
@@ -70,7 +70,7 @@
 
 							<td>' . $value["Email"] . '</td>
 
-							<td> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="100"></img></td>
+							<td> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="50"></img></td>
 
 							<td>' . $voiture["Marque"] . '</td>
 
@@ -80,7 +80,7 @@
 
 							<td>' . $voiture["Couleur"] . '</td>
 
-							<td> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="100"></img></td>
+							<td> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="50"></img></td>
 
 							<td>
 								<button class="btn material-icons" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popup">&#xe92d;</button>
