@@ -170,10 +170,5 @@ class Ligne
 	{
 		return $this->tab_etape[sizeof($this->tab_etape)-1]->get_id_Point_B();
 	}
-
-	function get_tab_point_rang()
-	{
-		return $this->tab_point_rang;
-	}
 }
 ?>

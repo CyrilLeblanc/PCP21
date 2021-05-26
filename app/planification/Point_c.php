@@ -35,7 +35,7 @@ class Point
 		$this->longitude = (float)$res['Longitude'];
 
 		// on récupère le rang du point sur la ligne
-		$sql = "SELECT rang FROM Composition WHERE idPoint_RDV = $idPoint AND idLigne = $idLigne;";
+		$sql = "SELECT rang FROM Composition WHERE idPoint_RDV = $idPoint AND idLigne = $idLigne";
 		$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
 		if ($this->id != 1)
 		{
