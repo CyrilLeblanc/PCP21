@@ -1,7 +1,7 @@
 <div class="row p-4 bg-success shadow border" style="font-weight: bold; color: white;">
 
   <div class="col-sm-4 w-25 text-left">
-    <button class="btn material-icons float-left" style="color: white; font-size: 400%;">&#xf02e;</button>
+    <button class="btn material-icons float-left" onclick="window.location.href = '../Profil/index.php';" style="color: white; font-size: 300%;">&#xf02e;</button>
     <img src="./webmaster/images/Abeille.png" width="80">
     Nom
     Prénom
