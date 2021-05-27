@@ -21,8 +21,6 @@ class Point
             array_push($stack,$row);
         }
         return $stack;
-
-        "SELECT * FROM Ligne;"
     }
 
  
