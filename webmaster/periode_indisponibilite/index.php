@@ -5,13 +5,6 @@
   <?php 
 	  include_once '../../bootstrap.html';
 	  require_once '../request/Indisp.php'; 
-
-    //Ajout de la période d'Indisponibilité
-    if(isset($_POST['date_debut']) && isset($_POST['date_fin']))
-    {
-      $Ajouter_Indisponibilite = new Indisp();
-      $Ajouter_Indisponibilite->add_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1);
-    }
   ?>
   <title>Période Indisponibilité</title>
 </head>
@@ -65,7 +58,25 @@
         <br/><button type="submit" class="btn btn-success" name="submit">Valider</button>
 
         <?php
-        
+          
+          //Ajout de la période d'Indisponibilité
+          if(isset($_POST['date_debut']) && isset($_POST['date_fin']))
+          {
+            if($_POST['date_debut'] > $_POST['date_fin'])
+            {
+              echo "</br></br>
+              <div class='alert alert-danger text-center'>
+              <h2><strong>La date de début doit précéder la date de fin.</strong></h2>
+              </div>";
+            }
+            else
+            {
+              $Ajouter_Indisponibilite = new Indisp();
+              $Ajouter_Indisponibilite->add_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1);
+            }
+            
+          }
+
           //Vérifie si la période a bien été ajoutée
           $verif_ajout = new Indisp();
           if(isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['flexRadioDefault']))

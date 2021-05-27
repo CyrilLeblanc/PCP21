@@ -59,7 +59,7 @@
         }
         else
         {
-          echo $_SESSION["Nom"];
+          echo $_SESSION["Nom"] . " ...";
         }
       ?>
     </div>
@@ -70,9 +70,7 @@
         {
           echo "+";
         }
-        echo $_SESSION["Nbr_Alveoles"];
-        
-        
+        echo $_SESSION["Nbr_Alveoles"]; 
       ?>
     </div>
 
