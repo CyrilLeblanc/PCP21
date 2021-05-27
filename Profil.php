@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<?php include '../bootstrap.html'; ?>
+	<?php include './bootstrap.html'; ?>
 	<title></title>
 </head>
 <body>
@@ -12,7 +12,7 @@
 <div class="col-sm-4">
 
 
-      <button class="btn material-icons float-left" onclick="window.location.href = '../Page_Accueil/index.php';" style="color: white; font-size: 200%;">&#xe5c4</button>
+      <button class="btn material-icons float-left" onclick="window.location.href = './index.php';" style="color: white; font-size: 200%;">&#xe5c4</button>
   
 
 </div>

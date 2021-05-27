@@ -1,6 +1,16 @@
 <?php
   session_start();
-  $_SESSION["is_Webmaster"] = 1;
+  $_SESSION["idCovoitureur"] = 50;
+
+  require_once "./webmaster/request/config.php"; 
+
+  $sql = "SELECT Nom, Prenom, Nbr_Alveoles, is_Webmaster FROM Covoitureur WHERE idCovoitureur = " . $_SESSION["idCovoitureur"];
+  $res = $GLOBALS['mysqli']->query($sql)-> fetch_assoc();
+
+  $_SESSION["is_Webmaster"] = $res["is_Webmaster"];
+  $_SESSION["Nom"] = $res["Nom"];
+  $_SESSION["Prenom"] = $res["Prenom"];
+  $_SESSION["Nbr_Alveoles"] = $res["Nbr_Alveoles"];
 ?>
 
 <!DOCTYPE html>
@@ -27,3 +37,4 @@
 
 </body>
 </html>
+
