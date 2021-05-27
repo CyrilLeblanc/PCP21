@@ -5,7 +5,7 @@ class Covoitureur
     {
         require_once __DIR__."/config.php";
     }
-    
+
 
     function verif_authentif($email, $password)
     // cette fonction permet de vérifier les informations de connection d'un utilisateur
