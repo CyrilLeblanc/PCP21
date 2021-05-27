@@ -297,27 +297,50 @@ class Covoiturage
 						$idCovoitureur = $passager->get_id();
 						$sql = "INSERT INTO Participation (is_Conducteur, Date, is_Valide_Systeme, is_Invalide_Webmaster, kilometrage, idCovoitureur, idCovoiturage) ".
 						"VALUES ($is_conducteur, '$date', 1, 1, $kilometrage ,$idCovoitureur, $idCovoiturage);\n";
-						$res = $GLOBALS['mysqli']->query($sql);
+						$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();		# TODO Verifié ici
 					}
 					if ($res != "True")
 					{
 						// mise en place des idParticipation pour chaque covoitureur
 						$passager->set_idParticipation($res['idParticipation']);
-					}					
+					}
 				} while (!isset($res) && $nbAttempt > 0);
 			}
 		}
-
-
-		
+		$res = null;
 
 		#############################################
 		#	Création / Détermination de l'Etape		#
 		#############################################
 
-
-		
+		// pour chaque etape
+		foreach($this->tab_etape_covoiturage as $etape)
+		{
+			$tab_passager = $etape['voiture']->get_ref_tab_passager();
+			foreach($tab_passager as $passager)
+			{
+				$nbAttempt = 0;
+				do{
+					$nbAttempt++;
+					// on vérifie que l'Etape n'existe pas déjà
+					$idPointA = $etape['idPointA'];
+					$idPointB = $etape['idPointB'];
+					$idVoiture = $etape['voiture']->get_id();
+					$idParticipation = $passager->get_idParticipation();
+					$kilometrage = (int)$etape['voiture']->get_kilometrage();
+					$sql = "SELECT idEtape FROM Etape WHERE idPoint_RDV_A = $idPointA AND idPoint_RDV_B = $idPointB AND idVoiture = $idVoiture AND idParticipation = $idParticipation;";
+					$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
+					
+					if(!isset($res))
+					// si elle n'existe pas on l'ajoute
+					{
+						$sql = "INSERT INTO Etape (Duree, Kilometrage, idPoint_RDV_A, idPoint_RDV_B, idVoiture, idParticipation) ".
+						"VALUES (0, $kilometrage, $idPointA, $idPointB, $idVoiture, $idParticipation);";
+						$GLOBALS['mysqli']->query($sql);
+					}
+				} while (!isset($res) && $nbAttempt > 0);				
+			}
+		}
 	}
-
 }
 

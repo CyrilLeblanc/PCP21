@@ -86,7 +86,5 @@ class Point
 	{
 		return $this->tab_covoitureur;
 	}	
-
-
 }
 ?>
