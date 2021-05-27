@@ -18,6 +18,7 @@ class Covoitureur
 	private $have_voiture = True;
 	private $heure_retour = null;
 	private $voiture_at_point = null;			// contient l'id point où la voiture du covoitureur à été laisser
+	private $idParticipation;
 
 	function __construct($id)
 	{
@@ -75,4 +76,15 @@ class Covoitureur
 	{
 		$this->voiture_at_point = $idPoint;
 	}
+
+	function set_idParticipation($value)
+	{
+		$this->idParticipation = $value;
+	}
+
+	function get_idParticipation()
+	{
+		return $this->idParticipation;
+	}
+
 }

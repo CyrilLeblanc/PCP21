@@ -74,5 +74,10 @@ class Voiture
 		$this->kilometrage = $value;
 	}
 
+	function get_kilometrage()
+	{
+		return $this->kilometrage;
+	}
+
 }
 ?>

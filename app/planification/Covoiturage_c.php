@@ -16,6 +16,7 @@ class Covoiturage
 	private $date;
 	private $heure;
 	private $is_depart_lycee;
+	private $idCovoiturage;
 
 	private $tab_etape_covoiturage = array(); 	// garde en mémoire toute les étapes créers
 
@@ -199,17 +200,6 @@ class Covoiturage
 				}
 			}
 		}
-
-		foreach($this->tab_etape_covoiturage as $etape)		#DEBUG
-		{
-			echo "\n\n\n\n";
-			echo $etape['idPointA'] . " ~ " . $etape['idPointB'] . "\n";
-			foreach($etape['voiture']->get_ref_tab_passager() as $passager)
-			{
-				echo $passager->get_id() . "\n";
-			}
-
-		}
 	}
 
 	function combler_tab(&$tab)
@@ -231,9 +221,9 @@ class Covoiturage
 	#TODO
 	{
 
-		####################################################
-		#	Détermination de l'idCovoiturage dans la BDD	#
-		#####################################################
+		#############################################################
+		#	Détermination / Création de l'idCovoiturage dans la BDD	#
+		#############################################################
 
 		// on détermine le jour de la semaine
 		$tab_date = explode('-', $this->date);		// on sépare chaque élément de la date
@@ -249,9 +239,11 @@ class Covoiturage
 			7 => "dimanche"
 		);
 
-		$jour_semaine = $tab_jourSemaine[date('w', $timestamp)];		// on récupère le jour de la semaine
+		$jour_semaine = $tab_jourSemaine[date('w', $timestamp)];		// on récupère le jour de la semaine!
 
+		$nbAttempt = 10;		// permet d'éviter une boucle infini en cas de mauvaise connexion avec la BDD  
 		do{
+			// on va chercher l'idCovoiturage qui correspond au jour de la semaine, à l'heure et à la même ligne
 			$is_depart_lycee = $this->is_depart_lycee;
 			$idLigne = $this->idLigne;
 			$heure = $this->heure;
@@ -262,14 +254,69 @@ class Covoiturage
 			$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
 	
 			if (!$res)
+			// si l'idCovoiturage n'existe pas alors on le créer
 			{
 				$sql = "INSERT INTO Covoiturage (Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure', $is_depart_lycee, $idLigne)";
-				echo "$sql\n";
 				$GLOBALS['mysqli']->query($sql);
 			}
-		} while (!isset($res));
-		$idCovoiturage = $res['idCovoiturage'];
-		var_dump($res);
+			$nbAttempt++;
+		} while (!isset($res) && $nbAttempt > 0);
+		$idCovoiturage = (int)$res['idCovoiturage'];
+		$res = null;
+		$this->idCovoiturage = $idCovoiturage;
+
+		echo "idCovoiturage : $idCovoiturage\n";
+
+		#####################################################
+		#	Détermination / Création de la Participation	#
+		#####################################################
+
+		// on regarde si une participation pour ce covoitureur pour ce covoiturage à une certaine date existe déjà
+		foreach($this->tab_etape_covoiturage as $etape)
+		{
+			$tab_passager = $etape['voiture']->get_ref_tab_passager();
+			foreach($tab_passager as $passager)
+			{
+				$nbAttempt = 0;
+				do{
+					$nbAttempt++;
+					$idPassager = $passager->get_id();
+					$is_conducteur = 0;
+					if($etape['voiture']->get_ref_tab_passager()[0]->get_id() == $idPassager)
+					{
+						$is_conducteur = 1;
+					}
+					// on cherche l'idParticipation pour ce covoiturage
+					$sql = "SELECT idParticipation FROM Participation WHERE idCovoitureur = $idPassager AND is_conducteur = $is_conducteur";
+					$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
+					if(!$res)
+					// si il n'existe pas on créer la Participation
+					{
+						$date = $this->date;
+						$kilometrage = (int)$etape['voiture']->get_kilometrage();
+						$idCovoitureur = $passager->get_id();
+						$sql = "INSERT INTO Participation (is_Conducteur, Date, is_Valide_Systeme, is_Invalide_Webmaster, kilometrage, idCovoitureur, idCovoiturage) ".
+						"VALUES ($is_conducteur, '$date', 1, 1, $kilometrage ,$idCovoitureur, $idCovoiturage);\n";
+						$res = $GLOBALS['mysqli']->query($sql);
+					}
+					if ($res != "True")
+					{
+						// mise en place des idParticipation pour chaque covoitureur
+						$passager->set_idParticipation($res['idParticipation']);
+					}					
+				} while (!isset($res) && $nbAttempt > 0);
+			}
+		}
+
+
+		
+
+		#############################################
+		#	Création / Détermination de l'Etape		#
+		#############################################
+
+
+		
 	}
 
 }
