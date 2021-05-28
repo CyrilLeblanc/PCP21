@@ -1,9 +1,4 @@
-<?php
-session_start();
-require_once "./connect.php";
-?>
-
-
+<?php require_once "./connect.php"; ?>
 <doctype HTML>
 <html>
 <head>
@@ -43,20 +38,30 @@ require_once "./connect.php";
 </ul>
 </nav>
 <?php 
-	// affichage des erreurs de connection
-	if ($_GET['error'] == 'login')
+	// affichage des erreurs de connexion
+	if (isset($_GET['error']))
 	{
-		echo "<BR/>
-		<div class='alert alert-danger text-center'>
-		<strong>Erreur :</strong> Mauvais mot de passe ou mauvaise adresse e-mail.
-	  	</div>";
-	} elseif($_GET['error'] == 'confirme')
-	{
-		echo "<BR/>
-		<div class='alert alert-danger text-center'>
-		<strong>Erreur :</strong> Compte non confirmé merci de contacté le webmaster en cas de problème.
-	  	</div>";
+		if ($_GET['error'] == 'login')
+		{
+			echo "<BR/>
+			<div class='alert alert-danger text-center'>
+			<strong>Erreur :</strong> Mauvais mot de passe ou adresse e-mail.
+			  </div>";
+		} elseif ($_GET['error'] == 'confirme')
+		{
+			echo "<BR/>
+			<div class='alert alert-danger text-center'>
+			<strong>Erreur :</strong> Votre compte n'a pas encore été validé par le webmaster. Merci de le contacter si le problème persiste.
+			  </div>";
+		} elseif ($_GET['error'] == 'expired_token')
+		{
+			echo "<BR/>
+			<div class='alert alert-danger text-center'>
+			<strong>Cela fait plus de 30 jours que vous êtes connecté veuillez vous reconnecter.
+			  </div>";
+		}
 	}
+	
 
 ?>
 
@@ -87,7 +92,7 @@ require_once "./connect.php";
 		
 	</form>
 	<p><a href='#TODO'><p>J'ai oublié mon mot de passe.</a></br>
-	Si vous n'avez pas de compte vous pouvez <a href="TODO">vous inscrire</a>.</p>
+	Si vous n'avez pas de compte vous pouvez <a href="#TODO">vous inscrire</a>.</p>
 
 	</div>
 <br/>

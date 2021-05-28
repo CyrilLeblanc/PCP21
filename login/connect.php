@@ -1,8 +1,11 @@
 <?php 
 
+// si une erreur est déclaré on exit
+
+
+
 session_start();
 require_once '../config.php';
-
 
 function connect($idCovoitureur)
 {
@@ -11,43 +14,40 @@ function connect($idCovoitureur)
     $res = $GLOBALS['mysqli']->query($sql);
     while($row = $res->fetch_assoc())
     {
-        $_SESSION = $row;
+        $_SESSION = $row;   // on enregistre toute les données dans la session
         break;
     }
-    echo "Go Accueil!";
-    header("Location: ./accueil/");
+    echo "Go Accueil!<br/>";
+    //header("Location: ../accueil/");
+    exit;
 }
 
 
-
-
-if(isset($_SESSION['idCovoitureur']))
+if(isset($_SESSION['idCovoitureur']))   // connexion par session
 {
+    echo "Already Connected.<br/>\n";
     connect($_SESSION['idCovoitureur']);
 }
 
 
-
-if(isset($_POST['email']) && isset($_POST['password']))
-// connexion via formulaire
+if(isset($_POST['email']) && isset($_POST['password']))     // connexion via formulaire
 {
-    require_once '../config.php';
     $erreur_login = False;
     $erreur_confirm = False;
+
+    $time_to_wait = 1;          // temp d'attente en cas d'erreur dans le formulaire
 	
 	$email = $_POST['email'];
 	$password = $_POST['password'];
 	$remember = $_POST['remember'];
 
-
-
-    #############################################
-    #   Vérification des informations fourni    #
-    #############################################
+    ###################################################################
+    #   Vérification des informations fourni et gestion des erreurs   #
+    ###################################################################
 
 	$sql = "SELECT * FROM Covoitureur WHERE Email = '$email'";
 	$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
-
+   
     // Vérification de l'email
     $erreur_login = !isset($res);
 
@@ -56,30 +56,29 @@ if(isset($_POST['email']) && isset($_POST['password']))
 
     // Vérification de la confirmation du compte
     $erreur_confirm = !(bool)$res['is_Confirme'];
-    
 
-    #############################
-    #   Gestion des erreurs     #
-    #############################
-    $time_to_wait = 1;
-
+    // Gestion erreur de login password ou email
     if($erreur_login)
     {
         sleep($time_to_wait);
-        echo "Erreur de login.\n";
+        echo "Erreur de login.<br/>\n";
+        header("Location: ./?error=login");
+        exit;
     }
 
+    // Gestion erreur confirmation de compte
     if($erreur_confirm)
     {
         sleep($time_to_wait);
-        echo "Erreur de confirmation de compte.\n";
+        echo "Erreur de confirmation de compte.<br/>\n";
+        header("Location: ./?error=confirme");
+        exit;
     }
 
 
     if (!$erreur_login && !$erreur_confirm)
     {
-        echo "Connexion Réussi\n";
-        $_SESSION['idCovoitureur'] = $res['idCovoitureur'];
+        echo "Connexion Réussi<br/>\n";
 
         ###################################
         #   Création de Token si demandé  #
@@ -89,7 +88,7 @@ if(isset($_POST['email']) && isset($_POST['password']))
         {
             // on créer le token
             $longueur_token = 255;
-            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&é&é"(-è_çà)=~#{[|@]}^$ù*,;:!¨£%µ?./§';
+            $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
             $token = '';
             for ($i = 0; $i < $longueur_token-1; $i++)
             {
@@ -109,9 +108,12 @@ if(isset($_POST['email']) && isset($_POST['password']))
             $GLOBALS['mysqli']->query($sql);
 
             // ajout du token dans les Cookies
-            setcookie('token',$token,time()+3600*24*29);        #INTEGRATION
-        }   
+            setcookie('token',$token,time()+3600*24*30);        #INTEGRATION
+        }
+
+        connect($res['idCovoitureur']);
     }
+    exit;
 } 
 
 #####################################
@@ -120,19 +122,21 @@ if(isset($_POST['email']) && isset($_POST['password']))
 
 elseif(isset($_COOKIE['token']))
 {
+    echo "Connection via Token.<br/>\n";
     $token = $_COOKIE['token'];     // on récupère le token dans les cookies
 
     // on le compare avec ceux de la base de donnée pour trouver l'idCovoitureur qui correpond
     $sql = "SELECT idCovoitureur, Date_Fin FROM Token WHERE Content = '$token'";
     $res = $GLOBALS['mysqli']->query($sql);
-
     while ($row = $res->fetch_assoc())
     // si on trouve un token qui correspond dans la BDD
     {
-        echo "test";
         if ($row['Date_Fin'] < date("y-m-d"))   // on prend en compte la date limite du token
         {
             connect($row['idCovoitureur']);
+        } else{     // token arrivé à éxpiration
+            header("Location: ./index.php?error=expired_token");
+            exit;
         }
         break;
     }
