@@ -6,8 +6,6 @@ $tab_date = array("2021-04-12");
 $tab_heure = array("12:00:00");
 $is_depart_lycee = array(0);			// TODO
 
-$tab_covoitureur_retour = array();
-
 foreach($tab_date as $date)
 {
 	foreach($tab_heure as $heure)
@@ -44,6 +42,11 @@ foreach($tab_date as $date)
 		$tab_covoiturage = array();
 		array_push($tab_covoiturage, $covoiturage);
 	}
+
+	#################################
+	#	Planification des retours 	#
+	#################################
+	// non codée pour le moment
 }
 
 

@@ -8,7 +8,7 @@
 #
 #
 
-require_once "../../config.php";
+require_once "../config.php";
 require_once "Point_c.php";
 require_once "Covoitureur_c.php";
 
@@ -30,6 +30,7 @@ class Etape
 	{
 		$this->Point_A = new Point($idPoint_A, $idLigne);
 		$this->Point_B = new Point($idPoint_B, $idLigne);
+		$this->set_distance();
 	}
 
 	function set_covoitureur($date, $heure, $is_depart_lycee)
@@ -98,9 +99,13 @@ class Etape
 	// permet de calculer la distance entre deux points en isodistance
 	#TODO
 	{
-
+		$this->distance = 1;
 	}
 
+	function get_distance()
+	{
+		return $this->distance;
+	}
 
 	function set_id_Point_A($id)
 	{
@@ -128,10 +133,5 @@ class Etape
 		return $this->Point_A->get_rang();
 	}
 
-	
-	function get_distance()
-	{
-		return $this->distance;
-	}
 }
 ?>

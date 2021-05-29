@@ -7,7 +7,7 @@
 #		
 #
 
-require_once "../../config.php";
+require_once "../config.php";
 
 class Voiture
 {
@@ -17,7 +17,7 @@ class Voiture
 	private $id;
 	private $kilometrage;
 
-	function __construct($conducteur)
+	function __construct(Covoitureur $conducteur)
 	// constructeur qui ajoute le conducteur au passager de la voiture
 	{
 

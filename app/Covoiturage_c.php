@@ -7,7 +7,7 @@
 #
 #
 
-require_once "../../config.php";
+require_once "../config.php";
 require_once "Voiture_c.php";
 
 class Covoiturage
@@ -146,11 +146,16 @@ class Covoiturage
 					}
 				}
 
+				$voiture->set_kilometrage($etape->get_distance());
+				#DEBUG
+				//$voiture->set_kilometrage(10);
+
 				$temp = array(
 					'idPointA' => $etape->get_id_point_A(),
 					'idPointB' => $etape->get_id_point_B(),
 					'voiture' => clone $etape->get_ref_voiture()
 				);
+				
 				array_push($this->tab_etape_covoiturage, $temp);
 
 
@@ -175,15 +180,11 @@ class Covoiturage
 
 						if (!$is_already_here)
 						{
-							//array_push($ligne->tab_etape[$k+1]->Point_A->tab_covoitureur, $passager);
 							$tab_etape[$k+1]->add_covoitureur($passager);
-						}
-						
-					}
-					$voiture->set_kilometrage($etape->get_distance());
+						}	
+					}	
 				}
 
-					
 				// on ajoute tout les passagers arriver au bout de leurs voyages dans $tab_covoitureur_retour
 
 				echo "\n\n\n";
@@ -218,12 +219,11 @@ class Covoiturage
 
 
 	function save()
-	#TODO
 	{
 
-		#############################################################
-		#	Détermination / Création de l'idCovoiturage dans la BDD	#
-		#############################################################
+		#########################################################
+		#	Détermination / Création du Covoiturage dans la BDD	#
+		#########################################################
 
 		// on détermine le jour de la semaine
 		$tab_date = explode('-', $this->date);		// on sépare chaque élément de la date
@@ -250,95 +250,94 @@ class Covoiturage
 			
 			$sql = "SELECT idCovoiturage FROM Covoiturage WHERE is_Depart_Lycee = $is_depart_lycee ".
 			"AND idLigne = $idLigne AND Heure = '$heure' AND Jour = '$jour_semaine';";
-	
-			$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
-	
-			if (!$res)
+			
+			$res = $GLOBALS['mysqli']->query($sql);
+			
+			if (mysqli_num_rows($res) == 0)
 			// si l'idCovoiturage n'existe pas alors on le créer
 			{
+				echo "#\tCréation du Covoiturage\n";
 				$sql = "INSERT INTO Covoiturage (Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure', $is_depart_lycee, $idLigne)";
 				$GLOBALS['mysqli']->query($sql);
 			}
-			$nbAttempt++;
-		} while (!isset($res) && $nbAttempt > 0);
-		$idCovoiturage = (int)$res['idCovoiturage'];
+			$nbAttempt--;
+		} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
+		$idCovoiturage = (int)$res->fetch_assoc()['idCovoiturage'];
 		$res = null;
 		$this->idCovoiturage = $idCovoiturage;
 
 		echo "idCovoiturage : $idCovoiturage\n";
 
-		#####################################################
-		#	Détermination / Création de la Participation	#
-		#####################################################
-
-		// on regarde si une participation pour ce covoitureur pour ce covoiturage à une certaine date existe déjà
+		// pour chaque etape enregistré
 		foreach($this->tab_etape_covoiturage as $etape)
 		{
-			$tab_passager = $etape['voiture']->get_ref_tab_passager();
-			foreach($tab_passager as $passager)
+			$idPoint_A = $etape['idPointA'];
+			$idPoint_B = $etape['idPointB'];
+			$voiture = $etape['voiture'];
+			
+			foreach($voiture->get_ref_tab_passager() as $j => $passager)
 			{
-				$nbAttempt = 0;
-				do{
-					$nbAttempt++;
-					$idPassager = $passager->get_id();
-					$is_conducteur = 0;
-					if($etape['voiture']->get_ref_tab_passager()[0]->get_id() == $idPassager)
-					{
-						$is_conducteur = 1;
-					}
-					// on cherche l'idParticipation pour ce covoiturage
-					$sql = "SELECT idParticipation FROM Participation WHERE idCovoitureur = $idPassager AND is_conducteur = $is_conducteur";
-					$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
-					if(!$res)
-					// si il n'existe pas on créer la Participation
-					{
-						$date = $this->date;
-						$kilometrage = (int)$etape['voiture']->get_kilometrage();
-						$idCovoitureur = $passager->get_id();
-						$sql = "INSERT INTO Participation (is_Conducteur, Date, is_Valide_Systeme, is_Invalide_Webmaster, kilometrage, idCovoitureur, idCovoiturage) ".
-						"VALUES ($is_conducteur, '$date', 1, 1, $kilometrage ,$idCovoitureur, $idCovoiturage);\n";
-						$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();		# TODO Verifié ici
-					}
-					if ($res != "True")
-					{
-						// mise en place des idParticipation pour chaque covoitureur
-						$passager->set_idParticipation($res['idParticipation']);
-					}
-				} while (!isset($res) && $nbAttempt > 0);
-			}
-		}
-		$res = null;
+				$idCovoitureur = $passager->get_id();
+				$date = $this->date;
 
-		#############################################
-		#	Création / Détermination de l'Etape		#
-		#############################################
+				#################################
+				#	Génération Participation	#
+				#################################
 
-		// pour chaque etape
-		foreach($this->tab_etape_covoiturage as $etape)
-		{
-			$tab_passager = $etape['voiture']->get_ref_tab_passager();
-			foreach($tab_passager as $passager)
-			{
-				$nbAttempt = 0;
-				do{
-					$nbAttempt++;
-					// on vérifie que l'Etape n'existe pas déjà
-					$idPointA = $etape['idPointA'];
-					$idPointB = $etape['idPointB'];
-					$idVoiture = $etape['voiture']->get_id();
-					$idParticipation = $passager->get_idParticipation();
-					$kilometrage = (int)$etape['voiture']->get_kilometrage();
-					$sql = "SELECT idEtape FROM Etape WHERE idPoint_RDV_A = $idPointA AND idPoint_RDV_B = $idPointB AND idVoiture = $idVoiture AND idParticipation = $idParticipation;";
-					$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
-					
-					if(!isset($res))
-					// si elle n'existe pas on l'ajoute
+				$is_conducteur = (int)($j == 0);
+				$kilometrage = $voiture->get_kilometrage();
+
+				$nbAttempt = 10;
+				do {
+					// on recherche la participation du covoitureur
+					$sql = "SELECT idParticipation FROM Participation WHERE ".
+					"is_Conducteur = $is_conducteur AND ".
+					"Date = '$date' AND ".
+					"idCovoitureur = $idCovoitureur AND ".
+					"idCovoiturage = $idCovoiturage;";
+
+					$res = $GLOBALS['mysqli']->query($sql);
+
+					if (mysqli_num_rows($res) == 0)
+					// si on a aucun résultat on le génère dans la BDD
 					{
-						$sql = "INSERT INTO Etape (Duree, Kilometrage, idPoint_RDV_A, idPoint_RDV_B, idVoiture, idParticipation) ".
-						"VALUES (0, $kilometrage, $idPointA, $idPointB, $idVoiture, $idParticipation);";
+						$sql = "INSERT INTO Participation (is_Conducteur, Date, Kilometrage, idCovoitureur, idCovoiturage) VALUES ".
+						"($is_conducteur, '$date', $kilometrage, $idCovoitureur, $idCovoiturage)";
+						echo "Création Participation pour Covoitureur \t#$idCovoitureur\n";
 						$GLOBALS['mysqli']->query($sql);
 					}
-				} while (!isset($res) && $nbAttempt > 0);				
+					$nbAttempt--;
+				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
+				echo "Obtention Participation pour Covoitureur\t#$idCovoitureur\n\n";
+				$passager->set_idParticipation($res->fetch_assoc()['idParticipation']);
+
+				#############################
+				#	Génération de l'Etape	#
+				#############################
+
+				$nbAttempt = 10;
+				do {
+					// on cherche si une Etape existe déjà
+					$idParticipation = $passager->get_idParticipation();
+					$sql = "SELECT * FROM Etape WHERE ".
+					"idParticipation = $idParticipation AND ".
+					"idPoint_RDV_A = $idPoint_A AND ". 
+					"idPoint_RDV_B = $idPoint_B";
+
+					$res = $GLOBALS['mysqli']->query($sql);
+
+					if (mysqli_num_rows($res) == 0)
+					// si on a aucune résultat on la génère dans la BDD
+					{
+						$idVoiture = $voiture->get_id();
+						$sql = "INSERT INTO Etape (Duree, Kilometrage, idPoint_RDV_A, idPoint_RDV_B, idVoiture, idParticipation) ".
+						"VALUES ('0', $kilometrage, $idPoint_A, $idPoint_B, $idVoiture, $idParticipation);";
+						$GLOBALS['mysqli']->query($sql);
+						echo "\tCréation Etape pour Covoitureur \t#$idCovoitureur\n";
+					}
+					$nbAttempt--;
+				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
+				echo "\tObtention Etape pour Covoitureur\t#$idCovoitureur\n\n";
 			}
 		}
 	}

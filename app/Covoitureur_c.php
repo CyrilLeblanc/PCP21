@@ -7,7 +7,7 @@
 #
 #
 
-require_once "../../config.php";
+require_once "../config.php";
 
 class Covoitureur
 {
@@ -19,6 +19,7 @@ class Covoitureur
 	private $heure_retour = null;
 	private $voiture_at_point = null;			// contient l'id point où la voiture du covoitureur à été laisser
 	private $idParticipation;
+	private $idVoiture;
 
 	function __construct($id)
 	{
@@ -27,6 +28,9 @@ class Covoitureur
 		$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
 		$this->Nbr_Alveole = (int)$res['Nbr_Alveoles'];
 		$this->idPoint_home = (int)$res['idPoint_RDV'];
+
+		$sql = "SELECT idVoiture FROM Voiture WHERE idCovoitureur = $id AND is_Favoris = 1";
+		$this->idVoiture = (int)$GLOBALS['mysqli']->query($sql)->fetch_assoc();
 	}
 
 
@@ -85,6 +89,11 @@ class Covoitureur
 	function get_idParticipation()
 	{
 		return $this->idParticipation;
+	}
+
+	function get_idVoiture()
+	{
+		return $this->idVoiture;
 	}
 
 }

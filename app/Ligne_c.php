@@ -8,7 +8,7 @@
 #
 #
 
-require_once "../../config.php";
+require_once "../config.php";
 require_once "Etape_c.php";
 
 class Ligne
