@@ -6,8 +6,8 @@
 		include('../../bootstrap.html');
 		include('./popupModifCovoitureur.php');
 		include('./popupModifVoiture.php');
-		include('./popupValidation.php');
-		include('./popupInvalidation.php');
+		include('./popupAccepter.php');
+		include('./popupRefuser.php');
 		require_once "../request/Covoitureur.php"; 
 	?>
 	<script src="./popup.js"></script>
@@ -48,16 +48,22 @@
 						<!-- TABLE Header -->
 							<thead align="center">
 								<tr>
+									<th>Non</th>	
 									<th>Covoitureur</th>
 									<th>Profil</th>
 									<th>Voiture</th>
-									<th>Validation</th>
+									<th>Oui</th>
 								</tr>
 							</thead>
 
 						<!-- TABLE Body -->
 							<tbody align="center" style="height: 100px; overflow: auto;">
 								<tr> 
+									<td>
+										<div style="padding-top: 1em; padding-bottom: 1em;">
+											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
+										</div>
+
 									<td> <div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div></td>
 				
 									<td>
@@ -74,8 +80,7 @@
 				
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: green; font-size: 250%;" data-toggle="modal" data-target="#popupValidation">&#xe92d;</button>
-											<button class="btn material-icons p-0" style="color: red; font-size: 250%;" data-toggle="modal" data-target="#popupInvalidation">&#xe888;</button>
+											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
 										</div>
 									</td>
 								</tr>	

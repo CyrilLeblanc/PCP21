@@ -40,7 +40,7 @@
 
 					echo 
 						'<!-- TABLE -->
-							<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
+							<div class="container overflow-auto" style="font-size: 16px; height: 400px;">
 								<table class="table">
 								
 						<!-- TABLE Header -->
@@ -55,7 +55,7 @@
 						<!-- TABLE Body -->
 							<tbody align="center" style="height: 100px; overflow: auto;">
 								<tr> 
-									<td> <div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div></td>
+									<td> <div style="padding-top: 0.5em; padding-bottom: 0.5em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div></td>
 				
 									<td>
 										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
