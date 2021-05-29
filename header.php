@@ -1,7 +1,7 @@
 <div class="bg-success row" style="font-weight: bold; color: white; padding-top: 0.5em; padding-bottom: 0.5em;">
 
   <div class="col-3" align="center">
-    <button class="btn material-icons" onclick="window.location.href = './Profil.php';" style="color: white; font-size: 300%;">&#xf02e;</button>
+    <button class="btn material-icons" style="color: white; font-size: 300%;">&#xe9ba;</button>
   </div>
 
   <div class="col-6" align="center" style="padding-top: 0.5em; padding-bottom: 0.5em;">
@@ -18,7 +18,10 @@
 
             <div class="dropdown-menu">
 
-              <a class="dropdown-item" href="./webmaster/periode_indisponibilite/index.php" style="">Période Indisponibilité</a>
+                <a class="dropdown-item" href="./Profil.php" style="">Profil</a>
+                
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="./webmaster/periode_indisponibilite/index.php" style="">Période Indisponibilité</a>
 
               <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="./webmaster/modifier_point/index.php">Modifier Point RDV</a>
@@ -36,6 +39,13 @@
 
             </div>
           </div>';
+      }
+      else
+      {
+        echo 
+          '<a href="./Profil.php">
+            <button class="btn material-icons" style="color: white; font-size: 300%;">&#xf02e;</button>
+		      </a>';
       }
     ?>
   </div>

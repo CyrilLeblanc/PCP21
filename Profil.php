@@ -22,7 +22,7 @@
   <div class="col-sm-4 text-right">
     
         69
-        <img src="../image/honey.png" width="60">
+        <img src="./webmaster/images/Alvéoles.png" width="60">
       </div>
 </div>
   
