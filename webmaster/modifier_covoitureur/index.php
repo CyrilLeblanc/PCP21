@@ -4,8 +4,11 @@
 <head>
 	<?php 
 		include('../../bootstrap.html');
+		include('./popupModifCovoitureur.php');
+		include('./popupModifVoiture.php');
 		require_once "../request/Covoitureur.php"; 
 	?>
+	<script src="./popup.js"></script>
 	<title>Modifier Covoitureur</title>
 </head>
 
@@ -20,170 +23,59 @@
 		<h2 class="text-center" style="color: white;">Modifier Covoitureur</h2>
 	</div>
 
+		<?php
+			$Covoitureur = new Covoitureur();
+			$table = $Covoitureur -> get_covoitureur(0);
 
-	<!-- TABLE -->
-		<div class="container overflow-auto" style="font-size: 10px ;height: 400px; max-width: 2000px;">
-		<table class="table">
+			if(sizeof($table) == 0)
+			{
+				echo '</br></br><h4 align="center">Pas de nouvelle demande de compte.</h4>';
+			}
 
+			else
+			{
+				foreach($table as $value)
+				{
+					$voiture = $Covoitureur -> get_voiture($value["idCovoitureur"]);
 
-			<!-- TABLE Header -->
-			<thead align="center">
-			<tr>
-				<th>Nom</th>
-				<th>Prénom</th>
-				<th>N° Téléphone</th>
-				<th>E-mail</th>
-				<th>Photo</th>
-				<th>Marque</th>
-				<th>Modèle</th>
-				<th>Année</th>
-				<th>Couleur</th>
-				<th>Photo</th>
-				<th>Modifier</th>
-			</tr>
-			</thead>
+					echo 
+						'<!-- TABLE -->
+							<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
+								<table class="table">
+								
+						<!-- TABLE Header -->
+							<thead align="center">
+								<tr>
+									<th>Covoitureur</th>
+									<th>Profil</th>
+									<th>Voiture</th>
+								</tr>
+							</thead>
 
+						<!-- TABLE Body -->
+							<tbody align="center" style="height: 100px; overflow: auto;">
+								<tr> 
+									<td> <div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div></td>
+				
+									<td>
+										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
+											onclick="popupModifCovoitureur(`' . $value["Nom"] . '`,`' . $value["Prenom"] . '`,`' . $value["Num_Telephone"] . '`,`' . $value["Email"] . '`,`' . $value["Utilisateur_Image"] . '`)"
+											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupModifCovoitureur">&#xe7ff;</button> 
+									</td>
+				
+									<td>
+										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
+											onclick="popupModifVoiture(`' . $voiture["Marque"] . '`,`' . $voiture["Modele"] . '`,`' . $voiture["Annee"] . '`,`' . $voiture["Couleur"] . '`,`' . $voiture["Nbr_Place"] . '`,`' . $voiture["Voiture_Image"] . '`)"
+											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupModifVoiture">&#xe531;</button>
+									</td>
+								</tr>	
+							</tbody>
+						</table>
+					</div>';
+				}
+			}
+		?>
 
-			<!-- TABLE Body -->
-			<tbody align="center" style="height: 100px; overflow: auto;">
-			
-
-				<?php
-					$Covoitureur = new Covoitureur();
-					$table = $Covoitureur -> get_covoitureur(True);
-					
-					foreach($table as $value)
-					{
-						$voiture = $Covoitureur -> get_voiture($value["idCovoitureur"]);
-
-						echo 
-							'<tr> 
-								<td>' . $value["Nom"] . '</td>
-
-								<td>' . $value["Prenom"] . '</td>
-
-								<td>' . $value["Num_Telephone"] . '</td>
-
-								<td>' . $value["Email"] . '</td>
-
-								<td> <a href="' . $value["Utilisateur_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' 
-									. $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="50"></img></a> </td>
-
-								<td>' . $voiture["Marque"] . '</td>
-
-								<td>' . $voiture["Modele"] . '</td>
-
-								<td>' . $voiture["Annee"] . '</td>
-
-								<td>' . $voiture["Couleur"] . '</td>
-
-								<td> <a href="' . $voiture["Voiture_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' 
-									. $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="50"></img></a> </td>
-
-								<td>' . '<button class="btn btn-success material-icons btn-sm" style="font-size: 150%" onclick="popupIndisp(`' 
-									. $value["Nom"] . $value["Prenom"] . $value["Num_Telephone"] . $value["Email"] . $value["Utilisateur_Image"] 
-									. $voiture["Marque"] . $voiture["Modele"] . $voiture["Annee"] . $voiture["Couleur"] . $voiture["Voiture_Image"] 	
-									.'`)" data-toggle="modal" data-target="#popupModif">&#xe3c9;</button>' . '</td>
-							</tr>';	
-					}
-
-				?>
-
-			</tbody>
-
-		</table>
-
-		</div>
-
-
-
-		<!-- POPUP -->
-		<div class="modal fade" id="popupModif">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-
-
-			<!-- POPUP Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">Modification Covoitureur - Work In Progress ...</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-
-
-			<!-- POPUP body -->
-			<div class="modal-body">
-
-				<form class="modifCovoitureur" method="post">
-
-					<div class="container border shadow rounded">
-						<!-- Partie Covoitureur -->
-						<div class="form-group" align="left">
-							<label for="nomCovoitureur" class="mr-sm-2">Nom : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="nomCovoitureur" name="nomCovoitureur" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="prenomCovoitureur" class="mr-sm-2">Prénom : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="prenomCovoitureur" name="prenomCovoitureur" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="numCovoitureur" class="mr-sm-2">N° Téléphone : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="numCovoitureur" name="numCovoitureur" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="mailCovoitureur" class="mr-sm-2">E-mail : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="mailCovoitureur" name="mailCovoitureur" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="photoCovoitueur" class="mr-sm-2">Photo : </label><br/>
-							<img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
-							<input type="file" class="mb-2 mr-sm-2" id="photoCovoitueur" name="photoCovoitueur" value="" required>
-						</div>
-					</div>
-
-					<div class="container border shadow rounded">
-						<!-- Partie Voiture -->
-						<div class="form-group" align="left">
-							<label for="marqueVoiture" class="mr-sm-2">Marque : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="marqueVoiture" name="marqueVoiture" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="modeleVoiture" class="mr-sm-2">Modèle : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="modeleVoiture" name="modeleVoiture" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="anneeVoiture" class="mr-sm-2">Année : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="anneeVoiture" name="anneeVoiture" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="couleurVoiture" class="mr-sm-2">Couleur : </label><br/>
-							<input type="text" class="mb-2 mr-sm-2" id="couleurVoiture" name="couleurVoiture" value="" required>
-						</div>
-
-						<div class="form-group" align="left">
-							<label for="photoVoiture" class="mr-sm-2">Photo : </label><br/>
-							<img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
-							<input type="file" class="mb-2 mr-sm-2" id="photoVoiture" name="photoVoiture" value="" required>
-						</div>
-					</div>
-
-					<!-- POPUP footer -->
-					<div class="modal-footer">
-						<button type="submit" class="btn btn-success">Enregistrer</button>
-					</div>
-
-				</form>
-
-			</div>
-			</div>
-		</div>
-		</div>
 	</div>
 </body>
 

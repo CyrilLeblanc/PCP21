@@ -4,8 +4,13 @@
 <head>
 	<?php 
 		include('../../bootstrap.html');
+		include('./popupModifCovoitureur.php');
+		include('./popupModifVoiture.php');
+		include('./popupValidation.php');
+		include('./popupInvalidation.php');
 		require_once "../request/Covoitureur.php"; 
 	?>
+	<script src="./popup.js"></script>
 	<title>Demandes Création Compte</title>
 </head>
 
@@ -37,13 +42,13 @@
 
 					echo 
 						'<!-- TABLE -->
-							<div class="container overflow-auto" style="font-size: 10px; height: 400px;">
+							<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
 								<table class="table">
 								
 						<!-- TABLE Header -->
 							<thead align="center">
 								<tr>
-									<th>Nom Prénom</th>
+									<th>Covoitureur</th>
 									<th>Profil</th>
 									<th>Voiture</th>
 									<th>Validation</th>
@@ -53,35 +58,30 @@
 						<!-- TABLE Body -->
 							<tbody align="center" style="height: 100px; overflow: auto;">
 								<tr> 
-									<td>' . $value["Nom"] . '</td>
-				
-									<td>' . $value["Prenom"] . '</td>
-				
-									<td>' . $value["Num_Telephone"] . '</td>
-				
-									<td>' . $value["Email"] . '</td>
-				
-									<td> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="100"></img></td>
-				
-									<td>' . $voiture["Marque"] . '</td>
-				
-									<td>' . $voiture["Modele"] . '</td>
-				
-									<td>' . $voiture["Annee"] . '</td>
-				
-									<td>' . $voiture["Couleur"] . '</td>
-				
-									<td> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="100"></img></td>
+									<td> <div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div></td>
 				
 									<td>
-										<button class="btn material-icons" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popup">&#xe92d;</button>
-										<button class="btn material-icons" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popup">&#xe888;</button>
+										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
+											onclick="popupModifCovoitureur(`' . $value["Nom"] . '`,`' . $value["Prenom"] . '`,`' . $value["Num_Telephone"] . '`,`' . $value["Email"] . '`,`' . $value["Utilisateur_Image"] . '`)"
+											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupModifCovoitureur">&#xe7ff;</button> 
+									</td>
+				
+									<td>
+										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
+											onclick="popupModifVoiture(`' . $voiture["Marque"] . '`,`' . $voiture["Modele"] . '`,`' . $voiture["Annee"] . '`,`' . $voiture["Couleur"] . '`,`' . $voiture["Nbr_Place"] . '`,`' . $voiture["Voiture_Image"] . '`)"
+											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupModifVoiture">&#xe531;</button>
+									</td>
+				
+									<td>
+										<div style="padding-top: 1em; padding-bottom: 1em;">
+											<button class="btn material-icons p-0" style="color: green; font-size: 250%;" data-toggle="modal" data-target="#popupValidation">&#xe92d;</button>
+											<button class="btn material-icons p-0" style="color: red; font-size: 250%;" data-toggle="modal" data-target="#popupInvalidation">&#xe888;</button>
+										</div>
 									</td>
 								</tr>	
 							</tbody>
 						</table>
-					</div> -->
-						';
+					</div>';
 				}
 			}
 		?>
@@ -90,58 +90,3 @@
 </body>
 
 </html>
-
-<!-- TABLE -->
-	<!-- <div class="container overflow-auto" style="font-size: 10px; height: 400px;">
-		<table class="table"> -->
-
-
-			<!-- TABLE Header -->
-			<!-- <thead align="center">
-			<tr>
-				<th>Nom</th>
-				<th>Prénom</th>
-				<th>N° Téléphone</th>
-				<th>E-mail</th>
-				<th>Photo</th>
-				<th>Marque</th>
-				<th>Modèle</th>
-				<th>Année</th>
-				<th>Couleur</th>
-				<th>Photo</th>
-				<th>Modifier</th>
-			</tr>
-			</thead> -->
-
-
-			<!-- TABLE Body -->
-			<!-- <tbody align="center" style="height: 100px; overflow: auto;">
-				<tr> 
-					<td>' . $value["Nom"] . '</td>
-
-					<td>' . $value["Prenom"] . '</td>
-
-					<td>' . $value["Num_Telephone"] . '</td>
-
-					<td>' . $value["Email"] . '</td>
-
-					<td> <img src="' . $value["Utilisateur_Image"] . '"class="img-fluid rounded" width="100"></img></td>
-
-					<td>' . $voiture["Marque"] . '</td>
-
-					<td>' . $voiture["Modele"] . '</td>
-
-					<td>' . $voiture["Annee"] . '</td>
-
-					<td>' . $voiture["Couleur"] . '</td>
-
-					<td> <img src="' . $voiture["Voiture_Image"] . '"class="img-fluid rounded" width="100"></img></td>
-
-					<td>
-						<button class="btn material-icons" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popup">&#xe92d;</button>
-						<button class="btn material-icons" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popup">&#xe888;</button>
-					</td>
-				</tr>	
-			</tbody>
-		</table>
-	</div> -->

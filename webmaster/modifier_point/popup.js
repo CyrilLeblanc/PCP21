@@ -13,7 +13,4 @@ function popupModifPoint(nom,adresse,ville,latitude,longitude,image){
 
 	document.getElementById("lienImage").setAttribute("src",image);
 	document.getElementById("imagePoint").innerHTML = image;
-
 }
-
-//function popupModifCovoit(nom,prenom,num_telephone,utilisateur_image,marque,modele,annee,type,couleur,voiture_image){}
