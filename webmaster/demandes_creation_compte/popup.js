@@ -1,5 +1,5 @@
 
-function popupModifCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image)
+function popupInfosCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image)
 {
     document.getElementById("nomCovoitureur").setAttribute("value",nom);
 
@@ -13,7 +13,7 @@ function popupModifCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image)
 	document.getElementById("imageCovoitureur").innerHTML = utilisateur_image;
 }
 
-function popupModifVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
+function popupInfosVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
 {
 	document.getElementById("marqueVoiture").setAttribute("value",marque);
 

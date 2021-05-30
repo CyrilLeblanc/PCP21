@@ -4,8 +4,8 @@
 <head>
 	<?php 
 		include('../../bootstrap.html');
-		include('./popupModifCovoitureur.php');
-		include('./popupModifVoiture.php');
+		include('./popupInfosCovoitureur.php');
+		include('./popupInfosVoiture.php');
 		include('./popupAccepter.php');
 		include('./popupRefuser.php');
 		require_once "../request/Covoitureur.php"; 
@@ -64,18 +64,20 @@
 											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
 										</div>
 
-									<td> <div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div></td>
-				
-									<td>
-										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
-											onclick="popupModifCovoitureur(`' . $value["Nom"] . '`,`' . $value["Prenom"] . '`,`' . $value["Num_Telephone"] . '`,`' . $value["Email"] . '`,`' . $value["Utilisateur_Image"] . '`)"
-											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupModifCovoitureur">&#xe7ff;</button> 
+									<td> 
+										<div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . '</br>' . $value["Prenom"] . ' </div>
 									</td>
 				
 									<td>
 										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
-											onclick="popupModifVoiture(`' . $voiture["Marque"] . '`,`' . $voiture["Modele"] . '`,`' . $voiture["Annee"] . '`,`' . $voiture["Couleur"] . '`,`' . $voiture["Nbr_Place"] . '`,`' . $voiture["Voiture_Image"] . '`)"
-											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupModifVoiture">&#xe531;</button>
+											onclick="popupInfosCovoitureur(`' . $value["Nom"] . '`,`' . $value["Prenom"] . '`,`' . $value["Num_Telephone"] . '`,`' . $value["Email"] . '`,`' . $value["Utilisateur_Image"] . '`)"
+											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupInfosCovoitureur">&#xe7ff;</button> 
+									</td>
+				
+									<td>
+										<button class="btn material-icons container bg-success p-2 my-2 rounded" 
+											onclick="popupInfosVoiture(`' . $voiture["Marque"] . '`,`' . $voiture["Modele"] . '`,`' . $voiture["Annee"] . '`,`' . $voiture["Couleur"] . '`,`' . $voiture["Nbr_Place"] . '`,`' . $voiture["Voiture_Image"] . '`)"
+											style="color: white; font-size: 200%;" data-toggle="modal" data-target="#popupInfosVoiture">&#xe531;</button>
 									</td>
 				
 									<td>

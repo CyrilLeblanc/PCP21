@@ -1,13 +1,13 @@
 
 <!-- POPUP -->
-<div class="modal fade" id="popupModifVoiture">
+<div class="modal fade" id="popupInfosVoiture">
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
 
     <!-- POPUP Header -->
     <div class="modal-header">
-        <h4 class="modal-title">Modification Voiture</h4>
+        <h4 class="modal-title">Informations Voiture</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -15,9 +15,9 @@
     <!-- POPUP body -->
     <div class="modal-body">
 
-        <form class="modifPoint" method="post">
+        <form class="infosVoiture" method="post">
 
-            <div class="container border rounded shadow">
+            <div class="container border rounded shadow"><br/>
                 <div class="form-group" align="center">
                     <label for="marque" class="mr-sm-2">Marque : </label><br/>
                     <input type="text" class="mb-2 mr-sm-2" id="marqueVoiture" name="marqueVoiture" value="" required>
@@ -51,7 +51,7 @@
 
                 <div class="form-group" align="center">
                     <label for="imageVoiture" class="mr-sm-2">Photo : </label><br/>
-                    <img class="border" src="" id="lienImageVoiture" class="img-fluid rounded" width="200"><br/>
+                    <img src="" id="lienImageVoiture" class="img-fluid border rounded" width="200"><br/>
                     <input type="file" class="mb-2 mr-sm-2" id="imageVoiture" name="imageVoiture" value="">
 
                 </div>

@@ -1,13 +1,13 @@
 
 <!-- POPUP -->
-<div class="modal fade" id="popupModifCovoitureur">
+<div class="modal fade" id="popupInfosCovoitureur">
 <div class="modal-dialog modal-lg">
     <div class="modal-content">
 
 
     <!-- POPUP Header -->
     <div class="modal-header">
-        <h4 class="modal-title">Modification Covoitureur</h4>
+        <h4 class="modal-title">Informations Covoitureur</h4>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
     </div>
 
@@ -15,9 +15,9 @@
     <!-- POPUP body -->
     <div class="modal-body">
 
-        <form class="modifCovoitureur" method="post">
+        <form class="infosCovoitureur" method="post">
 
-            <div class="container border rounded shadow">
+            <div class="container border rounded shadow"><br/>
                 <div class="form-group" align="center">
                     <label for="nom" class="mr-sm-2">Nom : </label><br/>
                     <input type="text" class="mb-2 mr-sm-2" id="nomCovoitureur" name="nomCovoitureur" value="" required>
@@ -45,7 +45,7 @@
 
                 <div class="form-group" align="center">
                     <label for="imageCovoitureur" class="mr-sm-2">Photo : </label><br/>
-                    <img src="" id="lienImageCovoitureur" class="img-fluid rounded" width="200"><br/>
+                    <img src="" id="lienImageCovoitureur" class="img-fluid border rounded" width="200"><br/>
                     <input type="file" class="mb-2 mr-sm-2" id="imageCovoitureur" name="imageCovoitureur" value="">
 
                 </div>
