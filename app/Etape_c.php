@@ -97,9 +97,27 @@ class Etape
 
 	function set_distance()
 	// permet de calculer la distance entre deux points en isodistance
-	#TODO
+	// Utilisation d'API Google Maps Impossible donc calcule via vol d'oiseau
 	{
 		$this->distance = 1;
+
+		$lat1 = $this->Point_A->get_coord()[0];
+		$lng1 = $this->Point_A->get_coord()[1];
+		$lat2 = $this->Point_B->get_coord()[0];
+		$lng2 = $this->Point_B->get_coord()[1];
+
+		$earth_radius = 6378137;   // Terre = sphère de 6378km de rayon
+		$rlo1 = deg2rad($lng1);
+		$rla1 = deg2rad($lat1);
+		$rlo2 = deg2rad($lng2);
+		$rla2 = deg2rad($lat2);
+		$dlo = ($rlo2 - $rlo1) / 2;
+		$dla = ($rla2 - $rla1) / 2;
+		$a = (sin($dla) * sin($dla)) + cos($rla1) * cos($rla2) * (sin($dlo) * sin($dlo));
+		$d = 2 * atan2(sqrt($a), sqrt(1 - $a));
+		
+		$distance = $earth_radius * $d;
+		$this->distance(round($distance));
 	}
 
 	function get_distance()

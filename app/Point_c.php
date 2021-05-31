@@ -85,6 +85,11 @@ class Point
 	function &get_ref_tab_covoitureur()
 	{
 		return $this->tab_covoitureur;
-	}	
+	}
+
+	function get_coord()
+	{
+		return array($this->latitude, $this->longitude);
+	}
 }
 ?>
