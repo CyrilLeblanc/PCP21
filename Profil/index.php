@@ -53,23 +53,25 @@
 		<div class="row">
 
 			<div class="form-group p-3 m-2">
-			  <label for="usr">Prénom</label>
+			  <label for="Prenom">Prénom</label>
 			  <input type="text" class="form-control" id="usr" placeholder="Nouveau Prénom">
 			</div>
 
   			<div class="form-group p-3 m-2">
-			  <label for="usr">Nom</label>
+			  <label for="Nom">Nom</label>
 			  <input type="text" class="form-control" id="usr" placeholder="Nouveau Nom">
 			</div>
 
   			<div class="form-group p-3 m-2">
-    <label for="exampleFormControlInput1">Adresse Email</label>
+    <label for="adresse_email">Adresse Email</label>
     <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Nouvelle Adresse Email">
   			</div>
 
   			<div class="form-group p-3 m-2">
-			  <label for="usr">e-mail</label>
-			  <input type="text" class="form-control" id="usr" placeholder="Nouveau e-mail">
+			  <label for="telephone">telephone</label>
+			  <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="Nouveau n° de téléphone"
+       pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}"
+       required>
 			</div>
 
   		</div>

@@ -24,7 +24,7 @@
 
 
 
-    <img src="../Image/Photo.jpg" style="width:80px;">
+    <img src="../Image/Abeille.png" style="width:80px;">
 
   
     Jean EUDE
@@ -37,7 +37,8 @@
   <div class="col-sm-4 text-right">
     
         69
-        <img src="../image/honey.png" width="60">
+        <img src="../image/honey.png" width="80px">
+        
       </div>
 </div>
   

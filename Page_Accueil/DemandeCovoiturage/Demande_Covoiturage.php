@@ -13,7 +13,7 @@ require_once '../request/Covoitureur.php';
 
         <div class="container">
 
-    <form action="./check_demande_cov.php" id="titre_covoi" method="post">
+    <form action="DemandeCovoiturage/check_demande_cov.php" id="titre_covoi" method="post">
     <h5 class="modal-title" id="titre_covoiturage">Demande de Covoiturage</h5>
     <br>
 
