@@ -19,7 +19,6 @@
             <div class="form-group" align="left">
                 <label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
                 <input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
-                <?php echo "test" . $_POST["Nom"] . "test"; ?>
 
             </div>
 
