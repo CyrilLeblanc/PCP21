@@ -9,7 +9,7 @@ $jour_semaine = $_POST['jour_semaine'];
 $heure_arrive = $_POST['heure_arrive'];
 $idLigne = 1;
 
-require_once '../../request/config.php';
+require_once '../../config.php';
 require_once '../../request/Covoitureur.php';
 
 
