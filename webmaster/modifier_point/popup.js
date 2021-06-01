@@ -17,7 +17,7 @@ function popupModifPoint(nom,adresse,ville,latitude,longitude,image){
 
 function popupInfosPoint(nom,adresse,ville,latitude,longitude,image){
 	
-	document.getElementById("nomPoint").setAttribute("value",nom);
+	document.getElementById("nomPoint").textContent = nom;
 
 	document.getElementById("adressePoint").setAttribute("value",adresse);
 
