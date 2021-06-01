@@ -3,6 +3,7 @@
 
 <head>
 	<?php 
+	var_dump($_GET);
 		include('../../bootstrap.html');
 		include('./popupInfosCovoitureur.php');
 		include('./popupInfosVoiture.php');
@@ -36,29 +37,31 @@
 
 			else
 			{
+				echo 
+					'<!-- TABLE -->
+					<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
+						<table class="table">
+						
+					<!-- TABLE Header -->
+						<thead align="center">
+							<tr>
+								<th>Non</th>	
+								<th>Covoitureur</th>
+								<th>Profil</th>
+								<th>Voiture</th>
+								<th>Oui</th>
+							</tr>
+						</thead>
+
+					<!-- TABLE Body -->
+						<tbody align="center" style="height: 100px; overflow: auto;">';
+
 				foreach($table as $value)
 				{
 					$voiture = $Covoitureur -> get_voiture($value["idCovoitureur"]);
 
 					echo 
-						'<!-- TABLE -->
-							<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
-								<table class="table">
-								
-						<!-- TABLE Header -->
-							<thead align="center">
-								<tr>
-									<th>Non</th>	
-									<th>Covoitureur</th>
-									<th>Profil</th>
-									<th>Voiture</th>
-									<th>Oui</th>
-								</tr>
-							</thead>
-
-						<!-- TABLE Body -->
-							<tbody align="center" style="height: 100px; overflow: auto;">
-								<tr> 
+						'		<tr> 
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
 											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
@@ -81,14 +84,23 @@
 									</td>
 				
 									<td>
-										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
-										</div>
+										<form method="post" action="">
+											<div style="padding-top: 1em; padding-bottom: 1em;">
+												<button class="btn material-icons p-0" style="color: green; font-size: 200%;" type="submit" name="Accepter" value="'. $value["idCovoitureur"] . '" data-toggle="modal" data-target="#popupAccepter" onclick="document.location.reload()" >&#xe92d;</button>
+											</div>
+										</form>
 									</td>
-								</tr>	
-							</tbody>
-						</table>
-					</div>';
+								</tr>';		
+				}
+					echo 
+						'</tbody>
+					</table>
+				</div>';
+				if(isset($_POST["Accepter"]))
+				{
+					$Covoitureur->validate_Covoitureur($_POST["Accepter"]);
+					//echo '<meta http-equiv="refresh" content="2">';
+
 				}
 			}
 		?>
