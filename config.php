@@ -7,7 +7,7 @@
 $adress = '127.0.0.1';      // addresse du serveur. En cas d'erreur mettre 'localhost'
 $user = 'root';            // nom d'utilisateur
 $password = '';         // mot de passe utilisateur
-$bdd = 'mydb';       // nom de la base de donnée
+$bdd = 'pcp21';       // nom de la base de donnée
 
 
 // ====================================================================
