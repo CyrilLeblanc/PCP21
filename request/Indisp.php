@@ -4,7 +4,6 @@ class Indisp
 {
     function __construct()
     {
-        
         require_once '../config.php';
     }
 

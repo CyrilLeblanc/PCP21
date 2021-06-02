@@ -1,10 +1,10 @@
 <?php
-
+include "../config.php";
 class Point
 {
     function __construct()
     {
-        require_once "../../config.php";
+        include "../../config.php";
     }
 
 

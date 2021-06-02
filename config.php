@@ -1,15 +1,15 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 
 //      ****************************************************
 //      *    Variable de connection pour base de donnée    *
 //      ****************************************************
 
 $adress = '127.0.0.1';      // addresse du serveur. En cas d'erreur mettre 'localhost'
-$user = 'root';            // nom d'utilisateur
-$password = '';         // mot de passe utilisateur
+$user = 'admin';            // nom d'utilisateur
+$password = 'test';         // mot de passe utilisateur
 $bdd = 'PCP21';       // nom de la base de donnée
-
-
 // ====================================================================
 // Ne rien changer pour la suite.
 

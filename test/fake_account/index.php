@@ -46,7 +46,7 @@ class Fantom {
 
     function gen_number()
     {
-        $number = "+66";
+        $number = "+33";
         for($i = 0 ; $i < 4 ; $i++)
         {
             $temp = rand(0, 99);
@@ -87,7 +87,6 @@ class Fantom {
 
         $this->voiture = $voiture;
     }
-
 
     function presentation()
     {
@@ -145,7 +144,6 @@ function clear_csv()
     $header = "ID,Prénom,Nom,Phone,Email,Password,idPoint_RDV,Voiture,Modele,Marque,Annee,Nbr_Place";
     file_put_contents('./dummy.csv', $header);
 }
-
 
 clear_dbb();
 clear_csv();
