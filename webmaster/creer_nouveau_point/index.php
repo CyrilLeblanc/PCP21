@@ -139,7 +139,6 @@
         <br/><button type="submit" class="btn btn-success" name="submit">Valider</button>
 
         <?php
-
           //Vérifie si le point a bien été ajouté
           $verif_ajout = new Point();
           if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
