@@ -6,7 +6,7 @@ $nb_fantom = readline('Nombre de compte à créer: ');
 
 require_once "../../config.php";
 
-class Fantom {
+class Dummy {
 
     public $idCovoitureur;
     public $nom;
@@ -150,7 +150,7 @@ clear_csv();
 
 for($i = 0 ; $i < $nb_fantom ; $i++)
 {
-    $test = new Fantom($i+1);
+    $test = new Dummy($i+1);
     $test->presentation();
     $test->save_csv();
     $test->save_bdd();
