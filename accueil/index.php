@@ -14,45 +14,10 @@
 
 <?php
   include '../header.php';
-  include 'DemandeCovoiturage/Demande_Covoiturage.php';
+  include 'DemandeCovoiturage/index.php';
   include 'Classement/Classement.php';
   include 'Historique/Historique.php';
 ?>
-
-<!-- HEADER 
-
-<div class="row p-4 bg-success" style="font-weight: bold; color: white;">
-
-<div class="col-sm-4">
-
-
-      <button class="btn material-icons float-left" onclick="window.location.href = '../Profil/index.php';" style="color: white; font-size: 300%;">&#xf02e;</button>
-
-
-
-    <img src="../Image/Abeille.png" style="width:80px;">
-
-  
-    Jean EUDE
-  
-
-</div>
-
-<div class="col-sm-4 text-center"><h1>Accueil</h1></div>
-
-  <div class="col-sm-4 text-right">
-    
-        69
-        <img src="../image/honey.png" width="80px">
-        
-      </div>
-</div>
-  
-  
-
-</div>
- HEADER -->
-
 
 <div class="container-fluid p-3 my-3 border shadow rounded"> <!-- CONTAINER PRINCIPAL -->
 

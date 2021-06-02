@@ -1,85 +1,92 @@
 <?php
+session_start();
 
-/*
+var_dump($_POST['is_unique']);
+exit;
+
 $date_depart = $_POST['date_depart'];
 $semaine = $_POST['semaine'];
 $is_unique = $_POST['is_unique'];
 $destination = $_POST['destination'];
 $jour_semaine = $_POST['jour_semaine'];
 $heure_arrive = $_POST['heure_arrive'];
-*/
+$idCovoitureur = $_SESSION['idCovoitureur'];
+
+/*
 $date_depart = "2021-10-20";
 $semaine = "A";
-$is_unique = "1";
+$is_unique = 1;
 $destination = "0";
 $jour_semaine = "lundi";
-$heure_arrive = "12:00:00";
+$heure_arrive = "08:00:00";
+$idCovoitureur = 1;
+*/
+if ($jour_semaine == "")
+{
+	$tab_date = explode('-', $date_depart);		// on sépare chaque élément de la date
+	$timestamp = mktime(0, 0, 0, $tab_date[1], $tab_date[2], $tab_date[0]);		// on créer la date à partir des éléments séparé
+	$tab_jourSemaine = array(
+		1 => "lundi",
+		2 => "mardi",
+		3 => "mercredi",
+		4 => "jeudi",
+		5 => "vendredi",
+		6 => "samedi",
+		7 => "dimanche"
+	);
+	$jour_semaine = $tab_jourSemaine[date('w', $timestamp)];		// on récupère le jour de la semaine!
+}
 
-$idLigne = 1;
+
 
 require_once '../../config.php';
 require_once '../../request/Covoitureur.php';
 
 
-//vérifier l'idCovoiturage
-/*
-function checkIdCovoiturage($jour_semaine, $heure_arrive, $destination)
-{
+	##################################
+	#       Obtention IdLigne        #
+	##################################
 
-$sql = "SELECT idCovoiturage FROM covoiturage WHERE Jour = '$jour_semaine' AND Heure = '$heure_arrive' AND is_Depart_Lycee = $destination;";
-$res = $GLOBALS['mysqli']->query($sql);
-$i = 0;
-while($res -> fetch_assoc())
-{
-$i++;
-}
+$sql = "SELECT idLigne FROM Composition ".
+"INNER JOIN Covoitureur ON Covoitureur.idPoint_RDV = Composition.idPoint_RDV ".
+"WHERE Covoitureur.idCovoitureur = $idCovoitureur";
 
-        return $i>0;
-
-}
-*/
-//function IdCovoiturage($jour_semaine, $heure_arrive, $destination, $idLigne) {
-        
-//check Id du covoiturage
-$nbIdCovoiturage=0;
+$idLigne = (int)$GLOBALS['mysqli']->query($sql)->fetch_assoc()['idLigne'];
+	
+	#########################################
+	#       Génération IdCovoiturage        #
+	#########################################
 
 do 
 {
-        $getId = "SELECT idCovoiturage FROM covoiturage WHERE Jour = '$jour_semaine' AND Heure = '$heure_arrive' AND is_Depart_Lycee = $destination AND idLigne = $idLigne;";
-        echo "$getId\n";
-        $res = $GLOBALS['mysqli']->query($getId)->fetch_assoc();
-
-        if(!$res)
-        {
-                $ajout_covoiturage = "INSERT INTO covoiturage(Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure_arrive', '$destination', '$idLigne');";
-                $GLOBALS['mysqli'] ->query($ajout_covoiturage);
-        }
-        $nbIdCovoiturage++;
-
+	$sql = "SELECT idCovoiturage FROM Covoiturage WHERE Jour = '$jour_semaine' AND Heure = '$heure_arrive' AND is_Depart_Lycee = $destination AND idLigne = $idLigne;";
+	$res = $GLOBALS['mysqli']->query($sql);
+	if(mysqli_num_rows($res) == 0)
+	{
+		$sql = "INSERT INTO Covoiturage(Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure_arrive', '$destination', '$idLigne');";
+		$GLOBALS['mysqli']->query($sql);
+	}
 }
-while(!isset($res) && $nbIdCovoiturage >0);
-$idCovoiturage = $res['idCovoiturage'];
+while(mysqli_num_rows($res) == 0);
 
-//check Id du Covoiturage
+$idCovoiturage = $res->fetch_assoc()['idCovoiturage'];
 
+	#########################################
+	#       Generation de L'inscription     #
+	#########################################
 
-
-
-
-
-if(isset($_POST["date_depart"]) && isset($_POST["semaine"]) && isset($_POST["is_unique"]) && isset($_POST["destination"]) && isset($_POST["jour_semaine"]) && isset($_POST["heure_arrive"]))
-
+if(isset($date_depart) && isset($semaine) && isset($is_unique) && isset($destination) && isset($jour_semaine) && isset($heure_arrive))
 {
+	$sql = "INSERT INTO Inscription (idCovoitureur,idCovoiturage, Date_Depart, Semaine, is_Unique, is_Depart_Lycee, Jour_Semaine, Heure_Arrivee) ".
+	"VALUES ($idCovoitureur, $idCovoiturage, '$date_depart', '$semaine', $is_unique, $destination, '$jour_semaine', '$heure_arrive');";
+	$GLOBALS['mysqli']->query($sql);
+}
 
-$sql = "INSERT INTO inscription(idCovoitureur, idCovoiturage, Date_Depart, Semaine, is_Unique, is_Depart_Lycee, Jour_Semaine, Heure_Arrivee)
-        VALUES (1, $idCovoiturage, '" . $_POST["date_depart"] . "',
-        '".$_POST["semaine"]."','".$_POST["is_unique"]."','".$_POST["destination"]."','".$_POST["jour_semaine"]."','".$_POST["heure_arrive"]."');";
-echo $sql;
 
-        $GLOBALS['mysqli']->query($sql);
-        echo "réussi.";
- }
+if (!isset($erreur))
+{
+	header('Location: ../../');
+} else {
+	header('Location: ../../?erreur='.$erreur);
+}
 
- else {
- echo "pas bon.";
- }

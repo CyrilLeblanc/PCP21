@@ -22,7 +22,7 @@
 
   <div class="col-sm-4 text-right">
     
-        69
+        <?php echo $_SESSION['Nbr_Alveoles'];?>
         <img src="../images/interface/Alvéoles.png" width="60">
       </div>
 </div>
