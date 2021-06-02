@@ -1,8 +1,8 @@
 <?php
 require_once "../config.php";
 
-echo "########\t Création de compte utilisateur \t########\n\n";
-
+echo "########\t Création de compte utilisateur \t########\n";
+echo "(Les valeurs dans les [] sont des valeurs par défaut si jamais les valeurs ne sont pas défini)\n\n";
 
 $is_webmaster = readline('is_Webmaster [0] : ');
 if ($is_webmaster == "")
@@ -63,7 +63,7 @@ $choice = readline("Création de voiture ? [n] (y/n) ");
 
 if ($choice == "n" || $choice == "")
 {
-    echo "Utilisation d'une voiture générique : \n";
+    echo "Utilisation de voiture générique : \n";
     $modele = "C5";
     $marque = "Citrën";
     $annee = "2020";
