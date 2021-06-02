@@ -1,6 +1,7 @@
 <?php
-require_once './config.php';
 #  Script déconnectant le client de son navigateur web
+
+require_once './config.php';
 
 session_start();
 $_SESSION['idCovoitureur'] = null;

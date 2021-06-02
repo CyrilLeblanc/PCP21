@@ -3,7 +3,7 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.html';
+		include '../../bootstrap.php';
 		include './popupModifCovoitureur.php';
 		include './popupModifVoiture.php';
 		require_once "../../request/Covoitureur.php"; 

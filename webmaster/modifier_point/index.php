@@ -3,7 +3,7 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.html';
+		include '../../bootstrap.php';
 		include './popupModifPoint.php';
 		include './popupInfosPoint.php';
 		require_once "../../request/Point.php"; 

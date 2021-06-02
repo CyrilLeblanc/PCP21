@@ -3,7 +3,7 @@
 
 <head>
 	<?php 
-		include '../bootstrap.html';
+		include '../bootstrap.php';
 		require_once "../../request/Covoitureur.php"; 
 	?>
 	<title>Modifier Ligne</title>

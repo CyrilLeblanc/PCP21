@@ -2,7 +2,7 @@
 <html>
 <head>
   <?php 
-    include('../../bootstrap.html');
+    include('../../bootstrap.php');
     require_once "../../request/Point.php";
     require_once "../../request/Covoitureur.php"; 
     require_once "../../config.php";

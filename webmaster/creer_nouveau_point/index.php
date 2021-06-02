@@ -3,7 +3,7 @@
 
 <head>
   <?php 
-		include_once '../../bootstrap.html';
+		include_once '../../bootstrap.php';
     require_once '../../request/Point.php';
 
     if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))

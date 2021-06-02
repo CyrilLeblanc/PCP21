@@ -5,7 +5,7 @@
 	<link rel="stylesheet" href="index.css" />
 	<script type="checkbox"></script>
 	<title>Inscription - Covoiturage Participatif</title>
-	<?php include('./bootstrap.html') ?>
+	<?php include('./bootstrap.php') ?>
   <?php include('./config.php') ?>
 </head>
 <body class="bg-success">
