@@ -9,7 +9,7 @@
 # Modification : NONE
 #
 -->
-	<?php include_once '../bootstrap.html'; ?>
+	<?php include_once '../bootstrap.php'; ?>
 	<style>
 	.center{
 		padding: auto;
@@ -92,7 +92,7 @@
 		
 	</form>
 	<p><a href='#TODO'><p>J'ai oublié mon mot de passe.</a></br>
-	Si vous n'avez pas de compte vous pouvez <a href="#TODO">vous inscrire</a>.</p>
+	Si vous n'avez pas de compte vous pouvez <a href="../sign_up">vous inscrire</a>.</p>
 
 	</div>
 <br/>

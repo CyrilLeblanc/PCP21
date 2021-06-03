@@ -1,9 +1,5 @@
 <?php 
 
-// si une erreur est déclaré on exit
-
-
-
 session_start();
 require_once '../config.php';
 
@@ -18,12 +14,12 @@ function connect($idCovoitureur)
         break;
     }
     echo "Go Accueil!<br/>";
-    //header("Location: ../accueil/");
+    header("Location: ../accueil/");
     exit;
 }
 
 
-if(isset($_SESSION['idCovoitureur']))   // connexion par session
+if($_SESSION['idCovoitureur'] != null)   // connexion par session
 {
     echo "Already Connected.<br/>\n";
     connect($_SESSION['idCovoitureur']);
@@ -108,9 +104,8 @@ if(isset($_POST['email']) && isset($_POST['password']))     // connexion via for
             $GLOBALS['mysqli']->query($sql);
 
             // ajout du token dans les Cookies
-            setcookie('token',$token,time()+3600*24*30);        #INTEGRATION
+            setcookie('token',$token,time()+3600*24*30, '/');        #INTEGRATION
         }
-
         connect($res['idCovoitureur']);
     }
     exit;
@@ -128,6 +123,7 @@ elseif(isset($_COOKIE['token']))
     // on le compare avec ceux de la base de donnée pour trouver l'idCovoitureur qui correpond
     $sql = "SELECT idCovoitureur, Date_Fin FROM Token WHERE Content = '$token'";
     $res = $GLOBALS['mysqli']->query($sql);
+    var_dump($res);
     while ($row = $res->fetch_assoc())
     // si on trouve un token qui correspond dans la BDD
     {
