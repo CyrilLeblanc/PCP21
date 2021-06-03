@@ -1,5 +1,6 @@
 <?php
   session_start();
+  require_once '../verif_session.php';
 ?>
 
 
@@ -7,7 +8,7 @@
 <html>
 <head>
   <?php
-    include '../bootstrap.html';
+    include '../bootstrap.php';
   ?>
 </head>
 <body>
@@ -42,9 +43,10 @@
 
 </div>
 
-<?php include 'Prochain_Covoiturage/Prochain_covoiturage.php' ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
+<?php include 'Prochain_Covoiturage/Prochain_covoiturage.php'; ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
+
 
 </div>
-
+<?php include '../footer.html';?>
 </body>
 </html>

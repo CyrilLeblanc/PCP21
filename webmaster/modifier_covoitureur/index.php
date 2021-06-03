@@ -3,7 +3,7 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.html';
+		include '../../bootstrap.php';
 		include './popupModifCovoitureur.php';
 		include './popupModifVoiture.php';
 		require_once "../../request/Covoitureur.php"; 
@@ -14,7 +14,6 @@
 
 <body>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
-
 
 	<div class="container bg-success p-2 my-2 rounded" >
 		<a href="../../accueil">

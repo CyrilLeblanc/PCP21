@@ -1,8 +1,8 @@
 <?php
 session_start();
-if(!isset($_SESSION['idCovoitureur']))
+if($_SESSION['idCovoitureur'] == null)
 {
-    header("Location: ./disconnect.php");
+    header("Location: ../disconnect.php");
 }
 
 ?>

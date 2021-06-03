@@ -3,7 +3,7 @@
 <html>
 
 <head>
-	<?php include '../bootstrap.html'; ?>
+	<?php include '../bootstrap.php'; ?>
 	<title></title>
 </head>
 

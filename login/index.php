@@ -9,7 +9,7 @@
 # Modification : NONE
 #
 -->
-	<?php include_once '../bootstrap.html'; ?>
+	<?php include_once '../bootstrap.php'; ?>
 	<style>
 	.center{
 		padding: auto;

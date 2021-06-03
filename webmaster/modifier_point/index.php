@@ -3,9 +3,15 @@
 
 <head>
 	<?php 
+<<<<<<< HEAD
 		include '../../bootstrap.html';
+		include '../popupModifPoint.php';
+		include '../popupInfosPoint.php';
+=======
+		include '../../bootstrap.php';
 		include './popupModifPoint.php';
 		include './popupInfosPoint.php';
+>>>>>>> ba8084218ce25be08b5be6bd5ae1e247bfc779be
 		require_once "../../request/Point.php"; 
 	?>
 	<script src="./popup.js"></script>
@@ -15,12 +21,12 @@
 <body>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
 
-	<div class="container bg-success p-2 my-2 rounded" >
-		<a href="../../accueil">
-		<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
-		</a>
-		<h2 class="text-center" style="color: white;">Modifier Point RDV</h2>
-	</div>
+		<div class="container bg-success p-2 my-2 rounded" >
+			<a href="../../accueil">
+			<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
+			</a>
+			<h2 class="text-center" style="color: white;">Modifier Point RDV</h2>
+		</div>
 
 		<!-- TABLE -->
 		<div class="container overflow-auto" style="font-size: 12px; height: 450px;">

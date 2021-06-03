@@ -3,7 +3,7 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.html';
+		include '../../bootstrap.php';
 		include './popupInfosPoint.php';
 		include './popupAccepter.php';
 		include './popupRefuser.php';

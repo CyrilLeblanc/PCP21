@@ -3,7 +3,7 @@
 
 <head>
   <?php 
-	  include_once '../../bootstrap.html';
+	  include_once '../../bootstrap.php';
 	  require_once '../../request/Indisp.php'; 
   ?>
   <title>Période Indisponibilité</title>

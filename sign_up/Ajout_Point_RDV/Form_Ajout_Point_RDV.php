@@ -1,10 +1,10 @@
 <?php
 include('./config.php');
 
-$ = $_POST['nom_point'];
-$ = $_POST['Adresse'];
-$ = $_POST['Longitude'];
-$ = $_POST['Latitude'];
+$nom_point = $_POST['nom_point'];
+$Adresse = $_POST['Adresse'];
+$Longitude = $_POST['Longitude'];
+$Latitude = $_POST['Latitude'];
 
 
 $sql = "INSERT INTO `point_rdv`(`idPoint_RDV`, `Nom`, `Adresse`, `Latitude`, `Longitude`, `Point_Image`, `is_Confirme`) 
