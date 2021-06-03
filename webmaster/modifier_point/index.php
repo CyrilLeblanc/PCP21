@@ -4,8 +4,8 @@
 <head>
 	<?php 
 		include '../../bootstrap.html';
-		include './popupModifPoint.php';
-		include './popupInfosPoint.php';
+		include '../popupModifPoint.php';
+		include '../popupInfosPoint.php';
 		require_once "../../request/Point.php"; 
 	?>
 	<script src="./popup.js"></script>
