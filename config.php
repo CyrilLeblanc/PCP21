@@ -11,7 +11,7 @@ $user = 'root';            // nom d'utilisateur
 $password = '';         // mot de passe utilisateur
 $bdd = 'PCP21';       // nom de la base de donnée
 
-$GLOBALS['racine'] = "/var/www/html/PCP21/";    // racine du projet
+$GLOBALS['racine'] = "/Applications/XAMPP/xamppfiles/htdocs/PCP21/";    // racine du projet
 
 // ====================================================================
 // Ne rien changer pour la suite.

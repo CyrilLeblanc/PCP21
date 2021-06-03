@@ -3,8 +3,9 @@
 
 <head>
   <?php 
-	  include_once '../../bootstrap.php';
-	  require_once '../../request/Indisp.php'; 
+    require_once '../../config.php'; 
+	  include $GLOBALS['racine'] . 'bootstrap.php';
+	  require_once $GLOBALS['racine'] . 'request/Indisp.php';
   ?>
   <title>Période Indisponibilité</title>
 </head>
@@ -72,7 +73,7 @@
             else
             {
               $Ajouter_Indisponibilite = new Indisp();
-              $Ajouter_Indisponibilite->add_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1);
+              $Ajouter_Indisponibilite->add_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault']);
             }
             
           }
@@ -81,7 +82,7 @@
           $verif_ajout = new Indisp();
           if(isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['flexRadioDefault']))
           {
-            if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1) == True)
+            if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault']) == True)
             {
               echo "</br></br>
                   <div class='alert alert-success text-center'>

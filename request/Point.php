@@ -1,10 +1,10 @@
 <?php
-include "../config.php";
+
 class Point
 {
     function __construct()
     {
-        require_once "../config.php";
+        require_once $GLOBALS['racine'] . 'config.php';
     }
 
 
@@ -42,6 +42,7 @@ class Point
         $Ville = addslashes($Ville);
         $sql = "SELECT * FROM Point_RDV WHERE Nom = '$Nom' AND Adresse = '$Adresse' AND Ville = '$Ville' AND Latitude = $Latitude AND Longitude = $Longitude ;";
         $res = $GLOBALS['mysqli']->query($sql);
+        echo $sql;
 
         $stack = array();
         while ($row = $res->fetch_assoc())
@@ -49,14 +50,7 @@ class Point
             array_push($stack,$row);
         }
 
-        if(sizeof($stack) > 0)
-        {
-            return True;
-        }
-        else
-        {
-            return False;
-        }
+        return (sizeof($stack) > 0);
     }
 
     
@@ -70,6 +64,7 @@ class Point
     function set_Point($name, $value, $idPoint_RDV)
     {
         $sql = "UPDATE Point_RDV SET $name = $value WHERE idPoint_RDV = $idPoint_RDV;";
+        echo $sql . "---";
         return $GLOBALS['mysqli'] ->query($sql);
     }
     

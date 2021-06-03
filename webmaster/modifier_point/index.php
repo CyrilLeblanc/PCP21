@@ -3,10 +3,13 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.php';
-		include '../popupModifPoint.php';
-		include '../popupInfosPoint.php';
-		require_once "../../request/Point.php"; 
+		require_once '../../config.php'; 
+		include $GLOBALS['racine'] . 'bootstrap.php';
+		include $GLOBALS['racine'] . 'webmaster/modifier_point/popupModifPoint.php';
+		include $GLOBALS['racine'] . 'webmaster/modifier_point/popupInfosPoint.php';
+		require_once $GLOBALS['racine'] . 'request/Point.php'; 
+		ini_set('display_errors', 1);   #DEBUG
+		ini_set('display_startup_errors', 1);   #DEBUG
 	?>
 	<script src="./popup.js"></script>
 	<title>Modifier Point RDV</title>
@@ -15,7 +18,7 @@
 <body>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
 
-		<div class="container bg-success p-2 my-2 rounded" >
+		<div class="container bg-success p-2 my-2 roun#ded" >
 			<a href="../../accueil">
 			<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
 			</a>
@@ -52,6 +55,7 @@
 									<div style="padding-top: 1em; padding-bottom: 1em;">
 										' . $value["Nom"] . '</td>
 									</div>
+									<input value="' . $value["idPoint_RDV"] . '" name="idPoint_RDV" hidden></input>
 
 								<td> 
 									<button class="btn material-icons container bg-success p-2 my-2 rounded" 
@@ -70,7 +74,29 @@
 
 			</tbody>
 		</table>
-		</div> 
+		</div>
+
+		<?php  
+			//Vérifie si le point a bien été modifié
+			$Verif_Point = new Point();
+			if(isset($_POST['nomPoint']) && isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']))
+			{
+				if($Verif_Point->verif_Point($_POST['nomPoint'],$_POST['adressePoint'],$_POST['villePoint'],$_POST['latitudePoint'],$_POST['longitudePoint']))
+				{
+				echo "</br></br>
+					<div class='alert alert-success text-center'>
+					<h5><strong>Le Point de RDV a bien été modifié.</strong></h5>
+					</div>";
+				}
+				else
+				{
+				echo "</br></br>
+					<div class='alert alert-danger text-center'>
+					<h2><strong>Erreur de modification du Point de RDV.</strong></h2>
+					</div>";
+				}
+			}
+		?> 
 
 	</div>
 </body>
@@ -78,4 +104,4 @@
 </html>
 
 <!--<a href="https://www.google.com/maps/place/' . $value["Latitude"] . ',' . $value["Longitude"] . '" onclick="window.open(this.href); return false;"" style="font-weight: bold; color: green;">' . $value["Latitude"] . '<br/>' . $value["Longitude"] . '
-<a href="' . $value["Point_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Point_Image"] . '"class="img-fluid rounded" width="100"></img></a>
+<a href="' . $value["Point_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Point_Image"] . '"class="img-fluid rounded" width="100"></img></a>-->
