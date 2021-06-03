@@ -97,19 +97,11 @@ class Dummy {
 
     function save_csv()
     {
-        $data = file_get_contents('dummy.csv');
+        $data = file_get_contents('saved_dummy_password.csv');
         $data .= "\n" . $this->idCovoitureur . ";".
-        $this->prenom . ";".
-        $this->nom . ";".
-        $this->phone . ";".
         $this->mail . ";".
-        $this->password_unashed . ";".
-        $this->Point_RDV['idPoint_RDV']. ";;".
-        $this->voiture['Modele'].";".
-        $this->voiture['Marque'].";".
-        $this->voiture['Annee'] . ";".
-        $this->voiture['Nbr_Place']; 
-        file_put_contents('dummy.csv', $data);
+        $this->password_unashed;
+        file_put_contents('saved_dummy_password.csv', $data);
     }
 
     function save_bdd()
