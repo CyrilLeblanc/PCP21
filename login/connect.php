@@ -123,6 +123,7 @@ elseif(isset($_COOKIE['token']))
     // on le compare avec ceux de la base de donnée pour trouver l'idCovoitureur qui correpond
     $sql = "SELECT idCovoitureur, Date_Fin FROM Token WHERE Content = '$token'";
     $res = $GLOBALS['mysqli']->query($sql);
+    var_dump($res);
     while ($row = $res->fetch_assoc())
     // si on trouve un token qui correspond dans la BDD
     {
