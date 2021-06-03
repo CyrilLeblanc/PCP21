@@ -3,11 +3,11 @@
 
 <head>
 	<?php 
-		include('../../bootstrap.html');
-		include('./popupInfosPoint.php');
-		include('./popupAccepter.php');
-		include('./popupRefuser.php');
-		require_once "../request/Point.php"; 
+		include '../../bootstrap.php';
+		include './popupInfosPoint.php';
+		include './popupAccepter.php';
+		include './popupRefuser.php';
+		require_once "../../request/Point.php";
 	?>
 	<script src="./popup.js"></script>
 	<title>Demandes Création Point RDV</title>
@@ -18,7 +18,7 @@
 
 
 	<div class="container bg-success p-2 my-2 rounded" >
-		<a href="/index.php">
+		<a href="../../accueil">
 		<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
 		</a>
 		<h2 class="text-center" style="color: white;">Demandes Création Point RDV</h2>

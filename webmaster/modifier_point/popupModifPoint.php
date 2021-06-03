@@ -62,6 +62,39 @@
                 <button type="submit" class="btn btn-success">Enregistrer</button>
             </div>
 
+            <?php   
+                if(isset($_POST['nomPoint'])isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']))
+                {
+                    $Modif_Point = new Point();
+                    $Modif_Point->set_Point(Nom,$_POST['nomPoint'],$_POST['idPoint_RDV']);
+                    $Modif_Point->set_Point(Adresse,$_POST['adressePoint'],$_POST['idPoint_RDV']);
+                    $Modif_Point->set_Point(Ville,$_POST['villePoint'],$_POST['idPoint_RDV']);
+                    $Modif_Point->set_Point(Latitude,$_POST['latitudePoint'],$_POST['idPoint_RDV']);
+                    $Modif_Point->set_Point(Longitude,$_POST['longitudePoint'],$_POST['idPoint_RDV']);
+                }
+
+                /*
+                //Vérifie si la période a bien été ajoutée
+                $verif_ajout = new Indisp();
+                if(isset($_POST['date_debut']) && isset($_POST['date_fin']) && isset($_POST['flexRadioDefault']))
+                {
+                    if($verif_ajout->verif_indisp($_POST['date_debut'],$_POST['date_fin'],$_POST['flexRadioDefault'],1) == True)
+                    {
+                    echo "</br></br>
+                        <div class='alert alert-success text-center'>
+                        <h5><strong>La période d'indisponibilité a bien été ajoutée.</strong></h5>
+                        </div>";
+                    }
+                    else
+                    {
+                    echo "</br></br>
+                        <div class='alert alert-danger text-center'>
+                        <h2><strong>Erreur d'ajout de période d'indisponibilité.</strong></h2>
+                        </div>";
+                    }
+                }*/
+            ?>
+
         </form>
 
     </div>

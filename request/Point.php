@@ -1,10 +1,10 @@
 <?php
-
+include "../config.php";
 class Point
 {
     function __construct()
     {
-        require_once __DIR__."/config.php";
+        require_once "../config.php";
     }
 
 
@@ -70,9 +70,7 @@ class Point
     function set_Point($name, $value, $idPoint_RDV)
     {
         $sql = "UPDATE Point_RDV SET $name = $value WHERE idPoint_RDV = $idPoint_RDV;";
-
         return $GLOBALS['mysqli'] ->query($sql);
-
     }
     
     function del_Point($idPoint_RDV)
@@ -80,6 +78,19 @@ class Point
         $sql = "DELETE FROM Point_RDV WHERE idPoint_RDV = $idPoint_RDV ;";
 
         return $GLOBALS['mysqli'] ->query($sql);
+    }
+
+    function get_point_info($id)
+    {
+       $sql= "SELECT * FROM Point_RDV WHERE idPoint_RDV = $id";
+
+       $res = $GLOBALS['mysqli'] ->query($sql);
+        
+        while ($row = $res->fetch_assoc())
+        {
+                return $row;
+        }
+
     }
 }
 ?>

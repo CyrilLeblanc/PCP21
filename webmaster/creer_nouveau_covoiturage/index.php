@@ -2,10 +2,10 @@
 <html>
 <head>
   <?php 
-    include('../../bootstrap.html');
-    require_once "../request/Point.php"; 
-    require_once "../request/Covoitureur.php"; 
-    require_once "../request/config.php";
+    include('../../bootstrap.php');
+    require_once "../../request/Point.php";
+    require_once "../../request/Covoitureur.php"; 
+    require_once "../../config.php";
 
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
@@ -13,9 +13,24 @@
   <script>
     function copycat()
     {
-      p = document.getElementById("etapes");
-      p_prime = p.cloneNode(true);
+      clone = document.getElementById("Etape").cloneNode(true);
+      document.getElementById("ListEtapes").appendChild (clone);
     }
+  </script>
+  <script>
+    let tabCovoitureur = [
+    <?php 
+      $sql = "SELECT Nom, Prenom, idCovoitureur FROM Covoitureur WHERE is_Confirme = 1;";
+          $res = $GLOBALS['mysqli']->query($sql);
+          while ($row = $res->fetch_assoc())
+          {
+            $name = $row['Nom'] . " " . $row['Prenom'];
+            $idCovoitureur = $row['idCovoitureur'];
+            echo ", $idCovoitureur : '$name'";
+          }
+    ?>
+    ]
+
   </script>
   <title>Création Nouveau Covoiturage</title>
 </head>
@@ -24,7 +39,7 @@
   <div class="container p-3 my-3 border shadow rounded" align="center">
 
     <div class="container bg-success p-2 my-2 rounded" >
-      <a href="/index.php">
+      <a href="../../accueil">
         <button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
       </a>
       <h2 class="text-center" style="color: white;">Créer Nouveau Covoiturage</h2>
@@ -70,7 +85,7 @@
           <td>
             <select class="mb-2" style="font-size: 10px; height: 25px; width: 125px;">
             <?php while( $row = $res->fetch_assoc() ){?>
-              <option value="<?php echo "value"; echo $row['Nom'];?>">
+              <option value="<?php echo $row['Nom'];?>">
                 <?php echo $row['Nom'];?>
               </option>
             <?php 
@@ -95,7 +110,8 @@
 
       <hr>
 
-      <div class="copycat row" id="etapes">
+      <div id="ListEtapes">
+      <div class="copycat row" id="Etape">
         <div class="form-group border col-6" align="center">
           <label for="etape" class="mr-sm-2">Étape : </label></br>
           <?php 
@@ -105,7 +121,7 @@
           <td>
           <select class="mb-2" style="font-size: 10px; height: 25px; width: 125px;">
           <?php while( $row = $res->fetch_assoc() ){?>
-              <option value="<?php echo "value"; echo $row['Nom'];?>">
+              <option value="<?php echo $row['idPoint_RDV'];?>">
               <?php echo $row['Nom'];?>
               </option>
           <?php 
@@ -124,7 +140,7 @@
           <td>
             <select class="mb-2" style="font-size: 10px; height: 25px; width: 125px;">
             <?php while( $row = $res->fetch_assoc() ){?>
-                <option value="<?php echo "value"; echo $row['Nom'];?>">
+                <option value="<?php echo $row['idCovoitureur'];?>">
                 <?php echo $row['Nom'] . " " . $row['Prenom'];?>
                 </option>
             <?php 
@@ -133,7 +149,7 @@
             </select>
           </td>
         </div>
-
+      </div>
       </div>
 
       <div align="center"> 

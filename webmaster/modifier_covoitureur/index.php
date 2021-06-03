@@ -3,10 +3,10 @@
 
 <head>
 	<?php 
-		include('../../bootstrap.html');
-		include('./popupModifCovoitureur.php');
-		include('./popupModifVoiture.php');
-		require_once "../request/Covoitureur.php"; 
+		include '../../bootstrap.php';
+		include './popupModifCovoitureur.php';
+		include './popupModifVoiture.php';
+		require_once "../../request/Covoitureur.php"; 
 	?>
 	<script src="./popup.js"></script>
 	<title>Modifier Covoitureur</title>
@@ -15,9 +15,8 @@
 <body>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
 
-
 	<div class="container bg-success p-2 my-2 rounded" >
-		<a href="/index.php">
+		<a href="../../accueil">
 		<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
 		</a>
 		<h2 class="text-center" style="color: white;">Modifier Covoitureur</h2>

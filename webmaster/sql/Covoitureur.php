@@ -3,7 +3,7 @@ class Covoitureur
 {
     function __construct()
     {
-        require_once __DIR__."/config.php";
+        require_once "../../config.php";
     }
 
 
@@ -175,7 +175,43 @@ class Covoitureur
         return $GLOBALS['mysqli']->query($sql);
     }
 
+    function get_date_depart($idInscription)
+    {
+        $sql = "SELECT * FROM Inscription WHERE idInscription = $idInscription;";
+        $res = $GLOBALS['mysqli'] ->query($sql);
+        
+        while ($row = $res->fetch_assoc())
+        {
+            return $row;
+        }
+    }
 
+    function get_participation($idParticipation)
+    {
+        $sql = "SELECT * FROM Participation WHERE idParticipation = $idParticipation;";
+
+        $res = $GLOBALS['mysqli'] ->query($sql);
+        $stack = array();
+        while ($row = $res->fetch_assoc())
+        {
+            array_push($stack,$row);
+        }
+        return $stack;
+    }
+
+    function get_etape($idEtape)
+    {
+            $sql = "SELECT * FROM Etape WHERE idEtape = $idEtape;";
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    
+    }
 }
 
 ?>

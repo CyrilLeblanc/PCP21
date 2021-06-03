@@ -18,8 +18,7 @@
         <div class="container border rounded shadow">
             <div class="form-group" align="left">
                 <label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
-                <input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
-
+                <label type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint"> </label>
             </div>
 
             <div class="form-group" align="left">

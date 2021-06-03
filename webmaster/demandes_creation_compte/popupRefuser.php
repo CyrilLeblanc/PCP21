@@ -24,13 +24,8 @@
             <input type="text" class="mb-2 mr-sm-2" id="explication" name="explication" value="" required>
         </div>
 
-    </div>
 
-    <!-- POPUP footer -->
-    <div class="modal-footer justify-content-center">
-        <button type="submit" class="btn btn-success">OK</button>
     </div>
-
     </div>
 </div>
 </div>

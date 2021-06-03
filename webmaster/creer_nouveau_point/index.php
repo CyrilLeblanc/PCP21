@@ -3,8 +3,8 @@
 
 <head>
   <?php 
-		include_once '../../bootstrap.html';
-    require_once '../request/Point.php';
+		include_once '../../bootstrap.php';
+    require_once '../../request/Point.php';
 
     if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
     {
@@ -92,7 +92,7 @@
   <div class="container p-3 my-3 border shadow rounded" align="center">
 
     <div class="container bg-success p-2 my-2 rounded">
-      <a href="/index.php">
+      <a href="../../accueil">
         <button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
       </a>
       <h2 class="text-center" style="color: white;">Créer Nouveau Point RDV</h2>
@@ -139,6 +139,7 @@
         <br/><button type="submit" class="btn btn-success" name="submit">Valider</button>
 
         <?php
+
           //Vérifie si le point a bien été ajouté
           $verif_ajout = new Point();
           if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))

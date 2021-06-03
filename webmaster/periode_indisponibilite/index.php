@@ -3,8 +3,8 @@
 
 <head>
   <?php 
-	  include_once '../../bootstrap.html';
-	  require_once '../request/Indisp.php'; 
+	  include_once '../../bootstrap.php';
+	  require_once '../../request/Indisp.php'; 
   ?>
   <title>Période Indisponibilité</title>
 </head>
@@ -14,7 +14,7 @@
 
 
     <div class="container bg-success p-2 my-2 rounded">
-      <a href="/index.php">
+      <a href="../../accueil">
         <button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
       </a>
       <h2 class="text-center" style="color: white;">Période Indisponibilité</h2>

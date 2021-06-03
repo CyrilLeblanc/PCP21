@@ -5,7 +5,7 @@ class Indisp
     function __construct()
     {
         
-        require_once __DIR__.'/config.php';
+        require_once '../../config.php';
     }
 
     function add_indisp($Debut_Fermeture, $Fin_Fermeture, $Motif_Fermeture, $idCovoitureur)
