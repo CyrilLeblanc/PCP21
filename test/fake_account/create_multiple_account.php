@@ -1,156 +1,111 @@
 <?php
-
-$nb_fantom = readline('Nombre de compte à créer: ');
-
-
-
 require_once "../../config.php";
+require_once $GLOBALS['racine']."test/fake_account/Dummy_c.php";
 
-class Dummy {
-
-    public $idCovoitureur;
-    public $nom;
-    public $prenom;
-    public $password_unashed;
-    public $password;
-    public $mail;
-    public $phone;
-    public $Point_RDV;
-
-    public $voiture;
-
-
-    function __construct($id)
-    {
-        // On récupère le JSON et on le décode
-        $content = json_decode(file_get_contents('https://api.namefake.com/'));
-
-        // on récupère le Nom complet découpé
-        $nom_complet = explode(" ", $content->name);
-        
-        $this->idCovoitureur = $id;
-        $this->nom = $nom_complet[0];
-        $this->prenom = $nom_complet[1];
-
-        $content->password = str_replace(";",":",$content->password);
-        $content->password = str_replace(",",".",$content->password);
-        $content->password = str_replace('"',"`",$content->password);
-        $this->password_unashed = $content->password;
-        $this->password = password_hash($content->password, PASSWORD_DEFAULT);
-        $this->mail = $content->email_u . "@" . $content->email_d;
-        $this->phone = $this->gen_number();
-        $this->Point_RDV = $this->gen_Point();
-        $this->gen_voiture();
-    }
-
-
-    function gen_number()
-    {
-        $number = "+33";
-        for($i = 0 ; $i < 4 ; $i++)
-        {
-            $temp = rand(0, 99);
-            if ($temp < 10)
-            {
-                $temp = "0".$temp;
-            }
-            $number .= $temp;
-        }
-        return $number;
-    }
-
-
-    function gen_Point()
-    {
-        $sql = "SELECT idPoint_RDV, Nom, Ville FROM Point_RDV;";
-        $res = $GLOBALS['mysqli']->query($sql);
-
-        $i = rand(1, 15);
-        while ($row = $res->fetch_assoc())
-        {
-            $i--;
-            if ($i == 0)
-            {
-                return $row;
-            }
-        }
-    }
-
-    function gen_voiture()
-    {
-        $voiture = array();
-        $voiture['Modele'] = "C5";
-        $voiture['Marque'] = "Citroën";
-        $voiture['Annee'] = "2020";
-        $voiture['Couleur'] = "rouge";
-        $voiture['Nbr_Place'] = rand(3,7);
-
-        $this->voiture = $voiture;
-    }
-
-    function presentation()
-    {
-        echo "idCovoitureur : " . $this->idCovoitureur . "\n".
-        "Nom : ".$this->nom."\n".
-        "Prenom : ".$this->prenom."\n".
-        "Mot de passe (clair) : ".$this->password_unashed."\n".
-        "E-mail : ".$this->mail."\n".
-        "Num : ".$this->phone."\n".
-        "Point_RDV : #". $this->Point_RDV['idPoint_RDV'] . "\t". $this->Point_RDV['Nom'] . " @ " . $this->Point_RDV['Ville']. "\n\n".
-        "\n";
-    }
-
-    function save_csv()
-    {
-        $data = file_get_contents('dummy.csv');
-        $data .= "\n" . $this->idCovoitureur . ";".
-        $this->prenom . ";".
-        $this->nom . ";".
-        $this->phone . ";".
-        $this->mail . ";".
-        $this->password_unashed . ";".
-        $this->Point_RDV['idPoint_RDV']. ";;".
-        $this->voiture['Modele'].";".
-        $this->voiture['Marque'].";".
-        $this->voiture['Annee'] . ";".
-        $this->voiture['Nbr_Place']; 
-        file_put_contents('dummy.csv', $data);
-    }
-
-    function save_bdd()
-    {
-        $sql = "INSERT INTO Covoitureur (idCovoitureur, Nom, Prenom, Num_Telephone, Email, Mot_De_Passe, idPoint_RDV, is_Confirme, Utilisateur_Image, Nbr_Alveoles) VALUE ".
-        "(".$this->idCovoitureur.",'".$this->nom."','".$this->prenom."','".$this->phone."','".$this->mail."','".$this->password."',".$this->Point_RDV['idPoint_RDV'].", 1, 'https://thispersondoesnotexist.com/image', ".rand(-20,20).");";
-        $GLOBALS['mysqli']->query($sql);
-
-        $voiture = $this->voiture;
-        $sql = "INSERT INTO Voiture (Modele, Marque, Annee, Couleur, Nbr_Place, is_Favoris, idCovoitureur) VALUE ('".
-        $voiture['Modele'] . "', '".$voiture['Marque']. "', ".$voiture['Annee']. ", '".$voiture["Couleur"]. "', ".$voiture['Nbr_Place']. ", 1,".$this->idCovoitureur.");";
-        $GLOBALS['mysqli']->query($sql);
-    }
+$nb_dummy = readline('Nombre de compte à créer [10] : ');
+if ($nb_dummy == "")
+{
+    $nb_dummy = 10;
+}
+$is_Confirme = readline('is_Confirme des dummys ([1]/0) :');
+if ($is_Confirme == "")
+{
+    $is_Confirme = 1;
 }
 
 function clear_dbb()
 {
-    $sql = "DELETE FROM Voiture;";
-    $GLOBALS['mysqli']->query($sql);
+    // on va chercher tout les covoitureur créer à partir de ce script
+    // on les identifie grâce à Utilisateur_Image dans la base de donnée qui pointe sur "https://thispersondoesnotexist.com/image"
+    $sql = "SELECT Covoitureur.idCovoitureur\n".
+    "FROM Covoitureur \n".
+    "WHERE Covoitureur.Utilisateur_Image = 'https://thispersondoesnotexist.com/image'\n";
+    echo "$sql\n";
 
-    $sql = "DELETE FROM Covoitureur;";
-    $GLOBALS['mysqli']->query($sql);
+    $res = $GLOBALS['mysqli']->query($sql);
+    while ($row = $res->fetch_assoc())
+    {
+        $idCovoitureur = $row['idCovoitureur'];
+
+    // Suppression des Inscription du Covoitureur
+        $sql = "SELECT Inscription.idInscription FROM Inscription \n".
+        "INNER JOIN Covoitureur ON Covoitureur.idCovoitureur = Inscription.idCovoitureur \n".
+        "WHERE Covoitureur.idCovoitureur = $idCovoitureur";
+
+        $res_del = $GLOBALS['mysqli']->query($sql);
+        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
+        {
+            $idInscription = $row_del['idInscription'];
+            $sql = "DELETE FROM Inscription WHERE idInscription = $idInscription";
+            $GLOBALS['mysqli']->query($sql);
+        }
+
+    // Suppression des Etape & Participation
+        $sql = "SELECT Etape.idEtape, Participation.idParticipation FROM Etape \n".
+        "INNER JOIN Participation ON Covoitureur.idCovoitureur = Participation.idCovoitureur \n".
+        "INNER JOIN Etape ON Etape.idParticipation = Participation.idParticipation\n".
+        "WHERE Covoitureur.idCovoitureur = $idCovoitureur";
+
+        $res_del = $GLOBALS['mysqli']->query($sql);
+        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
+        {
+            $idEtape = $row_del['idEtape'];
+            $idParticipation = $row['idParticipation'];
+            $sql = "DELETE FROM Etape WHERE idEtape = $idEtape;
+            DELETE FROM Participation WHERE idParticipation = $idParticipation";
+            $GLOBALS['mysqli']->multi_query($sql);
+        }
+    // Suppression des Inscription & Covoiturage
+        $sql = "SELECT Inscription.idInscription, Covoiturage.idCovoiturage FROM Inscription \n".
+        "INNER JOIN Covoiturage ON Inscription.idCovoiturage = Covoiturage.idCovoiturage\n".
+        "WHERE Inscription.idCovoitureur = $idCovoitureur";
+
+        $res_del = $GLOBALS['mysqli']->query($sql);
+        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
+        {
+            $idInscription = $row_del['idInscription'];
+            $idCovoiturage = $row['idCovoiturage'];
+            $sql = "DELETE FROM Inscription WHERE idInscription = $idInscription;
+            DELETE FROM Covoiturage WHERE idCovoiturage = $idCovoiturage";
+            $GLOBALS['mysqli']->multi_query($sql);
+        }
+    // Suppression des Token
+        $sql = "SELECT Token.idToken FROM Token WHERE idCovoitureur = $idCovoitureur";
+        $res_del = $GLOBALS['mysqli']->query($sql);
+        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
+        {
+            $idToken = $row_del['idToken'];
+            $sql = "DELETE FROM Token WHERE idToken = $idToken";
+            $GLOBALS['mysqli']->multi_query($sql);
+        }
+    // Suppression des Voiture
+        $sql = "SELECT Voiture.idVoiture FROM Voiture WHERE idCovoitureur = $idCovoitureur";
+        $res_del = $GLOBALS['mysqli']->query($sql);
+        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
+        {
+            $idVoiture = $row_del['idVoiture'];
+            $sql = "DELETE FROM Voiture WHERE idVoiture = $idVoiture";
+            $GLOBALS['mysqli']->multi_query($sql);
+        }
+
+    // Suppression du Covoitureur
+        $sql = "DELETE FROM Covoitureur WHERE idCovoitureur = $idCovoitureur";
+        $GLOBALS['mysqli']->multi_query($sql);
+    }
 }
 
 function clear_csv()
 {
-    $header = "ID,Prénom,Nom,Phone,Email,Password,idPoint_RDV,Voiture,Modele,Marque,Annee,Nbr_Place";
-    file_put_contents('./dummy.csv', $header);
+    $header = "ID,Email,Password";
+    file_put_contents('./saved_dummy_password.csv', $header);
 }
 
 clear_dbb();
 clear_csv();
 
-for($i = 0 ; $i < $nb_fantom ; $i++)
+for($i = 0 ; $i < $nb_dummy ; $i++)
 {
-    $test = new Dummy($i+1);
+    $test = new Dummy($i+1, $is_Confirme);
     $test->presentation();
     $test->save_csv();
     $test->save_bdd();
