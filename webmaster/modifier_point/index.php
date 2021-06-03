@@ -3,9 +3,15 @@
 
 <head>
 	<?php 
+<<<<<<< HEAD
 		include '../../bootstrap.html';
 		include '../popupModifPoint.php';
 		include '../popupInfosPoint.php';
+=======
+		include '../../bootstrap.php';
+		include './popupModifPoint.php';
+		include './popupInfosPoint.php';
+>>>>>>> ba8084218ce25be08b5be6bd5ae1e247bfc779be
 		require_once "../../request/Point.php"; 
 	?>
 	<script src="./popup.js"></script>

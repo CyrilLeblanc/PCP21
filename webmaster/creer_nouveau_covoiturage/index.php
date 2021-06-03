@@ -2,8 +2,8 @@
 <html>
 <head>
   <?php 
-    include('../../bootstrap.html');
-    require_once "../../request/Point.php"; 
+    include('../../bootstrap.php');
+    require_once "../../request/Point.php";
     require_once "../../request/Covoitureur.php"; 
     require_once "../../config.php";
 
@@ -16,6 +16,21 @@
       clone = document.getElementById("Etape").cloneNode(true);
       document.getElementById("ListEtapes").appendChild (clone);
     }
+  </script>
+  <script>
+    let tabCovoitureur = [
+    <?php 
+      $sql = "SELECT Nom, Prenom, idCovoitureur FROM Covoitureur WHERE is_Confirme = 1;";
+          $res = $GLOBALS['mysqli']->query($sql);
+          while ($row = $res->fetch_assoc())
+          {
+            $name = $row['Nom'] . " " . $row['Prenom'];
+            $idCovoitureur = $row['idCovoitureur'];
+            echo ", $idCovoitureur : '$name'";
+          }
+    ?>
+    ]
+
   </script>
   <title>Création Nouveau Covoiturage</title>
 </head>

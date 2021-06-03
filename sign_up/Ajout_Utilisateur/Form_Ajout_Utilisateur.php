@@ -1,5 +1,5 @@
 <?php
-include('./bootstrap.html');
+include('./bootstrap.php');
 include('./config.php');
 
 $nom = $_POST['nom'];

@@ -104,9 +104,8 @@ if(isset($_POST['email']) && isset($_POST['password']))     // connexion via for
             $GLOBALS['mysqli']->query($sql);
 
             // ajout du token dans les Cookies
-            setcookie('token',$token,time()+3600*24*30);        #INTEGRATION
+            setcookie('token',$token,time()+3600*24*30, '/');        #INTEGRATION
         }
-
         connect($res['idCovoitureur']);
     }
     exit;

@@ -62,7 +62,7 @@
 
   <div class="col-6 text-left" style="font-size: 12px; padding-top: 1em; padding-bottom: 0.5em; padding-left: 0;">
     <?php
-      $name = $_SESSION["Nom"] . " " . $_SESSION["Prenom"];
+      $name = strtoupper($_SESSION["Nom"]) . " " . $_SESSION["Prenom"];
 
       if(strlen($name) < 20)
       {
