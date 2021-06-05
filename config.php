@@ -22,5 +22,3 @@ $GLOBALS['mysqli'] = new mysqli($adress, $user, $password, $bdd);
         echo "Echec lors de la connexion à MySQL : (" . $GLOBALS['mysqli']->connect_errno . ") " . $GLOBALS['mysqli']->connect_error;
     }
 ?>
-
-
