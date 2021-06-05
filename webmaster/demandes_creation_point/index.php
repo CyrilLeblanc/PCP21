@@ -1,24 +1,23 @@
 <?php
-ini_set('display_errors', 1);   #DEBUG
-ini_set('display_startup_errors', 1);   #DEBUG
-require_once '../../config.php'; 
-require_once $GLOBALS['racine'] . 'request/Point.php';
+	ini_set('display_errors', 1);   #DEBUG
+	ini_set('display_startup_errors', 1);   #DEBUG
+	require_once '../../config.php'; 
+	require_once $GLOBALS['racine'] . 'request/Point.php';
 
-if (isset($_GET['validate']) && $_GET['validate'] != "")
-// si on demande la suppression d'un point on le valide
-{
-	$point = new Point();
-	$point->validate_Point($_GET['validate']);
-	header("Location: .?success=validate");		// on recharge la page en disant que la validation à réussi
-}
-if (isset($_GET['delete']) && $_GET['delete'] != "")
-// si on demande la suppression d'un point on le supprime
-{
-	$point = new Point();
-	$point->del_Point($_GET['delete']);			
-	header("Location: .?success=delete");		// on recharge la page en disant que la suppression à réussi
-}
-
+	if (isset($_GET['validate']) && $_GET['validate'] != "")
+	// si on demande la suppression d'un point on le valide
+	{
+		$point = new Point();
+		$point->validate_Point($_GET['validate']);
+		header("Location: .?success=validate");		// on recharge la page en disant que la validation à réussi
+	}
+	if (isset($_GET['delete']) && $_GET['delete'] != "")
+	// si on demande la suppression d'un point on le supprime
+	{
+		$point = new Point();
+		$point->del_Point($_GET['delete']);			
+		header("Location: .?success=delete");		// on recharge la page en disant que la suppression à réussi
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,11 +39,17 @@ if (isset($_GET['delete']) && $_GET['delete'] != "")
 			// on gère les message de validation et de suppression des points
 			if ($_GET['success'] == "validate")
 			{
-				echo "validation du points réussi";
+				echo 
+					"<div class='alert alert-success text-center'>
+					<h5><strong>Vous avez validé le Point de RDV.</strong></h5>
+					</div>";
 			}
 			if ($_GET['success'] == "delete")
 			{
-				echo "suppression du points réussi";
+				echo 
+					"<div class='alert alert-danger text-center'>
+					<h2><strong>Vous avez refusé le Point de RDV.</strong></h2>
+					</div>";
 			}
 		}
 	

@@ -3,8 +3,11 @@
 
 <head>
   <?php 
-		include_once '../../bootstrap.php';
-    require_once '../../request/Point.php';
+		ini_set('display_errors', 1);   #DEBUG
+    ini_set('display_startup_errors', 1);   #DEBUG
+    require_once '../../config.php'; 
+    include $GLOBALS['racine'] . 'bootstrap.php';
+    require_once $GLOBALS['racine'] . 'request/Point.php';
 
     if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
     {
@@ -14,13 +17,13 @@
         $tempname = $_FILES['photo']['tmp_name'];
         $filesize = $_FILES['photo']['size'];
         $error = 1;
-        $folder = "../images/".$filename;
+        $folder = $GLOBALS['racine'] . 'images/' . $filename;
 
         $extension = new SplFileInfo($filename);
         $ext = $extension->getExtension();
 
-        $newname = "/PCP21/webmaster/images/" . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
-        $newfolder = "../images/" . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
+        $newname = "/PCP21/images/" . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
+        $newfolder = $GLOBALS['racine'] . 'images/' . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
 
         $newname = addslashes($newname);
 
@@ -98,41 +101,41 @@
       <h2 class="text-center" style="color: white;">Créer Nouveau Point RDV</h2>
     </div>
 
-      <h1>Ajouter un point d'interrogation pour expliquer comment récupérer les coordonnées facilement.</h1>
-
     <!-- FORM -->
     <form class="needs-validation" method="post" action="" enctype="multipart/form-data">
 
       <!-- FORM Input Fields -->
       <div class="form-group" align="center">
         <label for="nom" class="mr-sm-2">Nom : </label><br/>
-        <input type="text" class="mb-2 mr-sm-2" placeholder="Lycée Charles Poncet" name="nom" required>
+        <input type="text" class="mb-2 mr-sm-2 w-100" placeholder="Lycée Charles Poncet" name="nom" required>
       </div>
 
       <div class="form-group" align="center">
         <label for="adresse" class="mr-sm-2">Adresse : </label><br/>
-        <input type="text" class="mb-2 mr-sm-2" placeholder="1 avenue de Charles Poncet" name="adresse" required>
+        <input type="text" class="mb-2 mr-sm-2 w-100" placeholder="1 avenue de Charles Poncet" name="adresse" required>
       </div>
 
       <div class="form-group" align="center">
         <label for="ville" class="mr-sm-2">Ville : </label><br/>
-        <input type="text" class="mb-2 mr-sm-2" placeholder="74300 Cluses" name="ville" required>
+        <input type="text" class="mb-2 mr-sm-2 w-100" placeholder="74300 Cluses" name="ville" required>
       </div>
 
       <div class="form-group" align="center">
         <label for="latitude" class="mr-sm-2">Latitude : </label><br/>
-        <input type="text" class="mb-2 mr-sm-2" placeholder="46.0621" name="latitude" required>
+        <input type="text" class="mb-2 mr-sm-2 w-100" placeholder="46.0621" name="latitude" required>
       </div>
 
       <div class="form-group" align="center">
         <label for="longitude" class="mr-sm-2">Longitude : </label><br/>
-        <input type="text" class="mb-2 mr-sm-2" placeholder="6.5787" name="longitude" required>
+        <input type="text" class="mb-2 mr-sm-2 w-100" placeholder="6.5787" name="longitude" required>
       </div>
 
       <div class="form-group" align="center">
         <label for="photo" class="mr-sm-2">Photo : </label><br/>
         <input type="file" class="mb-2 mr-sm-2" name="photo" id="photo">
       </div>
+
+      <input id="idPoint" name="idPoint" value="" hidden></input>
 
       <!-- FORM Submit Button -->
       <div align="center">
@@ -144,7 +147,10 @@
           $verif_ajout = new Point();
           if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
           {
-            if($verif_ajout->verif_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude']))
+            $id = $GLOBALS['mysqli']->insert_id;
+            echo $id;
+
+            if($verif_ajout->verif_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$id))
             {
               echo "</br></br>
                 <div class='alert alert-success text-center'>
@@ -155,7 +161,7 @@
             {
               echo "</br></br>
                 <div class='alert alert-danger text-center'>
-                <h2><strong>Erreur d'ajout de point de RDV.</strong></h2>
+                <h2><strong>Erreur d'ajout de Point de RDV.</strong></h2>
                 </div>";
             }
           }

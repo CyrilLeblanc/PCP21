@@ -1,5 +1,4 @@
 
-
 <!-- POPUP -->
 <div class="modal fade" id="popupValidate">
     <div class="modal-dialog modal-lg">
