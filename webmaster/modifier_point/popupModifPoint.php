@@ -1,5 +1,5 @@
 <?php			
-    function subPoint()
+    function submitPoint()
     {
         if(isset($_POST['nomPoint']) && isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']) && isset($_POST['idPoint']))
         {
@@ -20,6 +20,13 @@
             $temp = "'".$_POST['longitudePoint'] . "'";
             $Modif_Point->set_Point("Longitude",$temp,$_POST['idPoint']);
         }
+    }
+    function deletePoint()
+    {
+        $Delete_Point = new Point();
+        
+        $deleted = " '[Supprimé]" . $_POST['nomPoint'] . "'";
+        $Delete_Point->set_Point("Nom",$deleted,$_POST['idPoint']);
     }
 ?>
 
@@ -90,13 +97,18 @@
 
             <!-- POPUP footer -->
             <div class="modal-footer justify-content-center">
+                <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
                 <button type="submit" name="submit" class="btn btn-success">Enregistrer</button>
             </div>
 
             <?php
                 if(isset($_POST['submit']))
                 {
-                    subPoint();
+                    submitPoint();
+                }
+                elseif(isset($_POST['delete']))
+                {
+                    deletePoint();
                 }
             ?>
 
