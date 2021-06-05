@@ -15,6 +15,8 @@ function popupInfosPoint(nom,adresse,ville,latitude,longitude,image){
 	document.getElementById("imagePoint").innerHTML = image;
 }
 
-function idPoint(id){
-	document.getElementById("Valider").setAttribute("value",id);
+function set_idPoint(id){
+	// on change le contenu de la redirection des boutons accepté et refuser
+	document.getElementById("Valider").setAttribute("href","?validate="+id);
+	document.getElementById("Refuser").setAttribute("href","?delete="+id);
 }
