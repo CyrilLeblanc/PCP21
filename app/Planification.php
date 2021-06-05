@@ -20,47 +20,58 @@ for($i = 8; $i <= 19; $i++)
 	array_push($tab_heure, $i.":00:00");
 }
 
-foreach($tab_date as $date)
+//on créer idLigne
+$tab_ligne = array();
+$sql = "SELECT idLigne FROM Ligne";
+$res = $GLOBALS['mysqli']->query($sql);
+while($row = $res->fetch_assoc())
 {
-	foreach($tab_heure as $heure)
+	array_push($tab_ligne, (int)$row['idLigne']);
+}
+
+foreach($tab_ligne as $idLigne)
+{
+	foreach($tab_date as $date)
 	{
-		#############################
-		#	Determination Aller		#
-		#############################
-
-		$sens = 0;
-		$ligne = new Ligne(1, $sens);
-		$ligne->set_covoitureur($date, $heure, $sens);
-
-		// on associe pour chaque covoitureur leurs heure de retour
-		if ($sens == 0)		// si c'est un aller
+		foreach($tab_heure as $heure)
 		{
-			$tab_etape = &$ligne->get_ref_tab_etape();
-			foreach($tab_etape as $etape)
+			#############################
+			#	Determination Aller		#
+			#############################
+			
+			$sens = 0;
+			$ligne = new Ligne($idLigne, $sens);
+			$ligne->set_covoitureur($date, $heure, $sens);
+			if (sizeof($ligne->get_population()) > 0)
 			{
-				$tab_covoitureur = &$etape->get_ref_tab_covoitureur();
-				foreach($tab_covoitureur as $covoitureur)		// on associe les retours pour chaque covoitureur
+				echo "\n\n\n\n\n\n\n\n\t$idLigne\t$date\t$heure\n";
+			}
+			// on associe pour chaque covoitureur leurs heure de retour
+			if ($sens == 0)		// si c'est un aller
+			{
+				$tab_etape = &$ligne->get_ref_tab_etape();
+				foreach($tab_etape as $etape)
 				{
-					$sql = "SELECT Heure_Arrivee FROM Inscription WHERE idCovoitureur = ".$covoitureur->get_id()." AND Date_Depart = '$date' AND is_Depart_Lycee = 1";
-					$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
-					if (isset($res))
+					$tab_covoitureur = &$etape->get_ref_tab_covoitureur();
+					foreach($tab_covoitureur as $covoitureur)		// on associe les retours pour chaque covoitureur
 					{
-						$covoitureur->set_heure_retour($res['Heure_Arrivee']);
+						$sql = "SELECT Heure_Arrivee FROM Inscription WHERE idCovoitureur = ".$covoitureur->get_id()." AND Date_Depart = '$date' AND is_Depart_Lycee = 1";
+						$res = $GLOBALS['mysqli']->query($sql)->fetch_assoc();
+						if (isset($res))
+						{
+							$covoitureur->set_heure_retour($res['Heure_Arrivee']);
+						}
 					}
 				}
 			}
+
+			if (sizeof($ligne->get_population()) > 0)
+			{
+				$covoiturage = new Covoiturage($ligne, $date, $heure, $sens);
+				$covoiturage->save();
+			}
 		}
-
-		$covoiturage = new Covoiturage($ligne, $date, $heure, $sens);
-		$covoiturage->save();
-		$tab_covoiturage = array();
-		array_push($tab_covoiturage, $covoiturage);
 	}
-
-	#################################
-	#	Planification des retours 	#
-	#################################
-	// non codée pour le moment
 }
 
 ?>

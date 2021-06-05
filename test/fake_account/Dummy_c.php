@@ -78,7 +78,7 @@ class Dummy {
         $voiture['Marque'] = "Citroën";
         $voiture['Annee'] = "2020";
         $voiture['Couleur'] = "rouge";
-        $voiture['Nbr_Place'] = rand(3,7);
+        $voiture['Nbr_Place'] = rand(2,7);
 
         $this->voiture = $voiture;
     }

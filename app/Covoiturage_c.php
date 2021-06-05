@@ -256,7 +256,6 @@ class Covoiturage
 			if (mysqli_num_rows($res) == 0)
 			// si l'idCovoiturage n'existe pas alors on le créer
 			{
-				echo "#\tCréation du Covoiturage\n";
 				$sql = "INSERT INTO Covoiturage (Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure', $is_depart_lycee, $idLigne)";
 				$GLOBALS['mysqli']->query($sql);
 			}
@@ -303,12 +302,10 @@ class Covoiturage
 					{
 						$sql = "INSERT INTO Participation (is_Conducteur, Date, Kilometrage, idCovoitureur, idCovoiturage) VALUES ".
 						"($is_conducteur, '$date', $kilometrage, $idCovoitureur, $idCovoiturage)";
-						echo "Création Participation pour Covoitureur \t#$idCovoitureur\n";
 						$GLOBALS['mysqli']->query($sql);
 					}
 					$nbAttempt--;
 				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
-				echo "Obtention Participation pour Covoitureur\t#$idCovoitureur\n\n";
 				$passager->set_idParticipation($res->fetch_assoc()['idParticipation']);
 
 				#############################
@@ -333,11 +330,9 @@ class Covoiturage
 						$sql = "INSERT INTO Etape (Duree, Kilometrage, idPoint_RDV_A, idPoint_RDV_B, idVoiture, idParticipation) ".
 						"VALUES ('0', $kilometrage, $idPoint_A, $idPoint_B, $idVoiture, $idParticipation);";
 						$GLOBALS['mysqli']->query($sql);
-						echo "\tCréation Etape pour Covoitureur \t#$idCovoitureur\n";
 					}
 					$nbAttempt--;
 				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
-				echo "\tObtention Etape pour Covoitureur\t#$idCovoitureur\n\n";
 			}
 		}
 	}

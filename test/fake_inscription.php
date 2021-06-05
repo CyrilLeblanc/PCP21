@@ -83,8 +83,8 @@ foreach($tab_covoitureur as $covoitureur)
 		
 		if (mysqli_num_rows($res) == 0)
 		{
-			$sql = "INSERT INTO Inscription (idCovoitureur, idCovoiturage, Date_Depart, Heure_Arrivee) VALUES \n".
-			"($idCovoitureur, $idCovoiturage, '$date', '$heure');";
+			$sql = "INSERT INTO Inscription (idCovoitureur, idCovoiturage, Date_Depart, Heure_Arrivee, is_Depart_Lycee) VALUES \n".
+			"($idCovoitureur, $idCovoiturage, '$date', '$heure', 0);";
 			$GLOBALS['mysqli']->query($sql);
 		}
 	} while (mysqli_num_rows($res) == 0);
