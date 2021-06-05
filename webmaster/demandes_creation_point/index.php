@@ -6,8 +6,12 @@
 		require_once '../../config.php'; 
 		require_once $GLOBALS['racine'] . 'request/Point.php';
 		include $GLOBALS['racine'] . 'bootstrap.php';
-		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupAccepter.php';
-		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupRefuser.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupInfosPoint.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupValidate.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupValide.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupRefuse.php';
+		ini_set('display_errors', 1);   #DEBUG
+		ini_set('display_startup_errors', 1);   #DEBUG
 	?>
 	<script src="./popup.js"></script>
 	<title>Demandes Création Point RDV</title>
@@ -15,7 +19,6 @@
 
 <body>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
-
 
 	<div class="container bg-success p-2 my-2 rounded" >
 		<a href="../../accueil">
@@ -36,7 +39,7 @@
 			else
 			{
 				echo
-				'<!-- TABLE -->
+					'<!-- TABLE -->
 					<div class="container overflow-auto" style="font-size: 10px; height: 400px;">
 					<table class="table">
 
@@ -44,10 +47,10 @@
 					<!-- TABLE Header -->
 					<thead align="center">
 					<tr>
-						<th>Non</th>
 						<th>Nom</th>
+						<th>Coordonnées</th>
 						<th>Informations</th>
-						<th>Oui</th>
+						<th>Validation</th>
 					</tr>
 					</thead>';
 
@@ -57,14 +60,14 @@
 					'<!-- TABLE Body -->
 					<tbody align="center" style="height: 100px; overflow: auto;">
 						<tr> 
-						<td>
-							<div style="padding-top: 1em; padding-bottom: 1em;">
-								<button class="btn material-icons" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
-							</div>
-
 							<td> 
 								<div style="padding-top: 1em; padding-bottom: 1em;">' . $value["Nom"] . ' </div>
-							</td>							
+							</td>	
+							
+							<td>
+								<div style="padding-top: 1em; padding-bottom: 1em;">
+									<a href="https://www.google.com/maps/place/' . $value["Latitude"] . ',' . $value["Longitude"] . '" onclick="window.open(this.href); return false;"" 
+									style="font-weight: bold; color: green;">' . $value["Latitude"] . '<br/>' . $value["Longitude"] . ' </a></div></td>	
 
 							<td> 
 								<button class="btn material-icons container bg-success p-2 my-2 rounded" 
@@ -74,22 +77,19 @@
 
 							<td>
 								<div style="padding-top: 1em; padding-bottom: 1em;">
-									<button class="btn material-icons" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
+									<button class="btn material-icons" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popupValidate">&#xf1c2;</button>
 								</div>
 							</td>
+							<input value="' . $value["idPoint_RDV"] . '" id="idPoint_RDV" hidden></input>
 						</tr>
-					</tbody>
-					</table>';
+					</tbody>';
 				}
+				echo '</table>';
 			}
+			
 		?>
 
 	</div>
 </body>
 
 </html>
-
-<!--<td> 
-		<a href="https://www.google.com/maps/place/' . $value["Latitude"] . ',' . $value["Longitude"] . '" onclick="window.open(this.href); return false;"" style="font-weight: bold; color: green;">' . $value["Latitude"] . '<br/>' . $value["Longitude"] . '
-		<a href="' . $value["Point_Image"] . '"onclick="window.open(this.href); return false;"> <img src="' . $value["Point_Image"] . '"class="img-fluid rounded" width="100"></img></a> 
-	</td>

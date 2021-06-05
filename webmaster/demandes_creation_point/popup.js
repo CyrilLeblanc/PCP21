@@ -14,3 +14,4 @@ function popupInfosPoint(nom,adresse,ville,latitude,longitude,image){
 	document.getElementById("lienImage").setAttribute("src",image);
 	document.getElementById("imagePoint").innerHTML = image;
 }
+

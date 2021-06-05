@@ -63,9 +63,9 @@
 									<div style="padding-top: 0.5em; padding-bottom: 0.5em;">
 										<button class="btn material-icons bg-success" style="color: white; font-size: 200%;"
 										onclick="popupModifPoint(`' . $value["Nom"] . '`,`' . $value["Adresse"] . '`,`' . $value["Ville"] . '`,`' . $value["Latitude"] . '`,`' . $value["Longitude"] . '`,`' . $value["Point_Image"] . '`,`' . $value["idPoint_RDV"] . '`)" 
-										data-toggle="modal" data-target="#popupModifPoint">&#xe3c9;</button></td>
-									</div>
-									<input value="' . $value["idPoint_RDV"] . '" name="idPoint_RDV" hidden></input>
+										data-toggle="modal" data-target="#popupModifPoint">&#xe3c9;</button></div></td>
+									
+									<input value="' . $value["idPoint_RDV"] . '" id="idPoint_RDV" hidden></input>
 							</tr>';
 					}
 				?>
