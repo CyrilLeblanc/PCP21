@@ -3,11 +3,11 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.php';
-		include './popupInfosPoint.php';
-		include './popupAccepter.php';
-		include './popupRefuser.php';
-		require_once "../../request/Point.php";
+		require_once '../../config.php'; 
+		require_once $GLOBALS['racine'] . 'request/Point.php';
+		include $GLOBALS['racine'] . 'bootstrap.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupAccepter.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupRefuser.php';
 	?>
 	<script src="./popup.js"></script>
 	<title>Demandes Création Point RDV</title>

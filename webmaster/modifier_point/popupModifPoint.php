@@ -1,25 +1,24 @@
 <?php			
-    function x()
+    function subPoint()
     {
-        if(isset($_POST['nomPoint']) && isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']))
+        if(isset($_POST['nomPoint']) && isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']) && isset($_POST['idPoint']))
         {
             $Modif_Point = new Point();
-            
 
             $temp = "'".$_POST['nomPoint'] . "'";
-            $Modif_Point->set_Point("Nom",$temp,$value['idPoint_RDV']);
+            $Modif_Point->set_Point("Nom",$temp,$_POST['idPoint']);
 
             $temp = "'".$_POST['adressePoint'] . "'";
-            $Modif_Point->set_Point("Adresse",$temp,$value['idPoint_RDV']);
+            $Modif_Point->set_Point("Adresse",$temp,$_POST['idPoint']);
 
             $temp = "'".$_POST['villePoint'] . "'";
-            $Modif_Point->set_Point("Ville",$temp,$value['idPoint_RDV']);
+            $Modif_Point->set_Point("Ville",$temp,$_POST['idPoint']);
 
             $temp = "'".$_POST['latitudePoint'] . "'";
-            $Modif_Point->set_Point("Latitude",$temp,$value['idPoint_RDV']);
+            $Modif_Point->set_Point("Latitude",$temp,$_POST['idPoint']);
 
             $temp = "'".$_POST['longitudePoint'] . "'";
-            $Modif_Point->set_Point("Longitude",$temp,$value['idPoint_RDV']);
+            $Modif_Point->set_Point("Longitude",$temp,$_POST['idPoint']);
         }
     }
 ?>
@@ -42,41 +41,48 @@
         <form class="modifPoint" method="post">
 
             <div class="container border rounded shadow">
+
                 <div class="form-group" align="left">
                     <label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
+                    <input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required></input>
 
                 </div>
 
                 <div class="form-group" align="left">
                     <label for="adressePoint" class="mr-sm-2">Adresse : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2" id="adressePoint" name="adressePoint" value="" required>
+                    <input type="text" class="mb-2 mr-sm-2" id="adressePoint" name="adressePoint" value="" required></input>
 
                 </div>
 
                 
                 <div class="form-group" align="left">
                     <label for="villePoint" class="mr-sm-2">Ville : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2" id="villePoint" name="villePoint" value="" required>
+                    <input type="text" class="mb-2 mr-sm-2" id="villePoint" name="villePoint" value="" required></input>
 
                 </div>
 
                 <div class="form-group" align="left">
                     <label for="latitudePoint" class="mr-sm-2">Latitude : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2" id="latitudePoint" name="latitudePoint" value="" required>
+                    <input type="text" class="mb-2 mr-sm-2" id="latitudePoint" name="latitudePoint" value="" required></input>
 
                 </div>
 
                 <div class="form-group" align="left">
                     <label for="longitudePoint" class="mr-sm-2">Longitude : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2" id="longitudePoint" name="longitudePoint" value="" required>
+                    <input type="text" class="mb-2 mr-sm-2" id="longitudePoint" name="longitudePoint" value="" required></input>
 
                 </div>
 
                 <div class="form-group" align="left">
                     <label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
-                    <img src="" id="lienImage" class="img-fluid rounded" width="200"><br/>
-                    <input type="file" class="mb-2 mr-sm-2" id="imagePoint" name="imagePoint" value="">
+                    <img src="" id="lienImage" class="img-fluid rounded" width="200"></image><br/>
+                    <input type="file" class="mb-2 mr-sm-2" id="imagePoint" name="imagePoint" value=""></input>
+
+                </div>
+
+                <div class="form-group" align="left" hidden>
+                    <label for="idPoint" class="mr-sm-2" hidden>idPoint_RDV : </label><br/>
+                    <input type="text" class="mb-2 mr-sm-2" id="idPoint" name="idPoint" value="" hidden></input>
 
                 </div>
             </div>
@@ -89,7 +95,7 @@
             <?php
                 if(isset($_POST['submit']))
                 {
-                    x();
+                    subPoint();
                 }
             ?>
 

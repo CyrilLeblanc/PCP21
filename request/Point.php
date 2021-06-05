@@ -13,8 +13,8 @@ class Point
     // Renvoi un object sql
     {
         $sql = "SELECT * FROM Point_RDV WHERE is_Confirme = $is_confirme;";
-
         $res = $GLOBALS['mysqli'] ->query($sql);
+
         $stack = array();
         while ($row = $res->fetch_assoc())
         {
@@ -35,14 +35,15 @@ class Point
     }
 
 
-    function verif_Point($Nom, $Adresse, $Ville, $Latitude, $Longitude)
+    function verif_Point($Nom, $Adresse, $Ville, $Latitude, $Longitude, $idPoint_RDV)
     {
         $Nom = addslashes($Nom);
         $Adresse = addslashes($Adresse);
         $Ville = addslashes($Ville);
-        $sql = "SELECT * FROM Point_RDV WHERE Nom = '$Nom' AND Adresse = '$Adresse' AND Ville = '$Ville' AND Latitude = $Latitude AND Longitude = $Longitude ;";
+        $idPoint_RDV = addslashes($idPoint_RDV);
+
+        $sql = "SELECT * FROM Point_RDV WHERE Nom = '$Nom' AND Adresse = '$Adresse' AND Ville = '$Ville' AND Latitude = $Latitude AND Longitude = $Longitude AND idPoint_RDV = $idPoint_RDV;";
         $res = $GLOBALS['mysqli']->query($sql);
-        echo $sql;
 
         $stack = array();
         while ($row = $res->fetch_assoc())
@@ -64,7 +65,6 @@ class Point
     function set_Point($name, $value, $idPoint_RDV)
     {
         $sql = "UPDATE Point_RDV SET $name = $value WHERE idPoint_RDV = $idPoint_RDV;";
-        echo $sql . "---";
         return $GLOBALS['mysqli'] ->query($sql);
     }
     
