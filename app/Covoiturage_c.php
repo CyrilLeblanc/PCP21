@@ -1,10 +1,10 @@
 <?php
- 
+
 #
 #	Codeur : Cyril
 #	Description : 
-#		Créer tout les covoiturages et les enregistres automatiquement
-#
+#		Créer tout les covoiturages et les enregistres automatiquement dans la BDD
+#		(Participation et Etape)
 #
 
 require_once "../config.php";
@@ -256,7 +256,6 @@ class Covoiturage
 			if (mysqli_num_rows($res) == 0)
 			// si l'idCovoiturage n'existe pas alors on le créer
 			{
-				echo "#\tCréation du Covoiturage\n";
 				$sql = "INSERT INTO Covoiturage (Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure', $is_depart_lycee, $idLigne)";
 				$GLOBALS['mysqli']->query($sql);
 			}
@@ -303,13 +302,18 @@ class Covoiturage
 					{
 						$sql = "INSERT INTO Participation (is_Conducteur, Date, Kilometrage, idCovoitureur, idCovoiturage) VALUES ".
 						"($is_conducteur, '$date', $kilometrage, $idCovoitureur, $idCovoiturage)";
-						echo "Création Participation pour Covoitureur \t#$idCovoitureur\n";
 						$GLOBALS['mysqli']->query($sql);
 					}
 					$nbAttempt--;
 				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
-				echo "Obtention Participation pour Covoitureur\t#$idCovoitureur\n\n";
 				$passager->set_idParticipation($res->fetch_assoc()['idParticipation']);
+
+				$idParticipation = $passager->get_idParticipation();
+
+				// On supprime les étapes si il y en avais déjà avant (pour éviter les duplications 
+				//		lors de la planification du jours suivant)
+				$sql = "DELETE FROM Etape WHERE idParticipation = $idParticipation;";
+				$GLOBALS['mysqli']->query($sql);
 
 				#############################
 				#	Génération de l'Etape	#
@@ -318,7 +322,7 @@ class Covoiturage
 				$nbAttempt = 10;
 				do {
 					// on cherche si une Etape existe déjà
-					$idParticipation = $passager->get_idParticipation();
+					
 					$sql = "SELECT * FROM Etape WHERE ".
 					"idParticipation = $idParticipation AND ".
 					"idPoint_RDV_A = $idPoint_A AND ". 
@@ -333,13 +337,10 @@ class Covoiturage
 						$sql = "INSERT INTO Etape (Duree, Kilometrage, idPoint_RDV_A, idPoint_RDV_B, idVoiture, idParticipation) ".
 						"VALUES ('0', $kilometrage, $idPoint_A, $idPoint_B, $idVoiture, $idParticipation);";
 						$GLOBALS['mysqli']->query($sql);
-						echo "\tCréation Etape pour Covoitureur \t#$idCovoitureur\n";
 					}
 					$nbAttempt--;
 				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
-				echo "\tObtention Etape pour Covoitureur\t#$idCovoitureur\n\n";
 			}
 		}
 	}
 }
-
