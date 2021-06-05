@@ -1,10 +1,10 @@
 <?php
- 
+
 #
 #	Codeur : Cyril
 #	Description : 
-#		Créer tout les covoiturages et les enregistres automatiquement
-#
+#		Créer tout les covoiturages et les enregistres automatiquement dans la BDD
+#		(Participation et Etape)
 #
 
 require_once "../config.php";
@@ -308,6 +308,13 @@ class Covoiturage
 				} while (mysqli_num_rows($res) == 0 && $nbAttempt > 0);
 				$passager->set_idParticipation($res->fetch_assoc()['idParticipation']);
 
+				$idParticipation = $passager->get_idParticipation();
+
+				// On supprime les étapes si il y en avais déjà avant (pour éviter les duplications 
+				//		lors de la planification du jours suivant)
+				$sql = "DELETE FROM Etape WHERE idParticipation = $idParticipation;";
+				$GLOBALS['mysqli']->query($sql);
+
 				#############################
 				#	Génération de l'Etape	#
 				#############################
@@ -315,7 +322,7 @@ class Covoiturage
 				$nbAttempt = 10;
 				do {
 					// on cherche si une Etape existe déjà
-					$idParticipation = $passager->get_idParticipation();
+					
 					$sql = "SELECT * FROM Etape WHERE ".
 					"idParticipation = $idParticipation AND ".
 					"idPoint_RDV_A = $idPoint_A AND ". 
@@ -337,4 +344,3 @@ class Covoiturage
 		}
 	}
 }
-

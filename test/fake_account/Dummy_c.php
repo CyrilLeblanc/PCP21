@@ -10,12 +10,14 @@ class Dummy {
     public $phone;
     public $Point_RDV;
     public $is_Confirme;
+    public $idLigne;
 
     public $voiture;
 
 
-    function __construct($id, $is_Confirme)
+    function __construct($id, $is_Confirme, $idLigne)
     {
+        $this->idLigne = $idLigne;
         $this->is_Confirme = $is_Confirme;
         // On récupère le JSON et on le décode
         $content = json_decode(file_get_contents('https://api.namefake.com/'));
@@ -57,10 +59,21 @@ class Dummy {
 
     function gen_Point()
     {
-        $sql = "SELECT idPoint_RDV, Nom, Ville FROM Point_RDV;";
+        
+        $sql = "SELECT Composition.idPoint_RDV, Point_RDV.Nom, Point_RDV.Ville FROM Composition\n". 
+        "INNER JOIN Point_RDV ON Point_RDV.idPoint_RDV = Composition.idPoint_RDV \n". 
+        "WHERE NOT Point_RDV.idPoint_RDV=1";
+        
+        
+        if ($this->idLigne != "")
+        {
+            $idLigne = $this->idLigne;
+            $sql .= " AND Composition.idLigne = $idLigne";
+        }
+        
         $res = $GLOBALS['mysqli']->query($sql);
 
-        $i = rand(1, 15);
+        $i = rand(1, mysqli_num_rows($res));
         while ($row = $res->fetch_assoc())
         {
             $i--;

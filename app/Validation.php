@@ -14,7 +14,7 @@ $date_temp = getdate(strtotime('-1 day'));
 $date_veille = $date_temp['year'] . "-" . $date_temp['mon'] . "-" . $date_temp['mday'];
 
 #DEBUG
-//$date_veille = "2021-04-12";
+$date_veille = "2021-06-05";
 
 // on récupère toute les étapes effectué la veille
 $sql = "SELECT Participation.idCovoitureur AS 'idPassager', Etape.Kilometrage, Voiture.idCovoitureur as 'idConducteur', Conducteur.Nbr_Alveoles AS 'Conducteur_Alveole', Passager.Nbr_Alveoles as 'Passager_Alveole' FROM Participation 
@@ -34,7 +34,7 @@ while ($row = $res->fetch_assoc())
     $idCovoitureur = $row['idPassager'];
     $sql = "UPDATE Covoitureur SET Nbr_Alveoles = $nb WHERE idCovoitureur = $idCovoitureur";
     $GLOBALS['mysqli']->query($sql);
-    echo "#$idCovoitureur \t". $row['Passager_Alveole'] . " => $nb\n"; 
+    echo "#$idCovoitureur \t". $row['Passager_Alveole'] . " => $nb\n";
 
     // on ajoute le nombre de kilomètre au Conducteur en Alvéole
     $nb = $row['Conducteur_Alveole'] + $row['Kilometrage'];

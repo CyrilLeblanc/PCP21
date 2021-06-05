@@ -116,7 +116,7 @@ class Etape
 		$d = 2 * atan2(sqrt($a), sqrt(1 - $a));
 		
 		$distance = $earth_radius * $d;
-		$this->distance = round($distance);
+		$this->distance = round($distance/1000);
 	}
 
 	function get_distance()

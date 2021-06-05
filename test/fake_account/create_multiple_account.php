@@ -12,6 +12,7 @@ if ($is_Confirme == "")
 {
     $is_Confirme = 1;
 }
+$idLigne = readline("Sur l'idLigne [toute] : ");
 
 function clear_dbb()
 {
@@ -26,21 +27,8 @@ function clear_dbb()
     while ($row = $res->fetch_assoc())
     {
         $idCovoitureur = $row['idCovoitureur'];
-
-    // Suppression des Inscription du Covoitureur
-        $sql = "SELECT Inscription.idInscription FROM Inscription \n".
-        "INNER JOIN Covoitureur ON Covoitureur.idCovoitureur = Inscription.idCovoitureur \n".
-        "WHERE Covoitureur.idCovoitureur = $idCovoitureur";
-
-        $res_del = $GLOBALS['mysqli']->query($sql);
-        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
-        {
-            $idInscription = $row_del['idInscription'];
-            $sql = "DELETE FROM Inscription WHERE idInscription = $idInscription";
-            $GLOBALS['mysqli']->query($sql);
-        }
-
-    // Suppression des Etape & Participation
+    
+        // Suppression des Etape & Participation
         $sql = "SELECT Etape.idEtape, Participation.idParticipation FROM Etape \n".
         "INNER JOIN Participation ON Covoitureur.idCovoitureur = Participation.idCovoitureur \n".
         "INNER JOIN Etape ON Etape.idParticipation = Participation.idParticipation\n".
@@ -55,6 +43,20 @@ function clear_dbb()
             DELETE FROM Participation WHERE idParticipation = $idParticipation";
             $GLOBALS['mysqli']->multi_query($sql);
         }
+
+    // Suppression des Inscription du Covoitureur
+        $sql = "SELECT Inscription.idInscription FROM Inscription \n".
+        "INNER JOIN Covoitureur ON Covoitureur.idCovoitureur = Inscription.idCovoitureur \n".
+        "WHERE Covoitureur.idCovoitureur = $idCovoitureur";
+
+        $res_del = $GLOBALS['mysqli']->query($sql);
+        while (mysqli_num_rows($res_del) > 0 && $row_del = $res_del->fetch_assoc())
+        {
+            $idInscription = $row_del['idInscription'];
+            $sql = "DELETE FROM Inscription WHERE idInscription = $idInscription";
+            $GLOBALS['mysqli']->query($sql);
+        }
+
     // Suppression des Inscription & Covoiturage
         $sql = "SELECT Inscription.idInscription, Covoiturage.idCovoiturage FROM Inscription \n".
         "INNER JOIN Covoiturage ON Inscription.idCovoiturage = Covoiturage.idCovoiturage\n".
@@ -105,7 +107,7 @@ clear_csv();
 
 for($i = 0 ; $i < $nb_dummy ; $i++)
 {
-    $test = new Dummy($i+1, $is_Confirme);
+    $test = new Dummy($i+1, $is_Confirme, $idLigne);
     $test->presentation();
     $test->save_csv();
     $test->save_bdd();
