@@ -8,8 +8,6 @@
 		include $GLOBALS['racine'] . 'bootstrap.php';
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupInfosPoint.php';
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupValidate.php';
-		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupValide.php';
-		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupRefuse.php';
 		ini_set('display_errors', 1);   #DEBUG
 		ini_set('display_startup_errors', 1);   #DEBUG
 	?>

@@ -15,3 +15,6 @@ function popupInfosPoint(nom,adresse,ville,latitude,longitude,image){
 	document.getElementById("imagePoint").innerHTML = image;
 }
 
+function idPoint(id){
+	document.getElementById("Valider").setAttribute("value",id);
+}

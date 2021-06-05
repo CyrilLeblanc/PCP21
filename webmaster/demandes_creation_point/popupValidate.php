@@ -1,11 +1,13 @@
 <?php 
     function validerPoint()
     {
-        $Point->validate_Point($value['idPoint_RDV']);
+        $validerPoint = new Point();
+        $validerPoint->validate_Point($_POST['idPoint']);
     }
     function refuserPoint()
     {
-        $Point->del_Point($value['idPoint_RDV']);
+        $refuserPoint = new Point();
+        $refuserPoint->del_Point($_POST['idPoint']);
     }
 ?>
 
@@ -25,13 +27,32 @@
             <!-- POPUP body -->
             <div class="modal-body">
 
+                <form method="post">
+
                     <div class='alert text-center'>
                         <h5>Voulez-vous accepter ou refuser le nouveau Point de RDV ?</h5>
-                            <button class="btn material-icons container bg-success p-2 my-2 w-75 rounded" style="color: white; font-size: 200%;" id="Accepter"
-                            data-toggle="modal" data-target="#popupValide" name="Valider">&#xe92d;</button>
+                        <?php
+                            '<button class="btn material-icons container bg-success p-2 my-2 w-75 rounded" style="color: white; font-size: 200%;" id="Accepter"
+                            onclick="idPoint()" id="Valider" name="Valider">&#xe92d;</button>
                             <button class="btn material-icons container bg-danger p-2 my-2 w-75 rounded" style="color: white; font-size: 200%;" id="Refuser"
-                            data-toggle="modal" data-target="#popupRefuse" name="Refuser">&#xe888;</button>
+                            onclick="idPoint()" id="Refuser" name="Refuser">&#xe888;</button>
+                            <input id="idPoint" name="idPoint" value="" hidden></input>';
+                        ?>
                     </div>
+
+                    <?php
+                        if(isset($_POST['Valider']))
+                        {
+                            validerPoint();
+                        }
+                        elseif(isset($_POST['Refuser']))
+                        {
+                            refuserPoint();
+                        }
+                    ?>
+
+                </form>
+                    
             </div>
         </div>
     </div>
