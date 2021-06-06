@@ -78,17 +78,17 @@
 				echo
 					'<!-- TABLE -->
 					<div class="container overflow-auto" style="font-size: 10px; height: 400px;">
-					<table class="table">
+						<table class="table">
 
 
 					<!-- TABLE Header -->
 					<thead align="center">
-					<tr>
-						<th>Nom</th>
-						<th>Coordonnées</th>
-						<th>Informations</th>
-						<th>Validation</th>
-					</tr>
+						<tr>
+							<th>Nom</th>
+							<th>Coordonnées</th>
+							<th>Informations</th>
+							<th>Validation</th>
+						</tr>
 					</thead>';
 
 				foreach($table as $value)
@@ -121,7 +121,9 @@
 						</tr>
 					</tbody>';
 				}
-				echo '</table>';
+				echo 
+					'	</table>
+					</div>';
 			}
 			
 		?>

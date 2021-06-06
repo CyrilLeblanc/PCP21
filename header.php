@@ -26,19 +26,17 @@
                 <a class="dropdown-item" href="../webmaster/periode_indisponibilite/" style="">Période Indisponibilité</a>
 
               <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../webmaster/demandes_creation_point/">Demandes Création Point RDV</a>
-                <a class="dropdown-item" href="../webmaster/demandes_creation_compte/">Demandes Création Compte</a>  
-
-              <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="../webmaster/modifier_point/">Modifier Point RDV</a>
                 <a class="dropdown-item" href="../webmaster/modifier_covoitureur/">Modifier Covoitureur</a>
-                <a class="dropdown-item" href="../webmaster/modifier_etape/">Modifier Étape</a>
                 <a class="dropdown-item" href="../webmaster/modifier_ligne/">Modifier Ligne</a>
+
+              <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="../webmaster/demandes_creation_point/">Demandes Création Point RDV</a>
+                <a class="dropdown-item" href="../webmaster/demandes_creation_compte/">Demandes Création Compte</a>
 
               <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="../webmaster/creer_nouveau_point/">Créer Nouveau Point RDV</a>
                 <a class="dropdown-item" href="../webmaster/creer_nouveau_covoiturage/">Créer Nouveau Covoiturage</a>
-                <a class="dropdown-item" href="../webmaster/creer_nouvelle_etape/">Créer Nouvelle Étape</a>
                 <a class="dropdown-item" href="../webmaster/creer_nouvelle_ligne/">Créer Nouvelle Ligne</a>
 
             </div>

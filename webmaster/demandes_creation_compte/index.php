@@ -3,7 +3,8 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.php';
+		require_once '../../config.php'; 
+		include $GLOBALS['racine'] . 'bootstrap.php';
 		include './popupInfosCovoitureur.php';
 		include './popupInfosVoiture.php';
 		include './popupAccepter.php';
@@ -36,27 +37,28 @@
 
 			else
 			{
+				echo 
+					'<!-- TABLE -->
+					<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
+						<table class="table">
+						
+					<!-- TABLE Header -->
+					<thead align="center">
+						<tr>
+							<th>Non</th>	
+							<th>Covoitureur</th>
+							<th>Profil</th>
+							<th>Voiture</th>
+							<th>Oui</th>
+						</tr>
+					</thead>';
+
 				foreach($table as $value)
 				{
 					$voiture = $Covoitureur -> get_voiture($value["idCovoitureur"]);
 
 					echo 
-						'<!-- TABLE -->
-							<div class="container overflow-auto" style="font-size: 12px; height: 400px;">
-								<table class="table">
-								
-						<!-- TABLE Header -->
-							<thead align="center">
-								<tr>
-									<th>Non</th>	
-									<th>Covoitureur</th>
-									<th>Profil</th>
-									<th>Voiture</th>
-									<th>Oui</th>
-								</tr>
-							</thead>
-
-						<!-- TABLE Body -->
+						'<!-- TABLE Body -->
 							<tbody align="center" style="height: 100px; overflow: auto;">
 								<tr> 
 									<td>
@@ -86,10 +88,11 @@
 										</div>
 									</td>
 								</tr>	
-							</tbody>
-						</table>
-					</div>';
+							</tbody>';
 				}
+				echo 
+					'	</table>
+					</div>';
 			}
 		?>
 

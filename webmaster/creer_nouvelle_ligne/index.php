@@ -3,12 +3,11 @@
 
 <head>
   <?php 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
     include('../../bootstrap.html');
     require_once "../sql/Point.php";
     require_once "../sql/Ligne.php";
-
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
   ?>
   <title>Création Nouvelle Ligne</title>
 </head>
