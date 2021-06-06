@@ -91,7 +91,7 @@
 		<button class="btn btn-success" type="submit">Se connecter</button>
 		
 	</form>
-	<p><a href='#TODO'><p>J'ai oublié mon mot de passe.</a></br>
+	<p><a href='forget_password/'><p>J'ai oublié mon mot de passe.</a></br>
 	Si vous n'avez pas de compte vous pouvez <a href="../sign_up">vous inscrire</a>.</p>
 
 	</div>

@@ -19,7 +19,7 @@ function connect($idCovoitureur)
 }
 
 
-if($_SESSION['idCovoitureur'] != null)   // connexion par session
+if(isset($_SESSION['idCovoitureur']))   // connexion par session
 {
     echo "Already Connected.<br/>\n";
     connect($_SESSION['idCovoitureur']);
