@@ -2,7 +2,7 @@
   session_start();
   require_once '../verif_session.php';
   ini_set('display_errors', 1);   #DEBUG
-ini_set('display_startup_errors', 1);   #DEBUG
+  ini_set('display_startup_errors', 1);   #DEBUG
 ?>
 
 
