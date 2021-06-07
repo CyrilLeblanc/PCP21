@@ -7,7 +7,8 @@
 		ini_set('display_startup_errors', 1);   #DEBUG
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
-		require_once $GLOBALS['racine'] . 'request/Point.php';
+        include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupAjouterPoint.php'; 
+		require_once $GLOBALS['racine'] . 'request/Ligne.php';
 	?>
 	<title>Points de la Ligne</title>
 </head>
@@ -23,7 +24,7 @@
         </div>
 
         <!-- TABLE -->
-		<div class="container overflow-auto" style="font-size: 10px ;height: 400px; max-width: 2000px;">
+		<div class="container overflow-auto" style="font-size: 10px; height: 400px; max-width: 2000px;">
             <table class="table">
 
                 <!-- TABLE Header -->
@@ -68,14 +69,20 @@
                         }
                         if(isset($_POST['delete']))
                         {
-                           echo 
-                            '<div class="alert alert-success text-center">
-                                <h5><strong>Vous avez supprimé le Point de la Ligne.</strong></h5>
-                            </div>';
+                            //$idPoint = $row['Rang'];
+                            //$sql = "DELETE idPoint_RDV FROM Composition WHERE idPoint_RDV = $idPoint;"
+
+                            echo 
+                                '<div class="alert alert-success text-center">
+                                    <h5><strong>Vous avez supprimé le Point de la Ligne.</strong></h5>
+                                </div>';
                         }
                     ?>
                 </tbody>
             </table>
+        </div>
+        <div align="center">
+            <button class="btn bg-success" style="color: white; font-size: 20px;" data-toggle="modal" data-target="#popupAjouterPoint">Ajouter Point</button>
         </div>
     </div>
 </body>
