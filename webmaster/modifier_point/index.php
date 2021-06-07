@@ -19,7 +19,7 @@
 
 		<div class="container bg-success p-2 my-2 roun#ded" >
 			<a href="../../accueil">
-			<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
+				<button class="btn material-icons" style="color: white; font-size: 250%;">&#xe88a;</button>
 			</a>
 			<h2 class="text-center" style="color: white;">Modifier Point RDV</h2>
 		</div>

@@ -1,4 +1,4 @@
-<div class="bg-success row" style="font-weight: bold; color: white; padding-top: 0.5em; padding-bottom: 0.5em;">
+<div class="bg-success row" style="font-weight: bold; color: white;">
 
   <div class="col-3" align="center">
     <a href="../disconnect.php">

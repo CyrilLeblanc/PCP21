@@ -27,7 +27,6 @@
 		<div class="container overflow-auto" style="font-size: 10px ;height: 400px; max-width: 2000px;">
 		<table class="table">
 
-
 			<!-- TABLE Header -->
 			<thead align="center">
 			<tr>
@@ -37,10 +36,8 @@
 			</tr>
 			</thead>
 
-
 			<!-- TABLE Body -->
 			<tbody align="center" style="height: 100px; overflow: auto;">
-			
 
 				<?php
 					$sql = "SELECT * FROM Ligne";
@@ -54,19 +51,17 @@
 								  ' . $row['Nom'] . ' </div></td>
 							<td>
 								<div style="padding-top: 1em; padding-bottom: 1em;">
+									<a href="./points_ligne.php?idLigne=' . $row['idLigne'] . '">
 									<button class="bg-white border border-white rounded" style="font-weight: bold; color: green;">
-									' . $row['Nbr_Points'] . ' </button></div></td>
+									' . $row['Nbr_Points'] . ' </button></a></div></td>
 							<td>
 								<div style="padding-top: 0.5em; padding-bottom: 0.5em;">
 									<button class="btn material-icons bg-success" style="color: white; font-size: 200%;">&#xe3c9;</button></div></td>
 						</tr>';
 					}
 				?>
-
 			</tbody>
-
 		</table>
-
 		</div>
 	</div>
 </body>
