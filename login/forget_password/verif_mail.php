@@ -1,4 +1,6 @@
 <?php
+
+sleep(1);
 // on va chercher le covoitureur correspondant a l'email demandé
 // si on trouve un covoitureur on créer un token et on l'enregistre dans la bdd
 // on envoi un lien avec en GET le token par mail
@@ -15,7 +17,7 @@ if (!isset($_POST['mail']))
 
 function redirect()
 {
-    header("Location: forget_password.php?redirect=ok");
+    header("Location: index.php?redirect=ok");
     exit;
 }
 
@@ -60,6 +62,10 @@ if ($success)
     $GLOBALS['mysqli']->query($sql);
 } else {
     header("Location: forget_password.php?error=true");
+    exit;
 }
+
+redirect();
+
 
 ?>
