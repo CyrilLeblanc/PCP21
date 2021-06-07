@@ -43,7 +43,7 @@
                         $idLigne = $_GET['idLigne'];
                         $sql = "SELECT Composition.idPoint_RDV, Composition.Rang, Point_RDV.Nom, Point_RDV.Latitude, Point_RDV.Longitude FROM Composition 
                             INNER JOIN Point_RDV ON Composition.idPoint_RDV = Point_RDV.idPoint_RDV
-                            WHERE Composition.idLigne = $_GET['idLigne']
+                            WHERE Composition.idLigne = $idLigne
                             ORDER BY Composition.Rang;";
                         $res = $GLOBALS['mysqli']->query($sql);
                         while ($row = $res->fetch_assoc())
@@ -52,7 +52,7 @@
                             '<tr> 
                                 <td>
                                     <div style="padding-top: 1em; padding-bottom: 1em;">
-                                        ' . $row['Rang'] . ' </div></td>
+                                        ' . $row['Rang'] . '</div></td>
                                 <td>
                                     <div style="padding-top: 1em; padding-bottom: 1em;">
                                         ' . $row['Nom'] . '</div></td>
@@ -61,10 +61,17 @@
                                         <a href="https://www.google.com/maps/place/' . $row["Latitude"] . ',' . $row["Longitude"] . '" onclick="window.open(this.href); return false;"" 
                                             style="font-weight: bold; color: green;">' . $row["Latitude"] . '<br/>' . $row["Longitude"] . ' </a></div></td>
                                 <td>
-                                    <div style="padding-top: 0.5em; padding-bottom: 0.5em;">
-                                        <button class="btn material-icons bg-success" style="color: white; font-size: 200%;"
-                                        onclick="popupSupprPoint(`' . $row['idPoint_RDV'] . '`)" data-toggle="modal" data-target="#popupSupprPoint" >&#xe872;</button></div></td>
+                                    <form method="post"><div style="padding-top: 0.5em; padding-bottom: 0.5em;">
+                                        <button type="submit" name="delete" class="btn material-icons bg-success" style="color: white; font-size: 200%;"
+                                            >&#xe872;</button></div></form></td>
                             </tr>';
+                        }
+                        if(isset($_POST['delete']))
+                        {
+                           echo 
+                            '<div class="alert alert-success text-center">
+                                <h5><strong>Vous avez supprimé le Point de la Ligne.</strong></h5>
+                            </div>';
                         }
                     ?>
                 </tbody>
