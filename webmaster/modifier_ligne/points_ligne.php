@@ -9,7 +9,6 @@
 		include $GLOBALS['racine'] . 'bootstrap.php';
         require_once $GLOBALS['racine'] . 'request/Ligne.php';
         require_once $GLOBALS['racine'] . 'request/Point.php';
-        include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupAjouterPoint.php'; 
 	?>
 	<title>Points de la Ligne</title>
 </head>
