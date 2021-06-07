@@ -7,8 +7,9 @@
 		ini_set('display_startup_errors', 1);   #DEBUG
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
+        require_once $GLOBALS['racine'] . 'request/Ligne.php';
+        require_once $GLOBALS['racine'] . 'request/Point.php';
         include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupAjouterPoint.php'; 
-		require_once $GLOBALS['racine'] . 'request/Ligne.php';
 	?>
 	<title>Points de la Ligne</title>
 </head>

@@ -8,6 +8,7 @@
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
 		require_once $GLOBALS['racine'] . 'request/Point.php';
+		require_once $GLOBALS['racine'] . 'request/Ligne.php';
 	?>
 	<title>Modifier Ligne</title>
 </head>
