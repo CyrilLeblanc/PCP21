@@ -21,7 +21,7 @@ if (mysqli_num_rows($res) == 0)
     header("Location: index.php?erreur=true");
     exit;
 } else {
-    header("Location: ../../?password_changed=true");
+    header("Location: ../?password_changed=true");
     exit;
 }
 
