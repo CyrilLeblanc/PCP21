@@ -21,16 +21,7 @@ $GLOBALS['mysqli']->query($sql);
 // vérification de la modification
 $sql = "SELECT idCovoitureur FROM Covoitureur WHERE Mot_De_Passe = '$password'";
 $res = $GLOBALS['mysqli']->query($sql);
-if ($res->mysqli_num_rows == 0)
-{
-    echo 'réussi';
-} else {
-    echo 'échoué';
-}
-
-
-exit;
-if ($res->mysqli_num_rows == 0)
+if ($res->mysqli_num_rows() == 0)
 {
     header("Location: index.php?erreur=true");
     exit;
