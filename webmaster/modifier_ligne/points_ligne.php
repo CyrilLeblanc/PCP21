@@ -43,7 +43,7 @@
                         $idLigne = $_GET['idLigne'];
                         $sql = "SELECT Composition.idPoint_RDV, Composition.Rang, Point_RDV.Nom, Point_RDV.Latitude, Point_RDV.Longitude FROM Composition 
                             INNER JOIN Point_RDV ON Composition.idPoint_RDV = Point_RDV.idPoint_RDV
-                            WHERE Composition.idLigne = 1
+                            WHERE Composition.idLigne = $_GET['idLigne']
                             ORDER BY Composition.Rang;";
                         $res = $GLOBALS['mysqli']->query($sql);
                         while ($row = $res->fetch_assoc())
