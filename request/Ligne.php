@@ -36,11 +36,7 @@ class Ligne
                 $GLOBALS['mysqli']->query($sql);
             }
         }
-    }
-
-    function verif_compo($idPoint_RDV)
-    {
-        $sql = "SELECT * FROM ";
+        $this->update($idLigne);
     }
 
     function add_compo($idPoint_RDV, $rang, $idLigne)
@@ -69,6 +65,25 @@ class Ligne
             }
             $last_rang = (int)$row['Rang'];
         }
+        $this->update($idLigne);
+    }
+
+
+    function update_nbr_Point($idLigne)
+    # Permet de mettre à jour le nombre de points dans la Table Ligne en fonction de l'idLigne
+    {
+        // on compte le nombre de points
+        $nbr_Point = 0;
+        $sql = "SELECT * FROM Composition WHERE idLigne = $idLigne;";
+        $res = $GLOBALS['mysqli']->query($sql);
+
+        while ($row = $res->fetch_assoc())
+        {
+            $nbr_Point++;
+        }
+
+        $sql = "UPDATE Ligne SET Nbr_Points = $nbr_Point WHERE idLigne = $idLigne";
+        return $GLOBALS['mysqli']->query($sql);
     }
 }
 ?>

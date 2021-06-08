@@ -10,7 +10,13 @@
         require_once $GLOBALS['racine'] . 'request/Ligne.php';
         require_once $GLOBALS['racine'] . 'request/Point.php'; 
 	?>
-    <script src="./popup.js"></script>
+    <script>
+        function popupModifPoint(nom,idPoint)
+        {
+            document.getElementById("nomPoint").setAttribute("value",nom);
+            document.getElementById("idPoint").setAttribute("value",idPoint);
+        }
+    </script>
 	<title>Points de la Ligne</title>
 </head>
 
@@ -34,7 +40,6 @@
                         <th>Rang Point</th>
                         <th>Nom Point</th>
                         <th>Coordonnées Point</th>
-                        <th>Supprimer Point</th>
                     </tr>
                 </thead>
 
@@ -43,6 +48,7 @@
                 
                     <?php
                         $idLigne = $_GET['idLigne'];
+                        $nomLigne = $_GET['Nom'];
                         $sql = "SELECT Composition.idPoint_RDV, Composition.Rang, Point_RDV.Nom, Point_RDV.Latitude, Point_RDV.Longitude FROM Composition 
                             INNER JOIN Point_RDV ON Composition.idPoint_RDV = Point_RDV.idPoint_RDV
                             WHERE Composition.idLigne = $idLigne
@@ -63,12 +69,7 @@
                                     <div style="padding-top: 1em; padding-bottom: 1em;">
                                         <a href="https://www.google.com/maps/place/' . $row["Latitude"] . ',' . $row["Longitude"] . '" onclick="window.open(this.href); return false;"" 
                                             style="font-weight: bold; color: green;">' . $row["Latitude"] . '<br/>' . $row["Longitude"] . ' </a></div></td>
-                                <td>
-                                    <form method="post"><div style="padding-top: 0.5em; padding-bottom: 0.5em;">
-                                        <button type="submit" name="delete" class="btn material-icons bg-success" style="color: white; font-size: 200%;"
-                                            >&#xe872;</button></div></form></td>
                             </tr>';
-                            $idPoint = $row["idPoint_RDV"];
                         }
                         if(isset($_POST['delete']))
                         {
@@ -101,7 +102,7 @@
                 <tr>
                     <th>Nom</th>
                     <th>Coordonnées</th>
-                    <th>Ajouter</th>
+                    <th>Modifier</th>
                 </tr>
                 </thead>
 
@@ -129,14 +130,14 @@
                                     <td> 
                                         <div style="padding-top: 0.5em; padding-bottom: 0.5em;">
                                             <button class="btn material-icons bg-success" style="color: white; font-size: 200%;"
-                                            onclick="popupAjouterPoint(`' . $value["Nom"] . '`,`' . $value["idPoint_RDV"] . '`)"
-                                            data-toggle="modal" data-target="#popupAjouterPoint">&#xe148;</button></div></td>
+                                            onclick="popupModifPoint(`' . $value["Nom"] . '`,`' . $value["idPoint_RDV"] . '`)"
+                                            data-toggle="modal" data-target="#popupModifPoint">&#xf1c2;</button></div></td>
                                         
                                         <input value="' . $value["idPoint_RDV"] . '" id="idPoint_RDV" hidden></input>
                                 </tr>';
                         }
                     ?>
-                    <?php include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupAjouterPoint.php';?>
+                    <?php include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupModifPoint.php';?>
 
                 </tbody>
             </table>

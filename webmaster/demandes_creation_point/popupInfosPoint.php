@@ -20,32 +20,32 @@
 
                 <div class="form-group" align="center">
                     <label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2 w-100" id="nomPoint" name="nomPoint" value="" disabled></input>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="nomPoint" name="nomPoint" value="" readonly></input>
 
                 </div>
 
                 <div class="form-group" align="center">
                     <label for="adressePoint" class="mr-sm-2">Adresse : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2 w-100" id="adressePoint" name="adressePoint" value="" disabled></input>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="adressePoint" name="adressePoint" value="" readonly></input>
 
                 </div>
 
                 
                 <div class="form-group" align="center">
                     <label for="villePoint" class="mr-sm-2">Ville : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2 w-100" id="villePoint" name="villePoint" value="" disabled></input>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="villePoint" name="villePoint" value="" readonly></input>
 
                 </div>
 
                 <div class="form-group" align="center">
                     <label for="latitudePoint" class="mr-sm-2">Latitude : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2 w-100" id="latitudePoint" name="latitudePoint" value="" disabled></input>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="latitudePoint" name="latitudePoint" value="" readonly></input>
 
                 </div>
 
                 <div class="form-group" align="center">
                     <label for="longitudePoint" class="mr-sm-2">Longitude : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2 w-100" id="longitudePoint" name="longitudePoint" value="" disabled></input>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="longitudePoint" name="longitudePoint" value="" readonly></input>
 
                 </div>
 
@@ -54,11 +54,6 @@
                     <img src="" id="lienImage" class="img-fluid rounded" width="200"></image><br/>
 
                 </div>
-            </div>
-
-            <!-- POPUP footer -->
-            <div class="modal-footer justify-content-center">
-                <button type="submit" name="submit" class="btn btn-success">Enregistrer</button>
             </div>
 
         </form>
