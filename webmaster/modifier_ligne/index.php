@@ -62,13 +62,6 @@
 		</table>
 		</div>
 	</div>
-	<?php include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupAjouterPoint.php';?>
 </body>
 
 </html>
-
-<!--
-	<div style="padding-top: 0.5em; padding-bottom: 0.5em;">
-									<button class="btn material-icons bg-success" style="color: white; font-size: 200%;"
-									onclick="popupModifPoint(`' . $value["Nom"] . '`,`' . $value["Adresse"] . '`,`' . $value["Ville"] . '`,`' . $value["Latitude"] . '`,`' . $value["Longitude"] . '`,`' . $value["Point_Image"] . '`,`' . $value["idPoint_RDV"] . '`)" 
-									data-toggle="modal" data-target="#popupModifPoint">&#xe3c9;</button></div>

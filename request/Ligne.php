@@ -38,10 +38,15 @@ class Ligne
         }
     }
 
+    function verif_compo($idPoint_RDV)
+    {
+        $sql = "SELECT * FROM ";
+    }
+
     function add_compo($idPoint_RDV, $rang, $idLigne)
     # Permet d'ajouter un point d'une ligne tout en gardant une cohérence dans les rang
     {
-        if ($rang > 1)
+        if ($rang >= 1)
         {
             $rang--;
         }
