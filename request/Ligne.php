@@ -1,10 +1,10 @@
 <?php
 
-class Point
+class Ligne
 {
     function __construct()
     {
-        require_once "../config.php";
+        require_once $GLOBALS['racine']."config.php";
     }
-
+}
 ?>

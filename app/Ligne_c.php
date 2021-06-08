@@ -100,12 +100,6 @@ class Ligne
 		$this->del_empty();
 	}
 
-	function inject_covoitureur($tab_covoitureur)
-	{
-		
-	}
-
-
 	function del_empty()
 	{
 		// pour chaque étape on regarde si le point A a du monde

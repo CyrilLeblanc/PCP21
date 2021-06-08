@@ -1,5 +1,5 @@
 <?php
-require_once "../config.php";
+require_once "../../config.php";
 
 echo "########\t Création de compte utilisateur \t########\n";
 echo "(Les valeurs dans les [] sont des valeurs par défaut si jamais les valeurs ne sont pas défini)\n\n";

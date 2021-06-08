@@ -100,9 +100,10 @@ if(isset($_POST['email']) && isset($_POST['password']))     // connexion via for
             // ajout du Token dans la BDD
             $sql = "INSERT INTO Token (Content, Date_Creation, Date_Fin, idCovoitureur) ".
             "VALUES ('$token', '$date_debut', '$date_fin', $idCovoitureur)";
-
+            echo "$sql\n";
+            
             $GLOBALS['mysqli']->query($sql);
-
+            
             // ajout du token dans les Cookies
             setcookie('token',$token,time()+3600*24*30, '/');        #INTEGRATION
         }
@@ -115,15 +116,14 @@ if(isset($_POST['email']) && isset($_POST['password']))     // connexion via for
 #   Gestion de connexion par Token  #
 #####################################
 
-elseif(isset($_COOKIE['token']))
+elseif($_COOKIE['token'] != null)
 {
-    echo "Connection via Token.<br/>\n";
+    #echo "Connection via Token.<br/>\n";
     $token = $_COOKIE['token'];     // on récupère le token dans les cookies
 
     // on le compare avec ceux de la base de donnée pour trouver l'idCovoitureur qui correpond
     $sql = "SELECT idCovoitureur, Date_Fin FROM Token WHERE Content = '$token'";
     $res = $GLOBALS['mysqli']->query($sql);
-    var_dump($res);
     while ($row = $res->fetch_assoc())
     // si on trouve un token qui correspond dans la BDD
     {
