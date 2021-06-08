@@ -180,6 +180,11 @@ class Covoitureur
         $sql = "SELECT * FROM Inscription WHERE idInscription = $idInscription;";
         $res = $GLOBALS['mysqli'] ->query($sql);
         
+        if (mysqli_num_rows($res) == 0)
+        {
+            return false;
+        }
+
         while ($row = $res->fetch_assoc())
         {
             return $row;

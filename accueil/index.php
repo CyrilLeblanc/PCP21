@@ -1,5 +1,6 @@
 <?php
   session_start();
+  $_SESSION['idCovoitureur'] = 1;
   require_once '../verif_session.php';
   ini_set('display_errors', 1);   #DEBUG
 ini_set('display_startup_errors', 1);   #DEBUG
