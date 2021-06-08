@@ -5,11 +5,11 @@
 	<?php 
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
-		include './popupInfosCovoitureur.php';
-		include './popupInfosVoiture.php';
-		include './popupAccepter.php';
-		include './popupRefuser.php';
-		require_once "../../request/Covoitureur.php"; 
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosCovoitureur.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosVoiture.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupAccepter.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupRefuser.php';
+		require_once $GLOBALS['racine'] . 'request/Covoitureur.php';
 	?>
 	<script src="./popup.js"></script>
 	<title>Demandes Création Compte</title>
@@ -63,7 +63,7 @@
 								<tr> 
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
+											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" name="Refuser" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
 										</div>
 
 									<td> 
@@ -84,7 +84,7 @@
 				
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
+											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" name="Accepter" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
 										</div>
 									</td>
 								</tr>	
