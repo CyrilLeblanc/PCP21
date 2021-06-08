@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+require_once '../config.php';
+
 $idCovoitureur = $_SESSION['idCovoitureur'];
 
 $Nom = $_POST['Nom'];
@@ -18,7 +20,7 @@ $mdp = $_POST['MotDePasseActuelle'];
 $NouveauMDP = $_POST['NouvMotDePasse'];
 $ConfirmeMDP = $_POST['ConfMotDePasse'];
 
-$PointFav = $_POST[''];
+$PointFav = $_POST['PointFavori'];
 
 //Modifier information personnelle
 

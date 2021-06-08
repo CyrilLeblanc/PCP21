@@ -9,9 +9,10 @@ ini_set('display_startup_errors', 1);   #DEBUG
 $adress = '127.0.0.1';      // addresse du serveur. En cas d'erreur mettre 'localhost'
 $user = 'root';            // nom d'utilisateur
 $password = '';         // mot de passe utilisateur
-$bdd = 'PCP21';       // nom de la base de donnée
+$bdd = 'mydb';       // nom de la base de donnée
 
-$GLOBALS['racine'] = "/var/www/html/PCP21/";    // racine du projet
+//$GLOBALS['racine'] = "/var/www/html/PCP21/";    // racine du projet
+$GLOBALS['racine'] = "C:/xampp/htdocs/PCP21/";
 
 // ====================================================================
 // Ne rien changer pour la suite.

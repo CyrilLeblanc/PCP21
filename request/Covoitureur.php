@@ -212,6 +212,142 @@ class Covoitureur
             return $stack;
     
     }
+
+    function get_info_covoiturage($idCovoiturage)
+    {
+            $sql = "SELECT * FROM Participation WHERE idCovoiturage = $idCovoiturage;";
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    
+    }
+
+    function get_info_prochains_covoiturages($idCovoitureur)
+    {
+        $sql = "SELECT  Participation.Date, Participation.is_Conducteur, Participation.idCovoiturage, Etape.Kilometrage, Covoitureur.Nom, ".
+        "Covoitureur.Prenom, PointA.Nom AS PointA_Nom, PointB.Nom AS PointB_Nom ".
+        "FROM Covoitureur, Participation ".
+        "INNER JOIN Etape ON Participation.idParticipation = Etape.idParticipation ".
+        "INNER JOIN Point_RDV AS PointA ON Etape.idPoint_RDV_A = PointA.idPoint_RDV ".
+        "INNER JOIN Point_RDV AS PointB ON Etape.idPoint_RDV_B = PointB.idPoint_RDV ".
+        "WHERE Covoitureur.idCovoitureur=Participation.idCovoitureur AND Covoitureur.idCovoitureur=$idCovoitureur AND Participation.is_Valide_Systeme=1 ".
+        "ORDER BY Date;";
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    
+    }
+
+    function get_is_conduct($idCovoitureur)
+    {
+        $sql = "SELECT is_Conducteur FROM Participation WHERE idCovoitureur = $idCovoitureur;";
+        $res = $GLOBALS['mysqli'] ->query($sql);
+        while($row = $res->fetch_assoc())
+        {
+            if($row['is_Conducteur'] == 0)
+            {
+                return '-';
+            }
+            else
+            {
+                return '+';
+            }
+        }
+     
+    }
+
+    function get_NbrLigne($idCovoiturage)
+    {
+        $sql = "SELECT Ligne.Nbr_Points ".
+        "FROM participation ".
+        "INNER JOIN Covoiturage ON Participation.idCovoiturage = Covoiturage.idCovoiturage ".
+        "INNER JOIN Ligne ON covoiturage.idLigne = Ligne.idLigne ".
+        "WHERE Participation.idCovoiturage=$idCovoiturage;";
+        $res = $GLOBALS['mysqli'] ->query($sql);
+        $stack = array();
+
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    }
+
+    function get_info_covoiturage_is_conduct($idCovoiturage)
+    {
+        $sql = "SELECT Participation.Date, Participation.is_Conducteur, Etape.Kilometrage, Covoitureur.Nom, Covoitureur.Prenom, Covoitureur.Utilisateur_Image, Covoiturage.idCovoiturage, ".
+        "PointA.Nom AS PointA_Nom, PointB.Nom AS PointB_Nom ".
+        "FROM Covoiturage, Covoitureur, Participation ".
+        "INNER JOIN Etape ON Participation.idParticipation = Etape.idParticipation ".
+        "INNER JOIN Point_RDV AS PointA ON Etape.idPoint_RDV_A = PointA.idPoint_RDV ".
+        "INNER JOIN Point_RDV AS PointB ON Etape.idPoint_RDV_B = PointB.idPoint_RDV ".
+        "WHERE Covoitureur.idCovoitureur=Participation.idCovoitureur AND Participation.idCovoiturage=$idCovoiturage AND Participation.is_Valide_Systeme=1 ".
+        "AND participation.is_Conducteur=1 ".
+        "ORDER BY Date;";
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    
+    }
+
+    function get_info_covoiturage_is_no_conduct($idCovoiturage)
+    {
+        $sql = "SELECT Participation.Date, Participation.is_Conducteur, Etape.Kilometrage, Covoitureur.Nom, Covoitureur.Prenom, Covoiturage.idCovoiturage, ".
+        "PointA.Nom AS PointA_Nom, PointB.Nom AS PointB_Nom ".
+        "FROM Covoiturage, Covoitureur, Participation ".
+        "INNER JOIN Etape ON Participation.idParticipation = Etape.idParticipation ".
+        "INNER JOIN Point_RDV AS PointA ON Etape.idPoint_RDV_A = PointA.idPoint_RDV ".
+        "INNER JOIN Point_RDV AS PointB ON Etape.idPoint_RDV_B = PointB.idPoint_RDV ".
+        "WHERE Covoitureur.idCovoitureur=Participation.idCovoitureur AND Participation.idCovoiturage=$idCovoiturage AND Participation.is_Valide_Systeme=1 ".
+        "AND participation.is_Conducteur=0 ".
+        "ORDER BY Date;";
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    
+    }
+
+    function get_info_prochain_covoiturage($idCovoiturage)
+    {
+        $sql = "SELECT Participation.Date, Participation.is_Conducteur, Etape.Kilometrage, Covoitureur.Nom, Covoitureur.Prenom, Covoiturage.idCovoiturage, ".
+        "PointA.Nom AS PointA_Nom, PointB.Nom AS PointB_Nom ".
+        "FROM Covoiturage, Covoitureur, Participation ".
+        "INNER JOIN Etape ON Participation.idParticipation = Etape.idParticipation ".
+        "INNER JOIN Point_RDV AS PointA ON Etape.idPoint_RDV_A = PointA.idPoint_RDV ".
+        "INNER JOIN Point_RDV AS PointB ON Etape.idPoint_RDV_B = PointB.idPoint_RDV ".
+        "WHERE Covoitureur.idCovoitureur=Participation.idCovoitureur AND Participation.idCovoiturage=$idCovoiturage AND Participation.is_Valide_Systeme=1 ".
+        "ORDER BY Date;";
+        
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    
+    }
 }
 
 ?>
