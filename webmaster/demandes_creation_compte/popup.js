@@ -26,3 +26,15 @@ function popupInfosVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
 
     document.getElementById("lienImageVoiture").setAttribute("src",voiture_image);
 }
+
+function popupAccepter(id)
+{
+    document.getElementById("idCovoitureur").setAttribute("value",id);
+}
+
+function popupRefuser(idCovoitureur,idVoiture)
+{
+    document.getElementById("idCovoitureur").setAttribute("value",idCovoitureur);
+
+    document.getElementById("idVoiture").setAttribute("value",idVoiture);
+}

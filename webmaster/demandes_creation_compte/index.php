@@ -4,20 +4,30 @@
 <head>
 	<?php 
 		require_once '../../config.php'; 
+		require_once $GLOBALS['racine'] . 'request/Covoitureur.php';
 		include $GLOBALS['racine'] . 'bootstrap.php';
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosCovoitureur.php';
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosVoiture.php';
-		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupAccepter.php';
-		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupRefuser.php';
-		require_once $GLOBALS['racine'] . 'request/Covoitureur.php';
 	?>
 	<script src="./popup.js"></script>
 	<title>Demandes Création Compte</title>
 </head>
 
 <body>
+	<?php 
+		if(isset($_POST['Refuser']))
+		{
+			$delCovoitureur = new Covoitureur();
+			$delCovoitureur->del_Covoitureur($_POST['idCovoitureur']);
+			var_dump($delCovoitureur);
+		}
+		if(isset($_POST['Accepter']))
+		{
+			$addCovoitureur = new Covoitureur();
+			$addCovoitureur->validate_Covoitureur($_POST['idCovoitureur']);
+		}
+	?>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
-
 
 	<div class="container bg-success p-2 my-2 rounded" >
 		<a href="../../accueil">
@@ -63,7 +73,8 @@
 								<tr> 
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" name="Refuser" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
+											<button type="submit" class="btn material-icons p-0" style="color: red; font-size: 200%;"
+											onclick="popupRefuser(`' . $value["idCovoitureur"] . '`,`' . $voiture["idVoiture"] . '`)" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
 										</div>
 
 									<td> 
@@ -84,7 +95,8 @@
 				
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" name="Accepter" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
+											<button type="submit" class="btn material-icons p-0" style="color: green; font-size: 200%;"
+											onclick="popupAccepter(`' . $value["idCovoitureur"] . '`)" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
 										</div>
 									</td>
 								</tr>	
@@ -93,6 +105,10 @@
 				echo 
 					'	</table>
 					</div>';
+			
+				include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupRefuser.php';
+				include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupAccepter.php';
+
 			}
 		?>
 

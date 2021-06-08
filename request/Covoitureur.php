@@ -34,8 +34,7 @@ class Covoitureur
 
 
 
-    function add_user($Nom, $Prenom, $Utilisateur_image, 
-    $Num_Telephone, $Email, $Mot_De_Passe, $idPoint_RDV)
+    function add_user($Nom, $Prenom, $Utilisateur_image,$Num_Telephone, $Email, $Mot_De_Passe, $idPoint_RDV)
     {
         $sql = 'INSERT INTO Covoitureur (Nom, Prenom, Utilisateur_image, Num_Telephone, Email, Mot_De_Passe, idPoint_RDV) 
                 VALUES ("'. $Nom .'", "'. $Prenom .'", "'. $Utilisateur_image .'", "'. $Num_Telephone .'", "'. $Email .'",

@@ -4,8 +4,6 @@
 
 <head>
 	<?php 
-		ini_set('display_errors', 1);   #DEBUG
-		ini_set('display_startup_errors', 1);   #DEBUG
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
         require_once $GLOBALS['racine'] . 'request/Ligne.php';
