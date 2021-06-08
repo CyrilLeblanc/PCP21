@@ -2,13 +2,12 @@
 <html>
 
 <head>
-  <?php 
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    include('../../bootstrap.html');
-    require_once "../sql/Point.php";
-    require_once "../sql/Ligne.php";
-  ?>
+  <?php
+		require_once '../../config.php'; 
+		include $GLOBALS['racine'] . 'bootstrap.php';
+		require_once $GLOBALS['racine'] . 'request/Point.php';
+		require_once $GLOBALS['racine'] . 'request/Ligne.php';
+	?>
   <title>Création Nouvelle Ligne</title>
 </head>
 

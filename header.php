@@ -36,7 +36,6 @@
 
               <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="../webmaster/creer_nouveau_point/">Créer Nouveau Point RDV</a>
-                <a class="dropdown-item" href="../webmaster/creer_nouveau_covoiturage/">Créer Nouveau Covoiturage</a>
                 <a class="dropdown-item" href="../webmaster/creer_nouvelle_ligne/">Créer Nouvelle Ligne</a>
 
             </div>

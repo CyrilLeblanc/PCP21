@@ -3,10 +3,11 @@
 
 <head>
 	<?php 
-		include '../../bootstrap.php';
-		include './popupModifCovoitureur.php';
-		include './popupModifVoiture.php';
-		require_once "../../request/Covoitureur.php"; 
+		require_once '../../config.php'; 
+		include $GLOBALS['racine'] . 'bootstrap.php';
+		include $GLOBALS['racine'] . 'webmaster/modifier_covoitureur/popupModifCovoitureur.php'; 
+		include $GLOBALS['racine'] . 'webmaster/modifier_covoitureur/popupModifVoiture.php'; 
+		require_once $GLOBALS['racine'] . 'request/Covoitureur.php'; 
 	?>
 	<script src="./popup.js"></script>
 	<title>Modifier Covoitureur</title>
