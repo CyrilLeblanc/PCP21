@@ -5,11 +5,11 @@
 	<?php 
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
-		include './popupInfosCovoitureur.php';
-		include './popupInfosVoiture.php';
-		include './popupAccepter.php';
-		include './popupRefuser.php';
-		require_once "../../request/Covoitureur.php"; 
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosCovoitureur.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosVoiture.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupAccepter.php';
+		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupRefuser.php';
+		require_once $GLOBALS['racine'] . 'request/Covoitureur.php';
 	?>
 	<script src="./popup.js"></script>
 	<title>Demandes Création Compte</title>
