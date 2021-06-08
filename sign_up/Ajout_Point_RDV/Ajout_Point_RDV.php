@@ -17,6 +17,9 @@
 <input type="radio"
   name="choix1"
   value="choix1"> Utiliser un point existant déjà
+
+
+
   	<br>
 <input type="radio"
   name="choix2"

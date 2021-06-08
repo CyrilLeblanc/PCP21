@@ -1,6 +1,5 @@
 <?php
-include('./bootstrap.php');
-include('./config.php');
+include('../../config.php');
 
 $marque = $_POST['marque'];
 $modele = $_POST['modele'];
@@ -12,5 +11,5 @@ $sql = "INSERT INTO `voiture`(`idVoiture`, `Modele`, `Marque`, `Annee`, `Couleur
 		VALUES (NULL,'$modele','$marque','$annee','$couleur',$nbr_Place,NULL,NULL)";
 
 $mysqli->query($sql);
-header("Location: Ajout_Point_RDV.php");
+header("Location: ../Ajout_Point_RDV/Ajout_Point_RDV.php");
 ?>
