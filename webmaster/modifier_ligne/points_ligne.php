@@ -8,7 +8,11 @@
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
         require_once $GLOBALS['racine'] . 'request/Ligne.php';
+<<<<<<< HEAD
         require_once $GLOBALS['racine'] . 'request/Point.php'; 
+=======
+        require_once $GLOBALS['racine'] . 'request/Point.php';
+>>>>>>> 2764e8fddca078c5e4fc4ba962c01830fadb0086
 	?>
 	<title>Points de la Ligne</title>
 </head>

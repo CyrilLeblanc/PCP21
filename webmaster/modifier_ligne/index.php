@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<?php 
+	<?php
 		ini_set('display_errors', 1);   #DEBUG
 		ini_set('display_startup_errors', 1);   #DEBUG
 		require_once '../../config.php'; 
@@ -65,6 +65,7 @@
 		</table>
 		</div>
 	</div>
+	<?php include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupAjouterPoint.php';?>
 </body>
 
 </html>
