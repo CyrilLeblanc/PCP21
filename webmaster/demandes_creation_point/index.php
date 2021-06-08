@@ -34,6 +34,7 @@
 	<?php
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupInfosPoint.php';
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_point/popupValidate.php';
+
 		if (isset($_GET['success']) && $_GET['success'] != "")
 		{
 			// on gère les message de validation et de suppression des points
@@ -52,8 +53,6 @@
 					</div>";
 			}
 		}
-	
-	
 	?>
 	<div class="container p-3 my-3 border shadow rounded" align="center">
 

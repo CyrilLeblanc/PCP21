@@ -36,7 +36,7 @@ class Ligne
                 $GLOBALS['mysqli']->query($sql);
             }
         }
-        $this->update($idLigne);
+        $this->update_nbr_Point($idLigne);
     }
 
     function add_compo($idPoint_RDV, $rang, $idLigne)
@@ -65,7 +65,7 @@ class Ligne
             }
             $last_rang = (int)$row['Rang'];
         }
-        $this->update($idLigne);
+        $this->update_nbr_Point($idLigne);
     }
 
 

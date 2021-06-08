@@ -1,13 +1,31 @@
 <?php			
-    /*function submitPoint()
+    function addPoint()
     {
         if(isset($_POST['rangPoint']))
         {
-            $Ajouter_Point = new Ligne();
-            $Ajouter_Point->add_compo($_POST['idPoint'],$_POST['rangPoint'],$_GET['idLigne']);
-            var_dump($Ajouter_Point);
+            $addPoint = new Ligne();
+            $addPoint->add_compo($_POST['idPoint'],$_POST['rangPoint'],$_GET['idLigne']);
+            var_dump($addPoint);
+            echo 
+                '<div class="alert alert-success text-center">
+                    <h5><strong>Le Point à bien été ajouté à la Ligne.</strong></h5>
+                </div>';
         }
-    }*/
+    }
+    function deletePoint()
+    {
+        if(isset($_POST['delete']))
+        {
+            $delPoint = new Ligne();
+            $delPoint->delete_compo($_GET['idLigne'],$_POST['idPoint']);
+            var_dump($delPoint);
+            echo 
+                '<div class="alert alert-danger text-center">
+                    <h5><strong>Le Point à bien été supprimé de la Ligne.</strong></h5>
+                </div>';
+            
+        }
+    }
 ?>
 
 <!-- POPUP -->
@@ -31,7 +49,7 @@
                 <div class="row">
                     <div class="col-6 border-right">
                         <h6 class="container text-danger font-weight-bold rounded p-2 my-2">Supprimer Point</h6>
-                        <form class="ajouterPoint" method="post">                           
+                        <form class="deletePoint" method="post">                           
                             <div>
                                 <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
                             </div>
@@ -58,14 +76,17 @@
                         </form>
                     </div>
                 </div>
+                <?php
+                    if(isset($_POST['add']))
+                    {
+                        addPoint();
+                    }
+                    if(isset($_POST['delete']))
+                    {
+                        deletePoint();
+                    }
+                ?>
             </div>
-                
-                    <?php
-                        /*if(isset($_POST['submit']))
-                        {
-                            submitPoint();
-                        }*/
-                    ?>
         </div>
     </div>
 </div>

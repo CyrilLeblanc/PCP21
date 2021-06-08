@@ -71,16 +71,6 @@
                                             style="font-weight: bold; color: green;">' . $row["Latitude"] . '<br/>' . $row["Longitude"] . ' </a></div></td>
                             </tr>';
                         }
-                        if(isset($_POST['delete']))
-                        {
-                            $delPoint = new Ligne();
-                            $delPoint->delete_compo($idLigne,$idPoint);
-                            echo 
-                                '<div class="alert alert-success text-center">
-                                    <h5><strong>Le Point à bien été ajoué à la Ligne.</strong></h5>
-                                </div>';
-                            
-                        }
                     ?>
                 </tbody>
             </table>
@@ -90,7 +80,7 @@
 
         <div align="center">
             <div class="container bg-success p-2 my-2 rounded" >
-                <h3 class="text-center" style="color: white;">Ajouter un Point à la Ligne </br> "<?php echo $_GET['Nom']; ?>"</h3>
+                <h3 class="text-center" style="color: white;">Liste des Points disponibles</h3>
             </div>
             <!-- TABLE -->
             <div class="container overflow-auto" style="font-size: 12px; height: 450px;">
