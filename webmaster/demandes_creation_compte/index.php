@@ -63,7 +63,7 @@
 								<tr> 
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
+											<button class="btn material-icons p-0" style="color: red; font-size: 200%;" name="Refuser" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
 										</div>
 
 									<td> 
@@ -84,7 +84,7 @@
 				
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
-											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
+											<button class="btn material-icons p-0" style="color: green; font-size: 200%;" name="Accepter" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
 										</div>
 									</td>
 								</tr>	
