@@ -6,11 +6,12 @@
 	<script type="checkbox"></script>
 	<title>Inscription - Covoiturage Participatif</title>
 	<?php include('../bootstrap.php') ?>
+  <?php include('../config.php') ?>
 </head>
 <body class="bg-success">
 <div class="container rounded shadow border bg-white">
   <h1>Inscription</h1>
-    <form method="post" action="./Sign_Up/Ajout_Utilisateur/Form_Ajout_Utilisateur.php" class="form-group">
+    <form method="post" action="./Ajout_Utilisateur/Form_Ajout_Utilisateur.php" class="form-group">
     <div class="form-group">
       <label for="name">Nom *:</label>
       <input type="name" class="form-control" id="nom" placeholder="" name="nom" required>
@@ -21,7 +22,7 @@
     </div>
     <div class="form-group">
       <label for="tel">N° Téléphone *:</label>
-      <input type="Varchar" class="form-control" id="num_telephone" placeholder="" name="num_telephone" required>
+      <input type="name" class="form-control" id="num_telephone" placeholder="" name="num_telephone" required>
     </div>
     <div class="form-group">
       <label for="email">E-Mail *:</label>

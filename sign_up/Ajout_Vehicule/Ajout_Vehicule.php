@@ -5,14 +5,14 @@
 	<link rel="stylesheet" href="index.css" />
 	<script type="checkbox"></script>
 	<title>Inscription - Covoiturage Participatif</title>
-	<?php include('./bootstrap.html') ?>
-  <?php include('./config.php') ?>
+	<?php include('../../bootstrap.php') ?>
+      <?php include('../../config.php') ?>
 </head>
 <body class="bg-success">
 <div class="container rounded shadow border bg-white">
 	<br>
   <h1>Ajout du véhicule</h1>
-  <form method="post" action="Form_Ajout_Véhicule_BDD_1.php" class="form-group">
+  <form method="post" action="Form_Ajout_Véhicule.php" class="form-group">
 <div class="form-group">
       <label for="name">Marque *:</label>
       <input type="name" class="form-control" id="marque" placeholder="" name="marque" required>

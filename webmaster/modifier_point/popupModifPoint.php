@@ -63,7 +63,7 @@
             </div>
 
             <?php   
-                if(isset($_POST['nomPoint'])isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']))
+                if(isset($_POST['nomPoint']) && isset($_POST['adressePoint']) && isset($_POST['villePoint']) && isset($_POST['latitudePoint']) && isset($_POST['longitudePoint']))
                 {
                     $Modif_Point = new Point();
                     $Modif_Point->set_Point(Nom,$_POST['nomPoint'],$_POST['idPoint_RDV']);

@@ -50,7 +50,6 @@ class Etape
 		Inscription.is_Depart_Lycee = $is_depart_lycee
 		ORDER BY Covoitureur.Nbr_Alveoles ASC;";
 
-
 		if ($is_depart_lycee == 1)
 		// si c'est un retour on récupère toute les inscriptions sans prendre en compte le point de départ
 		{
@@ -62,7 +61,7 @@ class Etape
 			Inscription.is_Depart_Lycee = $is_depart_lycee
 			ORDER BY Covoitureur.Nbr_Alveoles ASC;";
 		}
-
+		
 
 		$res = $GLOBALS['mysqli']->query($sql);
 		while ($row = $res->fetch_assoc())
@@ -117,7 +116,7 @@ class Etape
 		$d = 2 * atan2(sqrt($a), sqrt(1 - $a));
 		
 		$distance = $earth_radius * $d;
-		$this->distance = round($distance);
+		$this->distance = round($distance/1000);
 	}
 
 	function get_distance()
