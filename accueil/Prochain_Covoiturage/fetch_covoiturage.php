@@ -1,9 +1,11 @@
 <?php
-require_once '../config.php';
+require_once '../../config.php';
 
 $all = array();
 
-$idCovoitureur = $_SESSION['idCovoitureur'];
+//$idCovoitureur = $_SESSION['idCovoitureur'];
+
+$idCovoitureur= 12;
 
 $sql = "SELECT Participation.Date, Participation.is_Conducteur, 
 Covoiturage.Heure, Covoiturage.is_Depart_Lycee,
@@ -21,9 +23,10 @@ Participation.Date > CURRENT_DATE
 ORDER BY Date";
 
 $res = $GLOBALS['mysqli']->query($sql);
+$done = null;
 while($row = $res->fetch_assoc())
 {
-        
+    $done .= json_encode($row);
 }
 
 ?>

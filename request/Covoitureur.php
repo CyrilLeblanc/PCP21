@@ -3,7 +3,7 @@ class Covoitureur
 {
     function __construct()
     {
-        require_once "../config.php";
+        
     }
 
 
@@ -269,13 +269,17 @@ class Covoitureur
     function get_NbrLigne($idCovoiturage)
     {
         $sql = "SELECT Ligne.Nbr_Points ".
-        "FROM participation ".
+        "FROM Participation ".
         "INNER JOIN Covoiturage ON Participation.idCovoiturage = Covoiturage.idCovoiturage ".
-        "INNER JOIN Ligne ON covoiturage.idLigne = Ligne.idLigne ".
+        "INNER JOIN Ligne ON Covoiturage.idLigne = Ligne.idLigne ".
         "WHERE Participation.idCovoiturage=$idCovoiturage;";
+        echo "$sql\n";
         $res = $GLOBALS['mysqli'] ->query($sql);
         $stack = array();
-
+            if (mysqli_num_rows($res) == 0)
+            {
+                return false;
+            }
             while ($row = $res->fetch_assoc())
             {
                 array_push($stack,$row);

@@ -1,6 +1,6 @@
 <?php
-include 'Detail.php';
-require_once '../config.php';
+include_once './Detail.php';
+require_once '../../config.php';
 require_once $GLOBALS['racine']."request/Covoitureur.php";
 ?>
 
@@ -21,7 +21,7 @@ require_once $GLOBALS['racine']."request/Covoitureur.php";
 
 <?php
 
-
+  $_SESSION['idCovoitureur'] = 12;
   $idCovoitureur = $_SESSION['idCovoitureur'];
 
   $InfoConduct = new Covoitureur();
