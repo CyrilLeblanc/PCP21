@@ -7,8 +7,6 @@
 		require_once $GLOBALS['racine'] . 'request/Point.php';
 		include $GLOBALS['racine'] . 'bootstrap.php';
 		include $GLOBALS['racine'] . 'webmaster/modifier_point/popupModifPoint.php'; 
-		ini_set('display_errors', 1);   #DEBUG
-		ini_set('display_startup_errors', 1);   #DEBUG
 	?>
 	<script src="./popup.js"></script>
 	<title>Modifier Point RDV</title>
