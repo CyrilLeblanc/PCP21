@@ -3,8 +3,6 @@
 
 <head>
 	<?php
-		ini_set('display_errors', 1);   #DEBUG
-		ini_set('display_startup_errors', 1);   #DEBUG
 		require_once '../../config.php'; 
 		include $GLOBALS['racine'] . 'bootstrap.php';
 		require_once $GLOBALS['racine'] . 'request/Point.php';
@@ -52,12 +50,11 @@
 								  ' . $row['Nom'] . ' </div></td>
 							<td>
 								<div style="padding-top: 1em; padding-bottom: 1em;">
-									<a href="./points_ligne.php?idLigne=' . $row['idLigne'] . '">
-									<button class="bg-white border border-white rounded" style="font-weight: bold; color: green;">
-									' . $row['Nbr_Points'] . ' </button></a></div></td>
+									' . $row['Nbr_Points'] . ' </div></td>
 							<td>
 								<div style="padding-top: 0.5em; padding-bottom: 0.5em;">
-									<button class="btn material-icons bg-success" style="color: white; font-size: 200%;">&#xe3c9;</button></div></td>
+									<a href="./points_ligne.php?idLigne=' . $row['idLigne'] . '&Nom=' . $row['Nom'] . '">
+									<button class="btn material-icons bg-success" style="color: white; font-size: 200%;">&#xe3c9;</button></a></div></td>
 						</tr>';
 					}
 				?>

@@ -20,7 +20,7 @@
             <a href="./index.php">
                 <button class="btn material-icons" style="color: white; font-size: 250%;">&#xe317;</button>
             </a>
-            <h2 class="text-center" style="color: white;">Points de la Ligne</h2>
+            <h2 class="text-center" style="color: white;">Points de la Ligne "<?php echo $_GET['Nom']; ?>"</h2>
         </div>
 
         <!-- TABLE -->
@@ -66,12 +66,12 @@
                                         <button type="submit" name="delete" class="btn material-icons bg-success" style="color: white; font-size: 200%;"
                                             >&#xe872;</button></div></form></td>
                             </tr>';
+                            $idPoint = $row["idPoint_RDV"];
                         }
                         if(isset($_POST['delete']))
                         {
-                            //$idPoint = $row['Rang'];
-                            //$sql = "DELETE idPoint_RDV FROM Composition WHERE idPoint_RDV = $idPoint;"
-
+                            $delPoint = new Ligne();
+                            $delPoint->delete_compo($idLigne,$idPoint);
                             echo 
                                 '<div class="alert alert-success text-center">
                                     <h5><strong>Vous avez supprimé le Point de la Ligne.</strong></h5>
