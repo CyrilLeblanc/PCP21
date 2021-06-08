@@ -43,24 +43,6 @@ function check_plan(){
           <br><br>
 
 
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="destination" value="1" checked>Aller-Retour
-            </label>
-          </div>
-          <div class="form-check-inline">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="destination" value="0">Aller
-            </label>
-          </div>
-          <div class="form-check-inline disabled">
-            <label class="form-check-label">
-              <input type="radio" class="form-check-input" name="destination" value="1">Retour
-            </label>
-          </div>
-          <br><br>
-
-
           <div class="form-check-inline font-weight-bold">
             <input type="hidden" class="form-check-input" value="0" name="is_unique">
             <input type="checkbox" class="form-check-input" value="1" id="is_unique" name="is_unique" onclick="check_plan()">

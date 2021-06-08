@@ -1,6 +1,9 @@
 <?php
   session_start();
+  $_SESSION['idCovoitureur'] = 1;
   require_once '../verif_session.php';
+  ini_set('display_errors', 1);   #DEBUG
+ini_set('display_startup_errors', 1);   #DEBUG
 ?>
 
 
@@ -43,7 +46,7 @@
 
 </div>
 
-<?php include 'Prochain_Covoiturage/Prochain_covoiturage.php'; ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
+<?php include './tab_prochain_covoit.php'; ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
 
 
 </div>
