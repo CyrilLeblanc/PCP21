@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -14,13 +15,34 @@
         function popupModifPoint(nom,idPoint)
         {
             document.getElementById("nomPoint").setAttribute("value",nom);
-            document.getElementById("idPoint").setAttribute("value",idPoint);
+            document.getElementById("idPointSupprimer").setAttribute("value",idPoint);
+            document.getElementById("idPointAjouter").setAttribute("value",idPoint);
         }
     </script>
 	<title>Points de la Ligne</title>
 </head>
 
 <body>
+    <?php
+        if(isset($_POST['ajouter']))
+        {
+            $addPoint = new Ligne();
+            $addPoint->add_compo($_POST['idPointAjouter'],$_POST['rangPoint'],$_GET['idLigne']);
+            echo 
+                '<div class="alert alert-success text-center">
+                    <h5><strong>Le Point à été ajouté à la Ligne.</strong></h5>
+                </div>';
+        }
+        if(isset($_POST['supprimer']))
+        {
+            $delPoint = new Ligne();
+            $delPoint->delete_compo($_GET['idLigne'],$_POST['idPointSupprimer']);
+            echo 
+                '<div class="alert alert-success text-center">
+                    <h5><strong>Le Point à été supprimé de la Ligne.</strong></h5>
+                </div>';
+        }
+    ?>
     <div class="container p-3 my-3 border shadow rounded" align="center">
 
         <div class="container bg-success p-2 my-2 rounded" >
@@ -126,9 +148,8 @@
                                         <input value="' . $value["idPoint_RDV"] . '" id="idPoint_RDV" hidden></input>
                                 </tr>';
                         }
+                        include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupModifPoint.php';                      
                     ?>
-                    <?php include $GLOBALS['racine'] . 'webmaster/modifier_ligne/popupModifPoint.php';?>
-
                 </tbody>
             </table>
             
