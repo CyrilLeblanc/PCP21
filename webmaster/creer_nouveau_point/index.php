@@ -2,90 +2,16 @@
 <html>
 
 <head>
-  <?php 
-		ini_set('display_errors', 1);   #DEBUG
-    ini_set('display_startup_errors', 1);   #DEBUG
+  <?php
     require_once '../../config.php'; 
     include $GLOBALS['racine'] . 'bootstrap.php';
     require_once $GLOBALS['racine'] . 'request/Point.php';
 
-    if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
+    if(isset($_POST['submit']))
     {
-      if(isset($_POST['submit']) && !empty($_FILES['photo']['name']))
-      {
-        $filename = $_FILES['photo']['name'];
-        $tempname = $_FILES['photo']['tmp_name'];
-        $filesize = $_FILES['photo']['size'];
-        $error = 1;
-        $folder = $GLOBALS['racine'] . 'images/' . $filename;
-
-        $extension = new SplFileInfo($filename);
-        $ext = $extension->getExtension();
-
-        $newname = "/PCP21/images/" . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
-        $newfolder = $GLOBALS['racine'] . 'images/' . $_POST['nom'] . "_" . $_POST['ville'] . "." . $ext;
-
-        $newname = addslashes($newname);
-
-        if(move_uploaded_file($tempname,$folder)) 
-        {
-          $_FILES['photo'] = $newname;
-        }
-        else 
-        { 
-          $_FILES['photo'] = null;
-
-          echo "</br></br>
-            <div class='alert alert-danger text-center'>
-            <h2><strong>Il y a un problème avec l'envoi de votre image.</strong></h2>
-            </div>"; 
-        }
-
-        if($filesize > 5000000)
-        {
-          echo "</br></br>
-            <div class='alert alert-danger text-center'>
-            <h2><strong>Le fichier dépasse la taille maximale de 5Mo.</strong></h2>
-            </div>";
-          $error = 0;
-        }
-
-        if($ext != "jpg" && $ext != "jpeg" && $ext != "png")
-        {
-          echo "</br></br>
-            <div class='alert alert-danger text-center'>
-            <h2><strong>Seulement les fichiers .jpg, .jpeg et .png sont acceptés.</strong></h2>
-            </div>";
-          $error = 0;
-        }
-
-        if ($error == 0) 
-        {
-          unlink($folder);
-          $newname = null;
-          
-          echo "</br></br>
-            <div class='alert alert-danger text-center'>
-            <h2><strong>Votre image n'a pas été ajoutée</strong></h2>
-            </div>";
-        }
-
-        //Ajout du Point de RDV avec image
-        $Ajouter_Point_RDV = new Point();
-        $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$newname,1);
-
-        if($error == 1)
-        {
-          rename($folder, $newfolder);
-        }
-      }
-      elseif(isset($_POST['submit']) && empty($_FILES['photo']['name']))
-      {
         //Ajout du Point de RDV sans image
         $Ajouter_Point_RDV = new Point();
         $Ajouter_Point_RDV->add_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],null,1);
-      }
-
     }
   ?>
   <title>Création Nouveau Point RDV</title>
@@ -130,11 +56,6 @@
         <input type="text" class="mb-2 mr-sm-2 w-100" placeholder="6.5787" name="longitude" required>
       </div>
 
-      <div class="form-group" align="center">
-        <label for="photo" class="mr-sm-2">Photo : </label><br/>
-        <input type="file" class="mb-2 mr-sm-2" name="photo" id="photo">
-      </div>
-
       <input id="idPoint" name="idPoint" value="" hidden></input>
 
       <!-- FORM Submit Button -->
@@ -148,7 +69,6 @@
           if(isset($_POST['nom']) && isset($_POST['adresse']) && isset($_POST['ville']) && isset($_POST['latitude']) && isset($_POST['longitude']))
           {
             $id = $GLOBALS['mysqli']->insert_id;
-            echo $id;
 
             if($verif_ajout->verif_Point($_POST['nom'],$_POST['adresse'],$_POST['ville'],$_POST['latitude'],$_POST['longitude'],$id))
             {
