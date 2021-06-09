@@ -72,7 +72,7 @@ $table_conduct = $Conducteur -> get_user(20);
 
 for($i = 0; $i < sizeof($table_info_kilom);$i++)
 {
-          
+
     echo
       '<tr>
           <td>'.$Inscription->get_date_depart($table_info_inscr['idInscription'])['Date_Depart'].'</td>'.

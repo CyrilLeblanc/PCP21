@@ -1,4 +1,3 @@
-
 <!-- POPUP -->
 <div class="modal fade" id="popupInfosPoint">
 <div class="modal-dialog modal-lg">
@@ -15,45 +14,49 @@
     <!-- POPUP body -->
     <div class="modal-body">
 
-        <div class="container border rounded shadow">
-            <div class="form-group" align="center">
-                <label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
-                <input type="text" class="mb-2 mr-sm-2" id="nomPoint" name="nomPoint" value="" required>
+        <form class="modifPoint" method="post">
 
+            <div class="container border rounded shadow">
+
+                <div class="form-group" align="center">
+                    <label for="nomPoint" class="mr-sm-2">Nom : </label><br/>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="nomPoint" name="nomPoint" value="" readonly></input>
+
+                </div>
+
+                <div class="form-group" align="center">
+                    <label for="adressePoint" class="mr-sm-2">Adresse : </label><br/>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="adressePoint" name="adressePoint" value="" readonly></input>
+
+                </div>
+
+                
+                <div class="form-group" align="center">
+                    <label for="villePoint" class="mr-sm-2">Ville : </label><br/>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="villePoint" name="villePoint" value="" readonly></input>
+
+                </div>
+
+                <div class="form-group" align="center">
+                    <label for="latitudePoint" class="mr-sm-2">Latitude : </label><br/>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="latitudePoint" name="latitudePoint" value="" readonly></input>
+
+                </div>
+
+                <div class="form-group" align="center">
+                    <label for="longitudePoint" class="mr-sm-2">Longitude : </label><br/>
+                    <input type="text" class="mb-2 mr-sm-2 w-100" id="longitudePoint" name="longitudePoint" value="" readonly></input>
+
+                </div>
+
+                <div class="form-group" align="center">
+                    <label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
+                    <img src="" id="lienImage" class="img-fluid rounded" width="200"></image><br/>
+
+                </div>
             </div>
 
-            <div class="form-group" align="center">
-                <label for="adressePoint" class="mr-sm-2">Adresse : </label><br/>
-                <input type="text" class="mb-2 mr-sm-2" id="adressePoint" name="adressePoint" value="" required>
-
-            </div>
-
-            
-            <div class="form-group" align="center">
-                <label for="villePoint" class="mr-sm-2">Ville : </label><br/>
-                <input type="text" class="mb-2 mr-sm-2" id="villePoint" name="villePoint" value="" required>
-
-            </div>
-
-            <div class="form-group" align="center">
-                <label for="latitudePoint" class="mr-sm-2">Latitude : </label><br/>
-                <input type="text" class="mb-2 mr-sm-2" id="latitudePoint" name="latitudePoint" value="" required>
-
-            </div>
-
-            <div class="form-group" align="center">
-                <label for="longitudePoint" class="mr-sm-2">Longitude : </label><br/>
-                <input type="text" class="mb-2 mr-sm-2" id="longitudePoint" name="longitudePoint" value="" required>
-
-            </div>
-
-            <div class="form-group" align="center">
-                <label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
-                <img src="" id="lienImage" class="img-fluid border rounded" width="200"><br/>
-                <input type="file" class="mb-2 mr-sm-2" id="imagePoint" name="imagePoint" value="">
-
-            </div>
-        </div>
+        </form>
 
     </div>
     </div>

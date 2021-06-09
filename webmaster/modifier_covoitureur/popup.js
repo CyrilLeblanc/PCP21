@@ -1,5 +1,5 @@
 
-function popupModifCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image)
+function popupModifCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image,idCov)
 {
     document.getElementById("nomCovoitureur").setAttribute("value",nom);
 
@@ -10,10 +10,11 @@ function popupModifCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image)
     document.getElementById("mailCovoitureur").setAttribute("value",mail);
 
     document.getElementById("lienImageCovoitureur").setAttribute("src",utilisateur_image);
-	document.getElementById("imageCovoitureur").innerHTML = utilisateur_image;
+
+    document.getElementById("idCovoitureur").setAttribute("value",idCov);
 }
 
-function popupModifVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
+function popupModifVoiture(marque,modele,annee,couleur,nbr_place,voiture_image,idVoit)
 {
 	document.getElementById("marqueVoiture").setAttribute("value",marque);
 
@@ -26,5 +27,6 @@ function popupModifVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
     document.getElementById("placesVoiture").setAttribute("value",nbr_place);
 
     document.getElementById("lienImageVoiture").setAttribute("src",voiture_image);
-	document.getElementById("imageVoiture").innerHTML = voiture_image;
+
+    document.getElementById("idVoiture").setAttribute("value",idVoit);
 }

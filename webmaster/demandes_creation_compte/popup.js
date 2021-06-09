@@ -10,7 +10,6 @@ function popupInfosCovoitureur(nom,prenom,num_telephone,mail,utilisateur_image)
     document.getElementById("mailCovoitureur").setAttribute("value",mail);
 
     document.getElementById("lienImageCovoitureur").setAttribute("src",utilisateur_image);
-	document.getElementById("imageCovoitureur").innerHTML = utilisateur_image;
 }
 
 function popupInfosVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
@@ -26,5 +25,20 @@ function popupInfosVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
     document.getElementById("placesVoiture").setAttribute("value",nbr_place);
 
     document.getElementById("lienImageVoiture").setAttribute("src",voiture_image);
-	document.getElementById("imageVoiture").innerHTML = voiture_image;
+}
+
+function popupAccepter(id,mailAdd)
+{
+    document.getElementById("idAccepter").setAttribute("value",id);
+
+    document.getElementById("mailAccepter").setAttribute("value",mailAdd);
+}
+
+function popupRefuser(idCovoitureur,idVoiture,mailDel)
+{
+    document.getElementById("idCovoitureur").setAttribute("value",idCovoitureur);
+
+    document.getElementById("idVoiture").setAttribute("value",idVoiture);
+
+    document.getElementById("mailRefuser").setAttribute("value",mailDel);
 }

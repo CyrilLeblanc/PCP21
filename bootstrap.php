@@ -8,8 +8,8 @@
       rel="stylesheet">
 <?php // ajoute un theme sombre en fonction du cookie "theme"
 
-/*if ($_COOKIE['theme'] == "dark")
+if (isset($_COOKIE['theme']) && $_COOKIE['theme'] == "dark")
 {
       echo '<link rel="stylesheet" href="http://localhost/PCP21/dark.css">';
-}*/
+}
 ?>

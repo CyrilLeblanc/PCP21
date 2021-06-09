@@ -4,13 +4,13 @@ class Indisp
 {
     function __construct()
     {
-        require_once '../config.php';
+        require_once $GLOBALS['racine'] . 'config.php';
     }
 
-    function add_indisp($Debut_Fermeture, $Fin_Fermeture, $Motif_Fermeture, $idCovoitureur)
+    function add_indisp($Debut_Fermeture, $Fin_Fermeture, $Motif_Fermeture)
     {
-        $sql = "INSERT INTO Indisponibilite (Debut_Fermeture, Fin_Fermeture, Motif_Fermeture, idCovoitureur) 
-        VALUES ('$Debut_Fermeture', '$Fin_Fermeture', '$Motif_Fermeture', $idCovoitureur);";
+        $sql = "INSERT INTO Indisponibilite (Debut_Fermeture, Fin_Fermeture, Motif_Fermeture) 
+        VALUES ('$Debut_Fermeture', '$Fin_Fermeture', '$Motif_Fermeture');";
         return $GLOBALS['mysqli']->query($sql);
 		
     }
@@ -41,9 +41,9 @@ class Indisp
         return $GLOBALS['mysqli']->query($sql);
     }
 
-    function verif_indisp($Debut_Fermeture, $Fin_Fermeture, $Motif_Fermeture, $idCovoitureur)
+    function verif_indisp($Debut_Fermeture, $Fin_Fermeture, $Motif_Fermeture)
     {
-        $sql = "SELECT * FROM Indisponibilite WHERE Debut_Fermeture = '$Debut_Fermeture' AND Fin_Fermeture = '$Fin_Fermeture' AND Motif_Fermeture = '$Motif_Fermeture' AND idCovoitureur = $idCovoitureur ;";
+        $sql = "SELECT * FROM Indisponibilite WHERE Debut_Fermeture = '$Debut_Fermeture' AND Fin_Fermeture = '$Fin_Fermeture' AND Motif_Fermeture = '$Motif_Fermeture';";
 		$res = $GLOBALS['mysqli']->query($sql);
 
         $stack = array();
