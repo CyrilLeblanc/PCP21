@@ -19,7 +19,7 @@
 		{
 			$delCovoitureur = new Covoitureur();
 			$delCovoitureur->del_Covoitureur($_POST['idCovoitureur']);
-			mail($_POST['mailRefuser'], "PCP21 - Compte Refusé" , "Votre demande de création de compte à été refusée par le Webmaster pour la raison suivant :\n" . $_POST['explication'] . "\n Cordialement.");
+			echo (string)mail($_POST['mailRefuser'], "PCP21 - Compte Refusé" , "Votre demande de création de compte à été refusée par le Webmaster pour la raison suivant :\n" . $_POST['explication'] . "\n Cordialement.");
 		}
 		if(isset($_POST['Accepter']))
 		{
@@ -75,7 +75,7 @@
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
 											<button type="submit" class="btn material-icons p-0" style="color: red; font-size: 200%;"
-											onclick="popupRefuser(`' . $value["idCovoitureur"] . '`,`' . $voiture["idVoiture"] . '`,`' . $value["mail"] . '`)" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
+											onclick="popupRefuser(`' . $value["idCovoitureur"] . '`,`' . $voiture["idVoiture"] . '`,`' . $value["Email"] . '`)" data-toggle="modal" data-target="#popupRefuser">&#xe888;</button>
 										</div>
 
 									<td> 
@@ -97,7 +97,7 @@
 									<td>
 										<div style="padding-top: 1em; padding-bottom: 1em;">
 											<button type="submit" class="btn material-icons p-0" style="color: green; font-size: 200%;"
-											onclick="popupAccepter(`' . $value["idCovoitureur"] . '`,`' . $value["mail"] . '`)" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
+											onclick="popupAccepter(`' . $value["idCovoitureur"] . '`,`' . $value["Email"] . '`)" data-toggle="modal" data-target="#popupAccepter">&#xe92d;</button>
 										</div>
 									</td>
 								</tr>	
