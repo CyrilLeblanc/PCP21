@@ -52,10 +52,9 @@
       <?php include 'Prochain_Covoiturage/Prochain_covoiturage.php'; ?><!-- TABLEAU DE PROCHAINS COVOITURAGE AFFICHER -->
 
     </div>
-
-    <?php include '../footer.html';?>
-
   </div>
+
+  <?php include $GLOBALS['racine'] . 'footer.html'; ?>
 
 </body>
 </html>
