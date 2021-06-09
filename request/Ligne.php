@@ -85,5 +85,14 @@ class Ligne
         $sql = "UPDATE Ligne SET Nbr_Points = $nbr_Point WHERE idLigne = $idLigne";
         return $GLOBALS['mysqli']->query($sql);
     }
+
+    function add_ligne($nom)
+    {
+        $sql = "INSERT INTO Ligne (Nom,Nbr_Points) VALUE ('$nom',0);";
+        $res = $GLOBALS['mysqli']->query($sql);
+
+        $idLigne = $GLOBALS['mysqli']->insert_id;
+        $this->add_Compo(1,1,$idLigne);
+    }
 }
 ?>
