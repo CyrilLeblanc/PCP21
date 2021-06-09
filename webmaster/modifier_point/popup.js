@@ -11,8 +11,5 @@ function popupModifPoint(nom,adresse,ville,latitude,longitude,image, id){
 
 	document.getElementById("longitudePoint").setAttribute("value",longitude);
 
-	document.getElementById("lienImage").setAttribute("src",image);
-	document.getElementById("imagePoint").innerHTML = image;
-
 	document.getElementById("idPoint").setAttribute("value",id);
 }

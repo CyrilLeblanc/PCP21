@@ -81,18 +81,7 @@
 
                 </div>
 
-                <div class="form-group" align="center">
-                    <label for="imagePoint" class="mr-sm-2">Photo : </label><br/>
-                    <img src="" id="lienImage" class="img-fluid rounded" width="200"></image><br/>
-                    <input type="file" class="mb-2 mr-sm-2 w-100" id="imagePoint" name="imagePoint" value=""></input>
-
-                </div>
-
-                <div class="form-group" align="center" hidden>
-                    <label for="idPoint" class="mr-sm-2" hidden>idPoint_RDV : </label><br/>
-                    <input type="text" class="mb-2 mr-sm-2" id="idPoint" name="idPoint" value="" hidden></input>
-
-                </div>
+                <input type="text" class="mb-2 mr-sm-2" id="idPoint" name="idPoint" value="" hidden></input>
             </div>
 
             <!-- POPUP footer -->

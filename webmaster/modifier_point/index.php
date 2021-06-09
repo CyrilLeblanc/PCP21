@@ -87,8 +87,8 @@
 				else
 				{
 				echo "</br></br>
-					<div class='alert alert-danger text-center'>
-					<h2><strong>Erreur de modification du Point de RDV.</strong></h2>
+					<div class='alert alert-success text-center'>
+					<h5><strong>Le Point de RDV a bien été supprimé.</strong></h5>
 					</div>";
 				}
 			}
