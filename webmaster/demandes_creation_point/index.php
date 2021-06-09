@@ -1,6 +1,4 @@
 <?php
-	ini_set('display_errors', 1);   #DEBUG
-	ini_set('display_startup_errors', 1);   #DEBUG
 	require_once '../../config.php'; 
 	require_once $GLOBALS['racine'] . 'request/Point.php';
 
