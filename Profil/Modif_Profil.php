@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+session_start();
 require_once '../config.php';
 
 $idCovoitureur = $_SESSION['idCovoitureur'];
@@ -10,6 +10,7 @@ $Prenom = $_POST['Prenom'];
 $Email = $_POST['Email'];
 $NumTelephone = $_POST['Telephone'];
 
+/*
 $Marque = $_POST['Marque'];
 $Modele = $_POST['Modele'];
 $Annee = $_POST['Annee'];
@@ -21,20 +22,50 @@ $NouveauMDP = $_POST['NouvMotDePasse'];
 $ConfirmeMDP = $_POST['ConfMotDePasse'];
 
 $PointFav = $_POST['PointFavori'];
+*/
 
 //Modifier information personnelle
 
-if(isset($Nom) || isset($Prenom) || isset($NumTelephone) || isset($Email))
+if(isset($Nom))
 {
-	$sql = "";
+	$sql = "UPDATE Covoitureur SET Nom='$Nom' WHERE idCovoitureur=$idCovoitureur";
+
+	$GLOBALS['mysqli']->query($sql);
+    
+    echo $sql;
+}
+
+if(isset($Prenom))
+{
+	$sql = "UPDATE Covoitureur SET Prenom='$Prenom' WHERE idCovoitureur=$idCovoitureur";
 
 	$GLOBALS['mysqli']->query($sql);
 
-    echo 'sql';
+    echo $sql;
 }
-else
+
+if(isset($Email))
 {
-    echo 'pas bon';
+	$sql = "UPDATE Covoitureur SET Email='$Email' WHERE idCovoitureur=$idCovoitureur";
+
+	$GLOBALS['mysqli']->query($sql);
+    
 }
+
+if(isset($NumTelephone))
+{
+	$sql = "UPDATE Covoitureur SET Num_Telephone='$NumTelephone' WHERE idCovoitureur=$idCovoitureur";
+
+	$GLOBALS['mysqli']->query($sql);
+
+}
+
+if (!isset($erreur))
+{
+	header('Location: ./');
+} else {
+	header('Location: ../?erreur='.$erreur);
+}
+
 
 ?>

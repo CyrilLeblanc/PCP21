@@ -80,9 +80,9 @@ class Point
         return $GLOBALS['mysqli'] ->query($sql);
     }
 
-    function get_point_info($id)
+    function get_point_info($idPoint_RDV)
     {
-       $sql= "SELECT * FROM Point_RDV WHERE idPoint_RDV = $id";
+       $sql= "SELECT * FROM Point_RDV WHERE idPoint_RDV = $idPoint_RDV";
 
        $res = $GLOBALS['mysqli'] ->query($sql);
         
@@ -92,5 +92,19 @@ class Point
         }
 
     }
+
+    function get_PointFav($idCovoitureur)
+    {
+       $sql= "SELECT Point_RDV.Nom FROM Point_RDV, Covoitureur WHERE Covoitureur.idPoint_RDV=Point_RDV.idPoint_RDV AND idCovoitureur = $idCovoitureur;";
+
+       $res = $GLOBALS['mysqli'] ->query($sql);
+        
+        while ($row = $res->fetch_assoc())
+        {
+                return $row;
+        }
+
+    }
+
 }
 ?>

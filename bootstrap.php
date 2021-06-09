@@ -7,9 +7,10 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 <?php // ajoute un theme sombre en fonction du cookie "theme"
-
+/*
 if ($_COOKIE['theme'] == "dark")
 {
       echo '<link rel="stylesheet" href="http://localhost/PCP21/dark.css">';
 }
+*/
 ?>
