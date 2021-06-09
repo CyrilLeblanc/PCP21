@@ -1,16 +1,21 @@
 <?php
-include('./bootstrap.php');
-include('./config.php');
+session_start();
 
-$nom = $_POST['nom'];
-$prenom = $_POST['prenom'];
-$num_telephone =$_POST['num_telephone'];
-$email = $_POST['email'];
-$mot_de_passe = $_POST['password'];
+if (!isset($_POST['nom'],$_POST['prenom'],$_POST['num_telephone'],$_POST['email'],$_POST['password']))
+{
+    header('Location: ../../?erreur=true');
+    exit;
+}
 
-$sql = "INSERT INTO `covoitureur`(`idCovoitureur`, `Nom`, `Prenom`, `Utilisateur_Image`, `Num_Telephone`, `Email`, `Mot_De_Passe`, `Nbr_Alveoles`, `is_Confirme`, `is_Webmaster`, `idPoint_RDV`) 
-		VALUES (NULL,'$nom','$prenom',NULL,'$num_telephone','$email','$mot_de_passe',0,0,0,NULL)";
 
-$mysqli->query($sql);
-header("Location: ../Ajout_Vehicule.php");
+
+include('../../config.php');
+$_SESSION['_Covoitureur']['Nom'] = $_POST['nom'];
+$_SESSION['_Covoitureur']['Prenom'] = $_POST['prenom'];
+$_SESSION['_Covoitureur']['Num_Telephone'] =$_POST['num_telephone'];
+$_SESSION['_Covoitureur']['Email'] = $_POST['email'];
+$_SESSION['_Covoitureur']['Mot_De_Passe'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+
+header("Location: ../Ajout_Vehicule/Ajout_Vehicule.php");
 ?>

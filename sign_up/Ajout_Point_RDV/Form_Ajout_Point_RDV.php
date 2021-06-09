@@ -1,15 +1,16 @@
 <?php
-include('./config.php');
+session_start();
 
-$nom_point = $_POST['nom_point'];
-$Adresse = $_POST['Adresse'];
-$Longitude = $_POST['Longitude'];
-$Latitude = $_POST['Latitude'];
+if (!isset($_POST['nom_point'],$_POST['Adresse'],$_POST['Longitude'],$_POST['Latitude']))
+{
+	header("Location: ../../?erreur=true");
+	exit;
+}
 
+$_SESSION['_Point_RDV']['Nom'] = $_POST['nom_point'];
+$_SESSION['_Point_RDV']['Adresse'] = $_POST['Adresse'];
+$_SESSION['_Point_RDV']['Longitude'] = $_POST['Longitude'];
+$_SESSION['_Point_RDV']['Latitude'] = $_POST['Latitude'];
 
-$sql = "INSERT INTO `point_rdv`(`idPoint_RDV`, `Nom`, `Adresse`, `Latitude`, `Longitude`, `Point_Image`, `is_Confirme`) 
-		VALUES (1,'$nom_point','$Adresse',$Longitude,$Latitude,NULL,0)";
-
-$mysqli->query($sql);
 header("Location: pop_up.php");
 ?>
