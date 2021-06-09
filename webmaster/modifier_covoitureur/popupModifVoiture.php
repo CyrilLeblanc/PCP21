@@ -52,14 +52,15 @@
                 <div class="form-group" align="center">
                     <label for="imageVoiture" class="mr-sm-2">Photo : </label><br/>
                     <img class="border" src="" id="lienImageVoiture" class="img-fluid rounded" width="200"><br/>
-                    <input type="file" class="mb-2 mr-sm-2" id="imageVoiture" name="imageVoiture" value="">
 
                 </div>
+
+                <input type="text" class="mb-2 mr-sm-2" id="idVoiture" name="idVoiture" value="" hidden></input>
             </div>
 
             <!-- POPUP footer -->
             <div class="modal-footer justify-content-center">
-                <button type="submit" class="btn btn-success">Enregistrer</button>
+                <button type="submit" name="modifVoiture" class="btn btn-success">Enregistrer</button>
             </div>
 
         </form>

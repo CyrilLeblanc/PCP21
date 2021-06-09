@@ -55,7 +55,6 @@ class Covoitureur
     {
 
         $sql = "UPDATE Covoitureur SET $name = $value WHERE idCovoitureur = $idCovoitureur;";
-
         return $GLOBALS['mysqli']->query($sql);
     }
 
@@ -110,7 +109,6 @@ class Covoitureur
     {
 
         $sql = "UPDATE Voiture SET $name = $value WHERE idVoiture = $idVoiture ;";
-
         return $GLOBALS['mysqli']->query($sql);
     }
 

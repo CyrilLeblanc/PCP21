@@ -19,7 +19,7 @@
 		{
 			$delCovoitureur = new Covoitureur();
 			$delCovoitureur->del_Covoitureur($_POST['idCovoitureur']);
-			echo (string)mail($_POST['mailRefuser'], "PCP21 - Compte Refusé" , "Votre demande de création de compte à été refusée par le Webmaster pour la raison suivant :\n" . $_POST['explication'] . "\n Cordialement.");
+			mail($_POST['mailRefuser'], "PCP21 - Compte Refusé" , "Votre demande de création de compte à été refusée par le Webmaster pour la raison suivant :\n" . $_POST['explication'] . "\n Cordialement.");
 		}
 		if(isset($_POST['Accepter']))
 		{
