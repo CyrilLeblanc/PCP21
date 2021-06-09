@@ -167,7 +167,7 @@ class Covoitureur
         $voitures = $this->get_voiture($idCovoitureur);
         foreach ($voitures as $value)
         {
-            $this->del_voiture($value['idVoiture']);
+            $this->del_voiture((int)$value);
         }
 
         $sql = "DELETE FROM Covoitureur WHERE idCovoitureur = $idCovoitureur ;";

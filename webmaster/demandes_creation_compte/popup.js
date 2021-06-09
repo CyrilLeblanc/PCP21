@@ -27,14 +27,18 @@ function popupInfosVoiture(marque,modele,annee,couleur,nbr_place,voiture_image)
     document.getElementById("lienImageVoiture").setAttribute("src",voiture_image);
 }
 
-function popupAccepter(id)
+function popupAccepter(id,mailAdd)
 {
-    document.getElementById("idCovoitureur").setAttribute("value",id);
+    document.getElementById("idAccepter").setAttribute("value",id);
+
+    document.getElementById("mailAccepter").setAttribute("value",mailAdd);
 }
 
-function popupRefuser(idCovoitureur,idVoiture)
+function popupRefuser(idCovoitureur,idVoiture,mailDel)
 {
     document.getElementById("idCovoitureur").setAttribute("value",idCovoitureur);
 
     document.getElementById("idVoiture").setAttribute("value",idVoiture);
+
+    document.getElementById("mailRefuser").setAttribute("value",mailDel);
 }

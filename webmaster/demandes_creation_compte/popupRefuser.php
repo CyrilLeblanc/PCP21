@@ -16,6 +16,7 @@
                 <form method="post">
                     <input type="text" id="idCovoitureur" name="idCovoitureur" value="" hidden>
                     <input type="text" id="idVoiture" name="idVoiture" value="" hidden>
+                    <input type="text" id="mailAccepter" name="mailAccepter" value="" hidden>
                     <div class='alert alert-success text-center'>
                         <h5><strong>Vous n'avez pas accepté le nouveau Covoitureur.</strong></h5>
                     </div>

@@ -14,7 +14,7 @@
             <!-- POPUP body -->
             <div class="modal-body">
                 <form method="post">
-                    <input type="text" id="idCovoitureur" name="idCovoitureur" value="" hidden>
+                    <input type="text" id="idAccepter" name="idCovoitureur" value="" hidden>
                     <div class='alert alert-success text-center'>
                         <h5><strong>Vous avez accepté un nouveau Covoitureur.</strong></h5>
                         <h6>Une nouvelle Abeille a rejoint la ruche !</h6>
