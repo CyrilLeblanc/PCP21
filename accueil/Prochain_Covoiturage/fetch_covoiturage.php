@@ -5,7 +5,6 @@ $all = array();
 
 //$idCovoitureur = $_SESSION['idCovoitureur'];
 
-$idCovoitureur= 12;
 
 $sql = "SELECT Participation.Date, Participation.is_Conducteur, 
 Covoiturage.Heure, Covoiturage.is_Depart_Lycee,

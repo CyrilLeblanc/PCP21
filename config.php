@@ -11,7 +11,7 @@ $user = 'admin';            // nom d'utilisateur
 $password = 'test';         // mot de passe utilisateur
 $bdd = 'PCP21';       // nom de la base de donnée
 
-$GLOBALS['racine'] = "/var/www/html/PCP21/";    // racine du projet
+$GLOBALS['racine'] = "/var/www/html/";    // racine du projet
 
 // ====================================================================
 // Ne rien changer pour la suite.

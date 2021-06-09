@@ -11,7 +11,7 @@ ini_set('display_startup_errors', 1);   #DEBUG
 <head>
 
 	<?php
-	include '../bootstrap.html';
+	include '../bootstrap.php';
 	require_once '../config.php';
 	require_once $GLOBALS['racine']."request/Point.php";
 	require_once $GLOBALS['racine']."request/Covoitureur.php";
@@ -222,7 +222,6 @@ ini_set('display_startup_errors', 1);   #DEBUG
 
 					foreach ($table_depart as $value) {
 						echo '<option value=' . $value["idPoint_RDV"] . '>' . $value["Nom"] . '</option>';
-						//var_dump($value["idPoint_RDV"]);
 					}
 
 					echo '</select>';

@@ -58,7 +58,6 @@ class Point
     function validate_Point($idPoint_RDV)
     {
         $sql = "UPDATE Point_RDV SET is_Confirme = 1 WHERE idPoint_RDV = $idPoint_RDV ;";
-        echo $sql;
         return $GLOBALS['mysqli'] ->query($sql);
     }
 
@@ -71,13 +70,24 @@ class Point
     function del_Point($idPoint_RDV)
     {
         $sql = "DELETE FROM Point_RDV WHERE idPoint_RDV = $idPoint_RDV ;";
-        echo $sql;
         return $GLOBALS['mysqli'] ->query($sql);
     }
 
     function get_point_info($id)
     {
        $sql= "SELECT * FROM Point_RDV WHERE idPoint_RDV = $id";
+
+       $res = $GLOBALS['mysqli'] ->query($sql);
+        
+        while ($row = $res->fetch_assoc())
+        {
+                return $row;
+        }
+
+    }
+    function get_PointFav($idCovoitureur)
+    {
+       $sql= "SELECT Point_RDV.Nom FROM Point_RDV, Covoitureur WHERE Covoitureur.idPoint_RDV=Point_RDV.idPoint_RDV AND idCovoitureur = $idCovoitureur;";
 
        $res = $GLOBALS['mysqli'] ->query($sql);
         

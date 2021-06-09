@@ -300,8 +300,8 @@ class Covoiturage
 					if (mysqli_num_rows($res) == 0)
 					// si on a aucun résultat on le génère dans la BDD
 					{
-						$sql = "INSERT INTO Participation (is_Conducteur, Date, Kilometrage, idCovoitureur, idCovoiturage) VALUES ".
-						"($is_conducteur, '$date', $kilometrage, $idCovoitureur, $idCovoiturage)";
+						$sql = "INSERT INTO Participation (is_Conducteur, Date, Kilometrage, idCovoitureur, idCovoiturage, is_Valide_Systeme) VALUES ".
+						"($is_conducteur, '$date', $kilometrage, $idCovoitureur, $idCovoiturage, 1)";
 						$GLOBALS['mysqli']->query($sql);
 					}
 					$nbAttempt--;

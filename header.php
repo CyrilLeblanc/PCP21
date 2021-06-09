@@ -1,3 +1,4 @@
+
 <div class="bg-success row" style="font-weight: bold; color: white;">
 
   <div class="col-3" align="center">
@@ -20,7 +21,7 @@
 
             <div class="dropdown-menu">
 
-              <a class="dropdown-item" href="../profil/" style="">Profil</a>
+              <a class="dropdown-item" href="../Profil/" style="">Profil</a>
                 
               <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="../webmaster/periode_indisponibilite/" style="">Période Indisponibilité</a>
@@ -44,7 +45,7 @@
       else
       {
         echo 
-          '<a href="../profil/">
+          '<a href="../Profil/">
             <button class="btn material-icons" style="color: white; font-size: 300%;">&#xf02e;</button>
 		      </a>';
       }
@@ -87,5 +88,4 @@
   <div class="col-2" align="left">
     <img src="../images/interface/Alvéoles.png" width="40">
   </div>
-
 </div>

@@ -1,6 +1,7 @@
 <?php
-require_once '../request/Point.php';
-require_once '../request/Covoitureur.php';
+require_once '../config.php'; 
+require_once $GLOBALS['racine']."request/Point.php";
+require_once $GLOBALS['racine']."request/Covoitureur.php";
 
 ?>
 
@@ -37,56 +38,32 @@ require_once '../request/Covoitureur.php';
 
     <tbody>
 
-      <tr>
-        <td>22/03/2021</td>
-        <td>74170 Saint-Gervais-les-Bains</td>
-        <td>74300 Lycée Charles Poncet</td>
-        <td>-12</td>
-        <td>TERRE David</td>
-      </tr>
 
 <?php
 
 
+$idCovoitureur = $_SESSION['idCovoitureur'];
 
-$Inscription = new Covoitureur();
-$table_info_inscr = $Inscription -> get_date_depart(1);
+$sql ="SELECT Participation.Date, Point_A.Nom AS Point_A_Nom, Point_B.Nom AS Point_B_Nom, Etape.Kilometrage, Covoitureur.Nom, Covoitureur.Prenom 
+FROM Covoiturage, Etape 
+INNER JOIN Participation ON Etape.idParticipation = Participation.idParticipation 
+INNER JOIN Point_RDV AS Point_A ON Etape.idPoint_RDV_A = Point_A.idPoint_RDV 
+INNER JOIN Point_RDV AS Point_B ON Etape.idPoint_RDV_B = Point_B.idPoint_RDV 
+INNER JOIN Voiture ON Etape.idVoiture=Voiture.idVoiture 
+INNER JOIN Covoitureur ON Voiture.idCovoitureur=Covoitureur.idCovoitureur 
+WHERE Participation.idCovoiturage = Covoiturage.idCovoiturage AND Participation.idCovoitureur=$idCovoitureur AND Etape.idParticipation = 1 AND is_Valide_Systeme=0";
 
-$PointA = new Point();
-$table1 = $PointA -> get_point_info(1);
-
-$PointB = new Point();
-$table2 = $PointB -> get_point_info(2);
-
-//$PointAB = new Covoitureur();
-//$table = $PointAB -> get_etape(1);
-
-$Kilom = new Covoitureur();
-$table_info_kilom = $Kilom -> get_participation(11);
-
-$Conducteur = new Covoitureur();
-$table_conduct = $Conducteur -> get_user(20);
-
-
-
-
-for($i = 0; $i < sizeof($table_info_kilom);$i++)
+$res = $GLOBALS['mysqli']->query($sql);
+while ($row = $res->fetch_assoc())
 {
-
-    echo
-      '<tr>
-          <td>'.$Inscription->get_date_depart($table_info_inscr['idInscription'])['Date_Depart'].'</td>'.
-          '<td>'.$PointA->get_point_info($table1['idPoint_RDV'])['Nom'].'</td>'.
-          '<td>'.$PointB->get_point_info($table2['idPoint_RDV'])['Nom'].'</td>'.
-
-          '<td>'.$table_info_kilom[$i]["Kilometrage"].'</td>'. //modifier par le km dans participation
-          
-          '<td>'.$Conducteur->get_user($table_conduct['idCovoitureur'])['Nom'].' '.$Conducteur->get_user($table_conduct['idCovoitureur'])['Prenom'].'</td>
-         
-      </tr>';
-
-
-          
+    echo "<tr>
+    <td>".$row['Date']."</td>
+    <td>".$row['Point_A_Nom']."</td>
+    <td>".$row['Point_B_Nom']."</td>
+    <td>".$row['Kilometrage']."</td>
+    <td>".$row['Nom']." ".$row['Prenom']."</td>
+    </tr>";
+    
 }
 
 ?>

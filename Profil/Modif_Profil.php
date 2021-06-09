@@ -32,7 +32,6 @@ if(isset($Nom))
 
 	$GLOBALS['mysqli']->query($sql);
     
-    echo $sql;
 }
 
 if(isset($Prenom))
@@ -41,7 +40,6 @@ if(isset($Prenom))
 
 	$GLOBALS['mysqli']->query($sql);
 
-    echo $sql;
 }
 
 if(isset($Email))

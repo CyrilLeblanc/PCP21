@@ -1,5 +1,5 @@
 <?php
-require_once '../../config.php';
+require_once '../config.php';
 require_once $GLOBALS['racine']."request/Covoitureur.php";
 
 $idCovoiturage=3;
