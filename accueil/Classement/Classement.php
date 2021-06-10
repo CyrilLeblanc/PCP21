@@ -27,37 +27,25 @@
                     <th>Nombres d'alvéoles</th>
                   </tr>
                 </thead>
+
                 <tbody>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+
+                <?php
+
+                  $nbRang=1;
+                  $sql = "SELECT Nom, Prenom, Nbr_Alveoles FROM Covoitureur ORDER BY Nbr_Alveoles DESC";
+                  $res = $GLOBALS['mysqli']->query($sql);
+
+                  while ($row = $res->fetch_assoc())
+                  {
+                      echo "<tr>
+                      <td>".$nbRang."</td>
+                      <td>".$row['Nom']." ".$row['Prenom']."</td>
+                      <td>".$row['Nbr_Alveoles']."</td>
+                      </tr>";
+                      $nbRang++;
+                  }
+                ?>                    
                 </tbody>
 
               </table>
@@ -77,3 +65,4 @@
   </div>
 
 </div>
+

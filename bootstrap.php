@@ -10,6 +10,6 @@
 
 if (isset($_COOKIE['theme']) && $_COOKIE['theme'] == "dark")
 {
-      echo '<link rel="stylesheet" href="http://localhost/PCP21/dark.css">';
+      echo '<link rel="stylesheet" href="../dark.css">';
 }
 ?>

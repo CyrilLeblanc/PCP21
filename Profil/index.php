@@ -1,252 +1,260 @@
+<?php
+	require_once '../config.php';
+	require_once $GLOBALS['racine'].'verif_session.php';
+?>
 <!DOCTYPE html>
 <html>
 
 <?php
-  session_start();
-  require_once '../verif_session.php';
-  ini_set('display_errors', 1);   #DEBUG
-ini_set('display_startup_errors', 1);   #DEBUG
+	require_once $GLOBALS['racine']."request/Point.php";
+	require_once $GLOBALS['racine']."request/Covoitureur.php";
 ?>
 
 <head>
-
-	<?php
-	include '../bootstrap.php';
-	require_once '../config.php';
-	require_once $GLOBALS['racine']."request/Point.php";
-	require_once $GLOBALS['racine']."request/Covoitureur.php";
-
-	$idCovoitureur = $_SESSION['idCovoitureur'];
-
-	?>
-
-	<title></title>
+	<?php include $GLOBALS['racine'].'bootstrap.php' ?>
+	<script>
+		function verifPassword()
+		{
+			let pass1 = document.getElementById('pass1').value;
+			let pass2 = document.getElementById('pass2').value;
+			if (pass1 == pass2)
+			{
+				return True;
+			} else {
+				document.getElementById('erreur_password').removeAttribute('hidden');
+				return false;
+			}
+		}
+	</script>
+	<title>Profil - PCP21</title>
 </head>
-
 <body>
-
+	<!-- HEADER -->
 	<div class="row p-4 bg-success" style="font-weight: bold; color: white;">
-
 		<div class="col-sm-4">
-
-
-			<button class="btn material-icons float-left" onclick="window.location.href = '../accueil/index.php';" style="color: white; font-size: 200%;">&#xe5c4;</button>
-
-
+			<a href="../">
+				<button class="btn material-icons float-left" style="color: white; font-size: 200%;">&#xe5c4;</button>
+			</a>
 		</div>
 
 		<div class="col-sm-4 text-center">
-			<h1>Profil</h1>
+			<h1>
+				Profil
+			</h1>
 		</div>
 
 		<div class="col-sm-4 text-right">
-			69
-			<img src="../image/honey.png" width="60">
+			<?php 
+				// affichage du nombre d'alvéoles du compte
+				$value = $_SESSION['Nbr_Alveoles'];
+				if ($value > 0)
+				{
+					$value = "+".$value;
+				}
+				echo $value;
+			?>
+			<img src="../images/interface/Alvéoles.png" width="60">
 		</div>
 	</div>
 
-
-
-	</div>
-
-
-	<div class="container-fluid p-3 my-3 border shadow rounded">
-
+	<!-- BODY -->
+	<div class="container-fluid p-3 my-3">
 		<div class="container bordered">
-
 			<div class="row">
 
+				<!-- IDENTITÉ -->
 				<div class="container col-sm-6 border ">
-
-					<p class="text-center font-weight-bold">Identité</p>
-					<img src="../image/Photo.png" style="width:100px;" class="rounded float-left">
-
+					<h2 class="text-center font-weight-bold">
+						Identité
+					</h2>
+					<img src="../images/interface/Profil.png" style="width:100px;" class="rounded float-left">
 					<div class="row">
-						
 						<form action="./Modif_Profil.php" id="ModifProfil" method="post"> <!-- Formulaire identité -->
-
 							<div class="form-group p-3 m-2">
-								<label for="Prenom">Prénom</label>
-								<input type="text" class="form-control" name="Prenom" placeholder="Nouveau Prénom">
+								<label for="Prenom">
+									Prénom
+								</label>
+								<input type="text" class="form-control" name="Prenom" placeholder="Nouveau Prénom" value="<?php echo $_SESSION['Prenom']?>">
 							</div>
-
 							<div class="form-group p-3 m-2">
-								<label for="Nom">Nom</label>
-								<input type="text" class="form-control" name="Nom" placeholder="Nouveau Nom">
+								<label for="Nom">
+									Nom
+								</label>
+								<input type="text" class="form-control" name="Nom" placeholder="Nouveau Nom" value="<?php echo $_SESSION['Nom']?>">
 							</div>
-
 							<div class="form-group p-3 m-2">
-								<label for="adresse_email">Adresse Email</label>
-								<input type="email" class="form-control" name="Email" placeholder="Nouvelle Adresse Email">
+								<label for="adresse_email">
+									Adresse Email
+								</label>
+								<input type="email" class="form-control" name="Email" placeholder="Nouvelle Adresse Email" value="<?php echo $_SESSION['Email']?>">
 							</div>
-
 							<div class="form-group p-3 m-2">
-								<label for="telephone">telephone</label>
+								<label for="telephone">
+									N° Téléphone
+								</label>
 								<input type="tel" name="Telephone" class="form-control" placeholder="Nouveau n° de téléphone"
-								pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}">
+								pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" value="<?php echo $_SESSION['Num_Telephone']?>">
 							</div>
-
 							<div class="form-group p-3 m-2">
 								<button type="submit" class="btn btn-success p-3 center-block" data-toggle="modal">
-								Enregistrer les modifications
+									Enregistrer les modifications
 								</button>
 							</div>				
-					</div>
-
-					
-
 						</form>
+					</div>
 				</div>
 
+				<!-- VOITURE -->
 				<div class="container col-sm-6 border">
-
-				<form action="./Modif_Profil.php" id="ModifProfil" method="post"> <!-- Formulaire de(s) voiture(s) -->
-
-					<p class="text-center font-weight-bold">Voiture</p>
-
-					<div class="row">
-
-					<div class="col-sm-10"></div>
-					
-					<button class="btn material-icons col-sm-2 float-right" data-toggle="modal" data-target="" style="color: green; font-size: 250%;">&#xe148</button>
-					
-					</div>
-
-					<div class="row"> <!-- php affichage info voiture + bouton annuler -->
-
-						<img src="../image/voiture.jpg" style="width:100px;" class="rounded col-sm-2"> 
-
-						<div class="col-sm-8"><p>test</p><p>test</p></div>
-
-						<button class="btn material-icons col-sm-2 float-right" data-toggle="modal" data-target="#Popup_Annuler_Voiture" style="color: green; font-size: 250%;">&#xe15d</button>
-
-					</div>
-					
-
-					<div class="row">
-
-						<div class="form-group p-3 m-2">
-							<label for="usr">Marque</label>
-							<input type="text" class="form-control" name="Marque" placeholder="Peugeot, Citroen ...">
+					<form action="./Modif_Profil.php" id="ModifProfil" method="post">
+						<h2 class="text-center font-weight-bold">
+							Voiture
+						</h2>
+						<div class="row">
+						<div class="col-sm-10"></div>
+						<button class="btn material-icons col-sm-2 float-right" data-toggle="modal" data-target="" style="color: green; font-size: 250%;">&#xe148</button>
+						</div>
+						<div class="row"> <!-- php affichage info voiture + bouton annuler -->
+							<img src="../images/interface/Voiture.png" style="width:100px;" class="rounded col-sm-2"> 
+							<div class="col-sm-8"></div>
+							<button class="btn material-icons col-sm-2 float-right" data-toggle="modal" data-target="#Popup_Annuler_Voiture" style="color: green; font-size: 250%;">&#xe15d</button>
 						</div>
 
-						<div class="form-group p-3 m-2">
-							<label for="usr">Modèle</label>
-							<input type="text" class="form-control" name="Modele" placeholder="">
+						<?php
+							// récupération de la voiture favorite du covoitureur
+							$sql = "SELECT * FROM Voiture WHERE idCovoitureur = ". $_SESSION['idCovoitureur'] . " ORDER BY is_Favoris DESC";
+							$res = $GLOBALS['mysqli']->query($sql);
+							while ($row = $res->fetch_assoc())
+							{
+								$value = $row;
+								break;
+							}
+						?>
+						<div class="row">
+							<div class="form-group p-3 m-2">
+								<label for="usr">
+									Marque
+								</label>
+								<input type="text" class="form-control" name="Marque" placeholder="Peugeot, Citroen ..." value="<?php echo $value['Marque']?>">
+							</div>
+							<div class="form-group p-3 m-2">
+								<label for="usr">
+									Modèle
+								</label>
+								<input type="text" class="form-control" name="Modele" placeholder="C5" value="<?php echo $value['Modele']?>">
+							</div>
+							<div class="form-group p-3 m-2">
+								<label for="usr">
+									Année
+								</label>
+								<input type="text" class="form-control" name="Annee" placeholder="2021" value="<?php echo $value['Annee']?>">
+							</div>
+							<div class="form-group p-3 m-2">
+								<label for="usr">
+									Couleur
+								</label>
+								<input type="text" class="form-control" name="Couleur" placeholder="Gris" value="<?php echo $value['Couleur']?>">
+							</div>
+							<div class="form-group p-3 m-2">
+								<label for="usr">
+									Places
+								</label>
+								<input type="text" class="form-control" name="Places" placeholder="(en comptant le conducteur)" value="<?php echo $value['Nbr_Place']?>">
+							</div>
 						</div>
-
-						<div class="form-group p-3 m-2">
-							<label for="usr">Année</label>
-							<input type="text" class="form-control" name="Annee" placeholder="">
-						</div>
-
-						<div class="form-group p-3 m-2">
-							<label for="usr">Type</label>
-							<input type="text" class="form-control" name="Type" placeholder="">
-						</div>
-
-						<div class="form-group p-3 m-2">
-							<label for="usr">Couleur</label>
-							<input type="text" class="form-control" name="Couleur" placeholder="">
-						</div>
-
-						<div class="form-group p-3 m-2">
-							<label for="usr">Places</label>
-							<input type="text" class="form-control" name="Places" placeholder="Nombres de Places">
-						</div>
-
-					</div>
-
-				</form>
-
+					</form>
 				</div>
-
 			</div>
 
 			<div class="row">
-				
-				<div class="container col-sm-6 border">
-
-				<form action="./Modif_MDP.php" id="ModifMDP" method="post"> <!-- Formulaire Modif MDP -->	
-					
-					<p class="text-center font-weight-bold">Mot de Passe</p>
-
-					<div class="form-group p-3 m-2">
-					<label for="exampleInputPassword1">Mot de Passe Actuel</label>
-						<input type="password" class="form-control" name="MotDePasseActuelle">
-					</div>
-
-					<div class="form-group p-3 m-2">
-						<label for="Pwd">Nouveau Mot de Passe</label>
-						<input type="password" class="form-control" name="NouvMotDePasse">
-
-						<small id="PwdHelp" class="text-muted">
-							Veuillez entrez au minimum 8 caractères
-						</small>
-					</div>
-
-					<div class="form-group p-3 m-2">
-						<label for="PwdConfirm">Confirmer Nouveau Mot de Passe</label>
-						<input type="password" class="form-control" name="ConfMotDePasse">
-					</div>
-
-					<div class="form-group p-3 m-2">
-						<button type="submit" class="btn btn-success p-3 center-block" data-toggle="modal">
-						Enregistrer les modifications
-						</button>
-					</div>	
-					</form>
-				</div>
-
 			
-
+				<!-- PASSWORD -->
 				<div class="container col-sm-6 border">
+					<form action="./Modif_MDP.php" id="ModifMDP" method="post" onsubmit="return verifPassword()"> <!-- Formulaire Modif MDP -->	
+						<h2 class="text-center font-weight-bold">
+							Mot de Passe
+						</h2>
+						<label id="erreur_password" hidden>	
+							Erreur les mot de passe doivent être identique <!-- Erreur affiché lors d'erreur mot de passe-->
+						</label>
+						<div class="form-group p-3 m-2">
+							<label for="exampleInputPassword1">
+								Mot de Passe Actuel
+							</label>
+							<input type="password" class="form-control" name="MotDePasseActuelle" id="pass_actuel">
+						</div>
 
-				<form action="./Modif_PointFav.php" id="ModifPointFav" method="post"> <!-- Formulaire Modif MDP -->
+						<div class="form-group p-3 m-2">
+							<label for="Pwd">
+								Nouveau Mot de Passe
+							</label>
+							<input type="password" class="form-control" name="NouvMotDePasse" id="pass1">
 
-					<p class="text-center font-weight-bold">Point Favoris</p>
+							<small id="PwdHelp" class="text-muted">
+								Veuillez entrez au minimum 8 caractères
+							</small>
+						</div>
 
-					<?php
-					$Point = new Point();
-					$table_depart = $Point->get_Point(True);
-
-					$Favori = new Point();
-					$PointFav = $Favori->get_PointFav($idCovoitureur);
-
-					echo '<p >Votre Point Favori : '.$PointFav["Nom"].'</p>';
-
-					echo '<div class="form-group ">';
-					echo '<label for="arrive" class="font-weight-bold">Modifier Point Favori</label>';
-					echo '<select class="custom-select my-1 mr-sm-2" name="PointFavori">';
-					echo '<option selected value="">Choisir...</option>';
-
-					foreach ($table_depart as $value) {
-						echo '<option value=' . $value["idPoint_RDV"] . '>' . $value["Nom"] . '</option>';
-					}
-
-					echo '</select>';
-					echo '</div>';
-					?>
+						<div class="form-group p-3 m-2">
+							<label for="PwdConfirm">
+								Confirmer Nouveau Mot de Passe
+							</label>
+							<input type="password" class="form-control" name="ConfMotDePasse" id="pass2">
+						</div>
 
 						<div class="form-group p-3 m-2">
 							<button type="submit" class="btn btn-success p-3 center-block" data-toggle="modal">
-							Enregistrer les modifications
-						</button>
-
-					</div>
-
-				</form>
-
+								Enregistrer les modifications
+							</button>
+						</div>	
+					</form>
 				</div>
 
+				<!-- POINT_RDV -->
+				<div class="container col-sm-6 border">
+					<form action="./Modif_PointFav.php" id="ModifPointFav" method="post"> <!-- Formulaire Modif MDP -->
+						<h2 class="text-center font-weight-bold">
+							Point Favoris
+						</h2>
+						<?php
+							$Point = new Point();
+							$table_depart = $Point->get_Point(True);
+
+							$Favori = new Point();
+							$PointFav = $Favori->get_PointFav($_SESSION['idCovoitureur']);
+						?>
+						<p>
+							Votre Point Favori : 
+							<b>
+								<?php echo $PointFav["Nom"] ?>
+							</b>
+						</p>
+						<div class="form-group ">
+							<label for="arrive" class="font-weight-bold">
+								Modifier Point Favori
+							</label>
+							<select class="custom-select my-1 mr-sm-2" name="PointFavori">
+								<option selected value="">
+									Choisir...
+								</option>
+								<?php 
+									foreach ($table_depart as $value) {
+										echo '<option value=' . $value["idPoint_RDV"] . '>' . $value["Nom"] . '</option>';
+									}
+								?>
+							</select>
+						</div>
+						
+						<div class="form-group p-3 m-2">
+							<button type="submit" class="btn btn-success p-3 center-block" data-toggle="modal">
+								Enregistrer les modifications
+							</button>
+						</div>
+					</form>
+				</div>
 			</div>
-			
 		</div>		
-
 	</div>
-
-	</div>
-
+	<?php include $GLOBALS['racine'] . 'footer.html'; ?>
 </body>
-
 </html>

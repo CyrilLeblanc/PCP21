@@ -1,5 +1,5 @@
 <?php
-include './Annuler_Cov.php'
+include './Annuler_cov.php';
 ?>
 
 <div class="container rounded border ">
