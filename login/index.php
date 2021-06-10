@@ -10,6 +10,7 @@
 #
 -->
 	<?php include_once '../bootstrap.php'; ?>
+	<title>Connexion - PCP21</title>
 	<style>
 	.center{
 		padding: auto;

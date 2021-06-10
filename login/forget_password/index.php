@@ -2,7 +2,7 @@
 <html>
 <head>
     <?php include '../../bootstrap.php';?>
-    <title>Mot de passe oublié</title>
+    <title>Mot de passe oublié - PCP21</title>
     <style>
         .container{
             text-align: center;

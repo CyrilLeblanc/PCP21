@@ -17,7 +17,7 @@
           <div class="container p-3 my-3">
             <div class="container">
 
-              <h2>Mes Prochains Covoiturages</h2>
+              <h2>Classement des abeilles du lycée</h2>
 
               <table class="table table-bordered table-striped">
                 <thead>
@@ -33,13 +33,13 @@
                 <?php
 
                   $nbRang=1;
-                  $sql = "SELECT Nom, Prenom, Nbr_Alveoles FROM Covoitureur ORDER BY Nbr_Alveoles DESC";
+                  $sql = "SELECT Nom, Prenom, Nbr_Alveoles FROM Covoitureur WHERE is_Confirme=1 ORDER BY ABS(Nbr_Alveoles)"; //modif
                   $res = $GLOBALS['mysqli']->query($sql);
 
                   while ($row = $res->fetch_assoc())
                   {
                       echo "<tr>
-                      <td>".$nbRang."</td>
+                      <td>"."#".$nbRang."</td>
                       <td>".$row['Nom']." ".$row['Prenom']."</td>
                       <td>".$row['Nbr_Alveoles']."</td>
                       </tr>";
@@ -49,7 +49,7 @@
                 </tbody>
 
               </table>
-
+              <label for="">Le classement est défini en fonction de votre nombre d'alvéoles. <br/>(Plus vous être proche de zéro mieux c'est)</label>
             </div>
           </div>
 

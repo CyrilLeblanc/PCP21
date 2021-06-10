@@ -36,38 +36,6 @@
           <span class="validity"></span>
           <br><br>
 
-
-          <div class="form-check-inline font-weight-bold">
-            <input type="hidden" class="form-check-input" value="0" name="is_unique">
-            <input type="checkbox" class="form-check-input" value="1" id="is_unique" name="is_unique" onclick="check_plan()">
-            <label class="form-check-label" for="is_unique">Plannification Pour toute l'année 2020-2021</label>
-          </div>
-
-
-          <div class="form-group" id="jour" hidden>
-            <label for="scroll_jour">Jour de semaine</label>
-            <select class="custom-select my-1 mr-sm-2" id="jour" name="jour_semaine">
-              <option selected>Choisir...</option>
-              <option value="Lundi">Lundi</option>
-              <option value="Mardi">Mardi</option>
-              <option value="Jeudi">Jeudi</option>
-              <option value="Vendredi">Vendredi</option>
-              <option value="Samedi">Samedi</option>
-              <option value="Dimanche">Dimanche</option>
-            </select>
-          </div>
-          <br>
-
-          <div class="form-group" id="regime" hidden>
-            <label for="scroll_regime">Régime de semaine</label>
-            <select class="custom-select my-1 mr-sm-2" id="regime" name="semaine">
-              <option selected>Choisir...</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-            </select>
-          </div>
-          <br>
-
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
             <button type="submit" class="btn btn-success">Confirmer</button>

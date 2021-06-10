@@ -18,7 +18,7 @@ if (!isset($_GET['token']))
 <head>
     <script src="check.js"></script>
     <?php include '../../bootstrap.php'; ?>
-    <title>Changement de mot de passe</title>
+    <title>Changement de mot de passe - PCP21</title>
     <style>
         form{
             margin-top: 2em;

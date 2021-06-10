@@ -42,19 +42,6 @@
 				Profil
 			</h1>
 		</div>
-
-		<div class="col-sm-4 text-right">
-			<?php 
-				// affichage du nombre d'alvéoles du compte
-				$value = $_SESSION['Nbr_Alveoles'];
-				if ($value > 0)
-				{
-					$value = "+".$value;
-				}
-				echo $value;
-			?>
-			<img src="../images/interface/Alvéoles.png" width="60">
-		</div>
 	</div>
 
 	<!-- BODY -->
@@ -94,12 +81,7 @@
 								</label>
 								<input type="tel" name="Telephone" class="form-control" placeholder="Nouveau n° de téléphone"
 								pattern="[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{2}" value="<?php echo $_SESSION['Num_Telephone']?>">
-							</div>
-							<div class="form-group p-3 m-2">
-								<button type="submit" class="btn btn-success p-3 center-block" data-toggle="modal">
-									Enregistrer les modifications
-								</button>
-							</div>				
+							</div>			
 						</form>
 					</div>
 				</div>
@@ -110,15 +92,11 @@
 						<h2 class="text-center font-weight-bold">
 							Voiture
 						</h2>
-						<div class="row">
-						<div class="col-sm-10"></div>
-						<button class="btn material-icons col-sm-2 float-right" data-toggle="modal" data-target="" style="color: green; font-size: 250%;">&#xe148</button>
-						</div>
-						<div class="row"> <!-- php affichage info voiture + bouton annuler -->
-							<img src="../images/interface/Voiture.png" style="width:100px;" class="rounded col-sm-2"> 
-							<div class="col-sm-8"></div>
-							<button class="btn material-icons col-sm-2 float-right" data-toggle="modal" data-target="#Popup_Annuler_Voiture" style="color: green; font-size: 250%;">&#xe15d</button>
-						</div>
+						<div class="text-center"> <!-- bouton voiture -->
+							<button type="button" class="btn btn-success p-3 col-sm-4" data-toggle="modal" data-target="#Voiture">
+								Voiture
+							</button>
+                   		</div>
 
 						<?php
 							// récupération de la voiture favorite du covoitureur
@@ -255,6 +233,9 @@
 			</div>
 		</div>		
 	</div>
-	<?php include $GLOBALS['racine'] . 'footer.html'; ?>
+	<?php 
+		include $GLOBALS['racine'] . 'footer.html'; 
+		include $GLOBALS['racine'] . 'Profil/Voiture.php'; 
+	?>
 </body>
 </html>

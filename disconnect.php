@@ -17,5 +17,5 @@ setcookie('token',$token,time()+3600*24*30, '/');
 $GLOBALS['mysqli']->query($sql);
 
 // redirection sur la page de connexion
-header("Location: ./login?disconnect=success");
+header("Location: ./login");
 ?>
