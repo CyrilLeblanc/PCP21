@@ -28,7 +28,7 @@
             $addPoint->add_compo($_POST['idPointAjouter'],$_POST['rangPoint'],$_GET['idLigne']);
             echo 
                 '<div class="alert alert-success text-center">
-                    <h5><strong>Le Point à été ajouté à la Ligne.</strong></h5>
+                    <h5><strong>Le Point a été ajouté à la Ligne.</strong></h5>
                 </div>';
         }
         if(isset($_POST['supprimer']))
@@ -37,7 +37,7 @@
             $delPoint->delete_compo($_GET['idLigne'],$_POST['idPointSupprimer']);
             echo 
                 '<div class="alert alert-success text-center">
-                    <h5><strong>Le Point à été supprimé de la Ligne.</strong></h5>
+                    <h5><strong>Le Point a été supprimé de la Ligne.</strong></h5>
                 </div>';
         }
     ?>

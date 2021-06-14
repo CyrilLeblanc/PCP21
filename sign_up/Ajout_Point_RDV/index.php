@@ -49,7 +49,7 @@
 	<tbody align='center'>
 		<?php 
 		require_once '../../config.php';
-		$sql = "SELECT * FROM Point_RDV ORDER BY Ville";
+		$sql = "SELECT * FROM Point_RDV WHERE NOT idPoint_RDV = 1 AND is_Confirme = 1 ORDER BY Ville";
 		$res = $GLOBALS['mysqli']->query($sql);
 		while ($row = $res->fetch_assoc())
 		{
@@ -83,15 +83,15 @@
 <form method="post" action="../final.php" class="form-group" id="create_point" hidden>
 <div class="form-group">
 	<label for="nom_point">Nom du point *:</label>
-	<input type="name" class="form-control" id="nom_point" placeholder="Lycée Charles Poncet" name="nom" required>
+	<input type="text" class="form-control" id="nom_point" placeholder="Lycée Charles Poncet" name="nom" required>
 </div>
 <div class="form-group">
 	<label for="ville">Ville avec code postal *:</label>
-	<input type="name" class="form-control" id="ville" placeholder="74300 Cluses" name="ville" required>
+	<input type="text" class="form-control" id="ville" placeholder="74300 Cluses" name="ville" required>
 </div>
 <div class="form-group">
 	<label for="adresse">Adresse *:</label>
-	<input type="name" class="form-control" id="adresse" placeholder="1 Avenue Charles Poncet" name="adresse" required>
+	<input type="text" class="form-control" id="adresse" placeholder="1 Avenue Charles Poncet" name="adresse" required>
 </div>
 <div class="form-group">
 	<label for="latitude">Coordonées Latitude *:</label>

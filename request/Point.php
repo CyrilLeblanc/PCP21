@@ -12,7 +12,8 @@ class Point
     // donne tout les points en fonction de leurs confirmation
     // Renvoi un object sql
     {
-        $sql = "SELECT * FROM Point_RDV WHERE is_Confirme = $is_confirme;";
+        $is_confirme = (int)$is_confirme;
+        $sql = "SELECT * FROM Point_RDV WHERE is_Confirme = $is_confirme AND NOT idPoint_RDV = 1;";
         $res = $GLOBALS['mysqli'] ->query($sql);
 
         $stack = array();

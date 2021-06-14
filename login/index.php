@@ -1,4 +1,9 @@
-<?php require_once "./connect.php"; ?>
+<?php 
+	if (!isset($_GET['error']))
+	{
+		require_once "./connect.php"; 
+	}
+?>
 <doctype HTML>
 <html>
 <head>
@@ -58,12 +63,10 @@
 		{
 			echo "<BR/>
 			<div class='alert alert-danger text-center'>
-			<strong>Cela fait plus de 30 jours que vous êtes connecté veuillez vous reconnecter.
+			<strong>Vous êtes connecté depuis plus de 30 jours. Veuillez vous reconnecter.
 			  </div>";
 		}
 	}
-	
-
 ?>
 
 <br/>

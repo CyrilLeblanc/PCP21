@@ -70,10 +70,10 @@ if (!isset($_GET['token']))
         
 
         <label for="password">Nouveau mot de passe :</label><br/>
-        <input type="password" id="password" name="password" required><br/>
+        <input type="password" id="password" name="password" pattern=".{8,}" title="8 Caractères au minimum" required><br/>
 
         <label for="verif_password">Retaper le mot de passe :</label><br/>
-        <input type="password" id="verif_password" required><br/>
+        <input type="password" id="verif_password" required ><br/>
 
         <input name="idCovoitureur" value="<?php echo $idCovoitureur?>" hidden>
         <input name="token" value="<?php echo $_GET['token']?>" hidden>

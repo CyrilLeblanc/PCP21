@@ -1,5 +1,6 @@
 <?php
 	require_once '../../config.php'; 
+	require_once $GLOBALS['racine'] . 'webmaster/verif_session_WB.php';
 	require_once $GLOBALS['racine'] . 'request/Point.php';
 
 	if (isset($_GET['validate']) && $_GET['validate'] != "")
@@ -13,7 +14,7 @@
 	// si on demande la suppression d'un point on le supprime
 	{
 		$point = new Point();
-		$point->del_Point($_GET['delete']);			
+		$point->del_Point($_GET['delete']);		
 		header("Location: .?success=delete");		// on recharge la page en disant que la suppression à réussi
 	}
 ?>
@@ -46,8 +47,8 @@
 			if ($_GET['success'] == "delete")
 			{
 				echo 
-					"<div class='alert alert-danger text-center'>
-					<h2><strong>Vous avez refusé le Point de RDV.</strong></h2>
+					"<div class='alert alert-success text-center'>
+					<h5><strong>Vous avez refusé le Point de RDV.</strong></h5>
 					</div>";
 			}
 		}

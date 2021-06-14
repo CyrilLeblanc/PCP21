@@ -98,14 +98,14 @@ class Dummy {
 
     function presentation()
     {
-        echo "idCovoitureur : " . $this->idCovoitureur . "\n".
-        "Nom : ".$this->nom."\n".
-        "Prenom : ".$this->prenom."\n".
-        "Mot de passe (clair) : ".$this->password_unashed."\n".
-        "E-mail : ".$this->mail."\n".
-        "Num : ".$this->phone."\n".
+        echo "idCovoitureur : " . $this->idCovoitureur . "\n<br>".
+        "Nom : ".$this->nom."\n<br>".
+        "Prenom : ".$this->prenom."\n<br>".
+        "Mot de passe (clair) : ".$this->password_unashed."\n<br>".
+        "E-mail : ".$this->mail."\n<br>".
+        "Num : ".$this->phone."\n<br>".
         "Point_RDV : #". $this->Point_RDV['idPoint_RDV'] . "\t". $this->Point_RDV['Nom'] . " @ " . $this->Point_RDV['Ville']. "\n\n".
-        "\n";
+        "<br><br>";
     }
 
     function save_csv()

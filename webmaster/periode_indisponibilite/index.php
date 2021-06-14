@@ -4,6 +4,7 @@
 <head>
   <?php 
     require_once '../../config.php'; 
+    require_once $GLOBALS['racine'] . 'webmaster/verif_session_WB.php';
 	  include $GLOBALS['racine'] . 'bootstrap.php';
 	  require_once $GLOBALS['racine'] . 'request/Indisp.php';
   ?>
@@ -87,13 +88,6 @@
               echo "</br></br>
                   <div class='alert alert-success text-center'>
                   <h5><strong>La période d'indisponibilité a bien été ajoutée.</strong></h5>
-                  </div>";
-            }
-            else
-            {
-              echo "</br></br>
-                  <div class='alert alert-danger text-center'>
-                  <h2><strong>Erreur d'ajout de période d'indisponibilité.</strong></h2>
                   </div>";
             }
           }

@@ -2,17 +2,17 @@
 require_once "../../config.php";
 require_once $GLOBALS['racine']."test/fake_account/Dummy_c.php";
 
-$nb_dummy = readline('Nombre de compte à créer [10] : ');
+$nb_dummy = $_POST['nb_compte'];
 if ($nb_dummy == "")
 {
     $nb_dummy = 10;
 }
-$is_Confirme = readline('is_Confirme des dummys ([1]/0) :');
+$is_Confirme = $_POST['confirme'];
 if ($is_Confirme == "")
 {
     $is_Confirme = 1;
 }
-$idLigne = readline("Sur l'idLigne [toute] : ");
+$idLigne = $_POST['ligne'];
 
 function clear_dbb()
 {
@@ -21,7 +21,6 @@ function clear_dbb()
     $sql = "SELECT Covoitureur.idCovoitureur\n".
     "FROM Covoitureur \n".
     "WHERE Covoitureur.Utilisateur_Image = 'https://thispersondoesnotexist.com/image'\n";
-    echo "$sql\n";
 
     $res = $GLOBALS['mysqli']->query($sql);
     while ($row = $res->fetch_assoc())
@@ -112,5 +111,5 @@ for($i = 0 ; $i < $nb_dummy ; $i++)
     $test->save_csv();
     $test->save_bdd();
 }
-
+echo "<a href='index.php'>back</a>";
 ?>

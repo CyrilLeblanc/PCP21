@@ -39,8 +39,8 @@ class Covoiturage
 				{
 					continue;
 				}
-				echo "####################\n";
-				echo "\t ETAPE ".$etape->get_id_Point_A()." ~ ".$etape->get_id_Point_B()."\n\n";
+				echo "####################<br/>\n";
+				echo "\t ETAPE ".$etape->get_id_Point_A()." ~ ".$etape->get_id_Point_B()."<br/>\n<br/>\n";
 		
 				#####################################
 				#	Détermination du Conducteur		#
@@ -82,8 +82,8 @@ class Covoiturage
 
 						// on ajoute le conducteur à sa voiture
 						$voiture->add_passager($conducteur);
-						echo "#Voiture de : ".$conducteur->get_id()." \t$= ".$covoitureur->get_Nbr_Alveole()."\t\t home: ".$covoitureur->get_idPoint_home()."\twant_retour : ".$covoitureur->get_heure_retour()."\n".
-						"idVoiture : ".$voiture->get_id()."\t nb_place : ".$voiture->get_place_restante()."\n\n";
+						echo "#Voiture de : ".$conducteur->get_id()." \t$= ".$covoitureur->get_Nbr_Alveole()."\t\t home: ".$covoitureur->get_idPoint_home()."\twant_retour : ".$covoitureur->get_heure_retour()."<br/>\n".
+						"idVoiture : ".$voiture->get_id()."\t nb_place : ".$voiture->get_place_restante()."<br/>\n<br/>\n";
 						break;
 					}
 				}
@@ -139,7 +139,7 @@ class Covoiturage
 						{
 							$covoitureur->set_voiture_at_point($etape->get_id_Point_A());
 						}
-						echo "#ID : ".$covoitureur->get_id()."  \t$ = ".$covoitureur->get_Nbr_Alveole()."\t\t\t home: ".$covoitureur->get_idPoint_home()."\tvoiture_at : ".$covoitureur->get_voiture_at_point()."\t want_retour : ".$covoitureur->get_heure_retour()."\n";
+						echo "#ID : ".$covoitureur->get_id()."  \t$ = ".$covoitureur->get_Nbr_Alveole()."\t\t\t home: ".$covoitureur->get_idPoint_home()."\tvoiture_at : ".$covoitureur->get_voiture_at_point()."\t want_retour : ".$covoitureur->get_heure_retour()."<br/>\n";
 						$covoitureur->set_have_voiture(False);							// on retire l'accès à la voiture du covoitureur passager
 						$voiture->add_passager($covoitureur);
 						$etape->rm_covoitureur($covoitureur->get_id());
@@ -147,8 +147,6 @@ class Covoiturage
 				}
 
 				$voiture->set_kilometrage($etape->get_distance());
-				#DEBUG
-				//$voiture->set_kilometrage(10);
 
 				$temp = array(
 					'idPointA' => $etape->get_id_point_A(),
@@ -187,7 +185,7 @@ class Covoiturage
 
 				// on ajoute tout les passagers arriver au bout de leurs voyages dans $tab_covoitureur_retour
 
-				echo "\n\n\n";
+				echo "<br/>\n<br/>\n<br/>\n";
 
 				if($ligne->get_id_final() == $etape->get_id_Point_B())				// si c'est la dernière étape
 				{
@@ -265,7 +263,7 @@ class Covoiturage
 		$res = null;
 		$this->idCovoiturage = $idCovoiturage;
 
-		echo "idCovoiturage : $idCovoiturage\n";
+		echo "idCovoiturage : $idCovoiturage<br/>\n";
 
 		// pour chaque etape enregistré
 		foreach($this->tab_etape_covoiturage as $etape)
@@ -273,7 +271,7 @@ class Covoiturage
 			$idPoint_A = $etape['idPointA'];
 			$idPoint_B = $etape['idPointB'];
 			$voiture = $etape['voiture'];
-			
+			echo $idPoint_A . ' ~ ' . $idPoint_B . "<br/>\n"; 
 			foreach($voiture->get_ref_tab_passager() as $j => $passager)
 			{
 				$idCovoitureur = $passager->get_id();
@@ -313,7 +311,7 @@ class Covoiturage
 				// On supprime les étapes si il y en avais déjà avant (pour éviter les duplications 
 				//		lors de la planification du jours suivant)
 				$sql = "DELETE FROM Etape WHERE idParticipation = $idParticipation;";
-				$GLOBALS['mysqli']->query($sql);
+				//$GLOBALS['mysqli']->query($sql);
 
 				#############################
 				#	Génération de l'Etape	#
@@ -322,12 +320,10 @@ class Covoiturage
 				$nbAttempt = 10;
 				do {
 					// on cherche si une Etape existe déjà
-					
 					$sql = "SELECT * FROM Etape WHERE ".
 					"idParticipation = $idParticipation AND ".
-					"idPoint_RDV_A = $idPoint_A AND ". 
+					"idPoint_RDV_A = $idPoint_A AND ".
 					"idPoint_RDV_B = $idPoint_B";
-
 					$res = $GLOBALS['mysqli']->query($sql);
 
 					if (mysqli_num_rows($res) == 0)

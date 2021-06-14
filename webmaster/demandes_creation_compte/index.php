@@ -4,6 +4,7 @@
 <head>
 	<?php 
 		require_once '../../config.php'; 
+		require_once $GLOBALS['racine'] . 'webmaster/verif_session_WB.php';
 		require_once $GLOBALS['racine'] . 'request/Covoitureur.php';
 		include $GLOBALS['racine'] . 'bootstrap.php';
 		include $GLOBALS['racine'] . 'webmaster/demandes_creation_compte/popupInfosCovoitureur.php';
@@ -19,7 +20,7 @@
 		{
 			$delCovoitureur = new Covoitureur();
 			$delCovoitureur->del_Covoitureur($_POST['idCovoitureur']);
-			mail($_POST['mailRefuser'], "PCP21 - Compte Refusé" , "Votre demande de création de compte à été refusée par le Webmaster pour la raison suivant :\n" . $_POST['explication'] . "\n Cordialement.");
+			mail($_POST['mailRefuser'], "PCP21 - Compte Refusé" , "Votre demande de création de compte à été refusée par le Webmaster pour la raison suivante :\n" . $_POST['explication'] . "\nCordialement.");
 		}
 		if(isset($_POST['Accepter']))
 		{

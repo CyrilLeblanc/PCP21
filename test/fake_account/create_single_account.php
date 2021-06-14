@@ -1,58 +1,55 @@
 <?php
 require_once "../../config.php";
 
-echo "########\t Création de compte utilisateur \t########\n";
-echo "(Les valeurs dans les [] sont des valeurs par défaut si jamais les valeurs ne sont pas défini)\n\n";
-
-$is_webmaster = readline('is_Webmaster [0] : ');
+$is_webmaster = $_POST['is_webmaster'];
 if ($is_webmaster == "")
 {
     $is_webmaster = "0";
 }
 
-$idPoint_RDV = readline("idPoint_RDV [random]: ");
+$idPoint_RDV = $_POST['Point_RDV'];
 if ($idPoint_RDV == "")
 {
     $idPoint_RDV = rand(1,15);
 }
 
-$firstname = readline('Nom [Jon]: ');
+$firstname = $_POST['prenom'];
 if ($firstname == "")    
 {
     $firstname = 'Jon';
 }
 
-$name = readline('Prénom [Doe]: ');
+$name = $_POST['nom'];
 if ($name == "")
 {
     $name = "Doe";
 }
 
-$number = readline("Numéro de Téléphone [06 00 ...] : ");
+$number = $_POST['tel'];
 if ($number == "")
 {
     $number = "0600000000";
 }
 
-$email = readline("E-mail [test@test.fr] : ");
+$email = $_POST['mail'];
 if ($email == "")
 {
     $email = "test@test.fr";
 }
 
-$password = readline("Mot de passe [test] : ");
+$password = $_POST['pass'];
 if ($password == "")
 {
     $password = "test";
 }
 
-$is_confirme = readline("is_Confirme [1] : ");
+$is_confirme = $_POST['confirm'];
 if ($is_confirme == "")
 {
     $is_confirme = "1";
 }
 
-$nbr_Alveole = readline("Nombre d'Alvéole [random]: ");
+$nbr_Alveole = $_POST['alveole'];
 if ($nbr_Alveole == "")
 {
     $nbr_Alveole = rand(-20, 20);
@@ -60,6 +57,7 @@ if ($nbr_Alveole == "")
 
 echo "\n\n";
 $choice = readline("Création de voiture ? [n] (y/n) ");
+$choice = 'y';
 
 if ($choice == "n" || $choice == "")
 {
@@ -70,31 +68,31 @@ if ($choice == "n" || $choice == "")
     $couleur = "gris";
     $nbr_place = 5;
 } else {
-    $modele = readline("Modele [C5] : ");
+    $modele = $_POST['modele'];
     if ($modele == "")
     {
         $modele = "C5";
     }
 
-    $marque = readline("Marque [Citroën] : ");
+    $marque = $_POST['marque'];
     if ($marque == "")
     {
         $marque = "Citroën";
     }
 
-    $annee = readline("Année [2020] : ");
+    $annee = $_POST['annee'];
     if ($annee == "")
     {
         $annee = "2020";
     }
 
-    $couleur = readline("Couleur [gris] :");
+    $couleur = $_POST['couleur'];
     if ($couleur == "")
     {
         $couleur = "gris";
     }
 
-    $nbr_place = readline("Nombre de place [5] : ");
+    $nbr_place = $_POST['nb_place'];
     if ($nbr_place == "")
     {
         $nbr_place = 5;
@@ -105,18 +103,21 @@ $password = password_hash($password, PASSWORD_DEFAULT);
 
 $sql = "INSERT INTO Covoitureur (is_Webmaster, idPoint_RDV, Nom, Prenom, Num_Telephone, Email, Mot_De_Passe, Nbr_Alveoles, is_Confirme) ".
 "VALUE ($is_webmaster, $idPoint_RDV,'$firstname', '$name', '$number', '$email', '$password', $nbr_Alveole, $is_confirme);";
+echo $sql . "<br><br>";
 $GLOBALS['mysqli']->query($sql);
 
-echo "\n\n$sql";
 
 $idCovoitureur = $GLOBALS['mysqli']->insert_id;
 
 $sql = "INSERT INTO Voiture (Modele, Marque, Annee, Couleur, Nbr_Place, idCovoitureur) ".
 "VALUE ('$modele', '$marque', '$annee', '$couleur', $nbr_place, $idCovoitureur)";
+echo $sql . "<br><br>";
 $GLOBALS['mysqli']->query($sql);
 
-echo "\n\n$sql";
+echo "s'il n'y as pas eu d'erreur le covoitureur a été ajouté <a href='index.php'> retour </a>";
 
+
+exit;
 $idVoiture = $GLOBALS['mysqli']->insert_id;
 
 

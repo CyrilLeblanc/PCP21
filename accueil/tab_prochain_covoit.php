@@ -11,7 +11,7 @@
 $idCovoitureur = $_SESSION['idCovoitureur'];
 
 $sql ="SELECT * FROM Participation, Covoiturage WHERE Participation.idCovoiturage = Covoiturage.idCovoiturage AND Participation.idCovoitureur = $idCovoitureur 
-AND Participation.Date>=NOW() AND Covoiturage.Heure>=NOW() ORDER BY Date, Heure";
+AND Participation.Date>=CURRENT_DATE() AND Covoiturage.Heure>=CURRENT_DATE() ORDER BY Date, Heure";
 $res = $GLOBALS['mysqli']->query($sql);
 while ($row = $res->fetch_assoc())
 {
@@ -54,10 +54,10 @@ while ($row = $res->fetch_assoc())
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Détail de l'étape</h4>
+        <h4 class="modal-title">Détails des étapes</h4>
       </div>
       <div class="modal-body">
-        <iframe src="./etapes.php?" frameborder="0" id="vue"></iframe> <!-- Contenu rediriger vers etapes.php -->
+        <iframe src="./etapes.php?" frameborder="0" id="vue" height="100%" width="100%"></iframe> <!-- Contenu rediriger vers etapes.php -->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>

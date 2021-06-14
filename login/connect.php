@@ -18,6 +18,10 @@ function connect($idCovoitureur)
     exit;
 }
 
+if (!isset($_COOKIE['token']))
+{
+    $_COOKIE['token'] = "no_token";
+}
 
 if(isset($_SESSION['idCovoitureur']))   // connexion par session
 {
@@ -100,8 +104,8 @@ if(isset($_POST['email']) && isset($_POST['password']))     // connexion via for
             // ajout du Token dans la BDD
             $sql = "INSERT INTO Token (Content, Date_Creation, Date_Fin, idCovoitureur) ".
             "VALUES ('$token', '$date_debut', '$date_fin', $idCovoitureur);";
-            
             $GLOBALS['mysqli']->query($sql);
+            
             // ajout du token dans les Cookies
             setcookie('token',$token,time()+3600*24*30, '/');        #INTEGRATION
         }
@@ -121,15 +125,19 @@ elseif($_COOKIE['token'] != null)
     // on le compare avec ceux de la base de donnée pour trouver l'idCovoitureur qui correpond
     $sql = "SELECT idCovoitureur, Date_Fin FROM Token WHERE Content = '$token'";
     $res = $GLOBALS['mysqli']->query($sql);
+    if (mysqli_num_rows($res) == 0)
+    {
+        header("Location: ./index.php?error=token_not_found");
+        exit;
+    }
     while ($row = $res->fetch_assoc())
     // si on trouve un token qui correspond dans la BDD
     {
         if ($row['Date_Fin'] < date("y-m-d"))   // on prend en compte la date limite du token
         {
             echo "connexion";
-            exit;
             connect($row['idCovoitureur']);
-        } else{     // token arrivé à éxpiration
+        } else {     // token arrivé à éxpiration
             header("Location: ./index.php?error=expired_token");
             exit;
         }

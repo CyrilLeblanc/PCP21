@@ -7,7 +7,7 @@ if(isset($_SESSION['idCovoitureur']) && $_SESSION['idCovoitureur'] != null)
 {
     header("Location: ./accueil");
 } else {
-    header("Location: ./disconnect.php");
+    header("Location: ./login/connect.php");
 }
 
 ?>

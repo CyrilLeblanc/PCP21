@@ -41,7 +41,7 @@ $idLigne = (int)$GLOBALS['mysqli']->query($sql)->fetch_assoc()['idLigne'];
 	#########################################
 	#       Génération IdCovoiturage        #
 	#########################################
-
+$nb_attempt = 0;
 do 
 {
 	$sql = "SELECT idCovoiturage FROM Covoiturage WHERE Jour = '$jour_semaine' AND Heure = '$heure_arrive' AND is_Depart_Lycee = $destination AND idLigne = $idLigne;";
@@ -52,9 +52,13 @@ do
 		$sql = "INSERT INTO Covoiturage(Jour, Heure, is_Depart_Lycee, idLigne) VALUES ('$jour_semaine', '$heure_arrive', '$destination', '$idLigne');";
 		$GLOBALS['mysqli']->query($sql);
 	}
+	$nb_attempt++;
 }
-while(mysqli_num_rows($res) == 0);
-
+while(mysqli_num_rows($res) == 0 && $nb_attempt <= 10);
+if ($nb_attempt == 10)
+{
+	echo "erreur inscription.";
+}
 $idCovoiturage = $res->fetch_assoc()['idCovoiturage'];
 
 	#########################################
@@ -67,7 +71,6 @@ if(isset($date_depart) && isset($semaine) && isset($destination) && isset($jour_
 	"VALUES ($idCovoitureur, $idCovoiturage, '$date_depart', '$semaine', 1, $destination, '$jour_semaine', '$heure_arrive');";
 	$GLOBALS['mysqli']->query($sql);
 }
-
 
 if (!isset($erreur))
 {

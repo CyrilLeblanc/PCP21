@@ -90,6 +90,6 @@ foreach($tab_covoitureur as $covoitureur)
 	} while (mysqli_num_rows($res) == 0);
 }
 
-
+echo "les inscriptions on été généré";
 
 ?>

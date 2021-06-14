@@ -4,6 +4,7 @@
 <head>
   <?php
     require_once '../../config.php'; 
+    require_once $GLOBALS['racine'] . 'webmaster/verif_session_WB.php';
     include $GLOBALS['racine'] . 'bootstrap.php';
     require_once $GLOBALS['racine'] . 'request/Point.php';
 

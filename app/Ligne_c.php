@@ -45,7 +45,7 @@ class Ligne
 	}
 
 
-	private function get_composition($id, $is_depart_lycee)
+	function get_composition($id, $is_depart_lycee)
 	// utilisé par le constructeur
 	// permet de récupéré la composition d'une ligne en fonction de son sens et de son id
 	{

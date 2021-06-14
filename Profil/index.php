@@ -166,7 +166,7 @@
 							<label for="Pwd">
 								Nouveau Mot de Passe
 							</label>
-							<input type="password" class="form-control" name="NouvMotDePasse" id="pass1">
+							<input type="password" class="form-control" name="NouvMotDePasse" id="pass1" pattern=".{8,}" title="8 Caractères au minimum">
 
 							<small id="PwdHelp" class="text-muted">
 								Veuillez entrez au minimum 8 caractères

@@ -349,6 +349,61 @@ class Covoitureur
             return $stack;
     
     }
+
+    function get_Historique($idCovoitureur)
+    {
+        $sql = "SELECT  Participation.Date, Participation.idCovoiturage, Etape.Kilometrage, Covoitureur.Nom, ".
+        "Covoitureur.Prenom, PointA.Nom AS PointA_Nom, PointB.Nom AS PointB_Nom ".
+        "FROM Covoitureur, Participation ".
+        "INNER JOIN Etape ON Participation.idParticipation = Etape.idParticipation ".
+        "INNER JOIN Point_RDV AS PointA ON Etape.idPoint_RDV_A = PointA.idPoint_RDV ".
+        "INNER JOIN Point_RDV AS PointB ON Etape.idPoint_RDV_B = PointB.idPoint_RDV ".
+        "WHERE Covoitureur.idCovoitureur=Participation.idCovoitureur AND Covoitureur.idCovoitureur=$idCovoitureur AND Participation.is_Valide_Systeme=0 ".
+        "ORDER BY Date;";
+    
+            $res = $GLOBALS['mysqli'] ->query($sql);
+            $stack = array();
+            while ($row = $res->fetch_assoc())
+            {
+                array_push($stack,$row);
+            }
+            return $stack;
+    }
+
+
+    function get_mdp_actuelle($idCovoitureur)
+    {
+       $sql= "SELECT Mot_De_Passe FROM Covoitureur WHERE idCovoitureur = $idCovoitureur;";
+
+       $res = $GLOBALS['mysqli'] ->query($sql);
+        
+        while ($row = $res->fetch_assoc())
+        {
+                return $row;
+        }
+
+    }
+
+    function set_nouveau_mdp($ConfirmMDP,$idCovoitureur)
+    {
+       $sql= "UPDATE Covoitureur SET Mot_De_Passe='$ConfirmMDP' WHERE idCovoitureur = $idCovoitureur;";
+
+       $res = $GLOBALS['mysqli'] ->query($sql);
+        
+    }
+
+    function get_idParticipation($idCovoitureur)
+    {
+       $sql= "SELECT idParticipation FROM Participation WHERE idCovoitureur = $idCovoitureur;";
+
+       $res = $GLOBALS['mysqli'] ->query($sql);
+        
+        while ($row = $res->fetch_assoc())
+        {
+                return $row;
+        }
+
+    }
 }
 
 ?>

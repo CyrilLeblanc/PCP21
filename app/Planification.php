@@ -44,7 +44,7 @@ foreach($tab_ligne as $idLigne)
 			$ligne->set_covoitureur($date, $heure, $sens);
 			if (sizeof($ligne->get_population()) > 0)
 			{
-				echo "\n\n\n\n\n\n\n\n\t$idLigne\t$date\t$heure\n";
+				echo "\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n<br/>\n\t$idLigne\t$date\t$heure<br/>\n";
 			}
 			// on associe pour chaque covoitureur leurs heure de retour
 			if ($sens == 0)		// si c'est un aller
